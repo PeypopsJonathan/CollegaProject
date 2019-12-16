@@ -51,7 +51,7 @@ public class UserRepositoryDb implements UserRepository {
     public List<User> getAll() {
         try (Connection conn = ConnectionPool.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM \"user\""))
+             ResultSet rs = stmt.executeQuery("SELECT * FROM \"award-team9\".user"))
         {
             List<User> users = new ArrayList<>();
             while (rs.next()) {
