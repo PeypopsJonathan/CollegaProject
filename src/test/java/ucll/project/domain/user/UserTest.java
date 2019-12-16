@@ -10,19 +10,15 @@ public class UserTest {
     public void CreateUserTest(){
 
         User user = new User(
-                "username",
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Gender.FEMALE,
                 Role.ADMIN
         );
 
-        assertEquals(user.getUserName(), "username");
         assertEquals(user.getFirstName(), "firstName");
         assertEquals(user.getLastName(), "lastName");
         assertEquals(user.getEmail(), "email@example.com");
-        assertEquals(user.getGender(), Gender.FEMALE);
         assertEquals(user.getRole(), Role.ADMIN);
     }
 
@@ -30,11 +26,9 @@ public class UserTest {
     @Test(expected = IllegalArgumentException.class)
     public void CreateUserWithWrongEmailTest(){
         User user = new User(
-                "username",
                 "firstName",
                 "lastName",
                 "emailexample.com",
-                Gender.FEMALE,
                 Role.ADMIN
         );
     }
@@ -42,11 +36,9 @@ public class UserTest {
     @Test
     public void UserMakesValidPassword(){
         User user = new User(
-                "username",
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Gender.FEMALE,
                 Role.ADMIN
         );
         user.hashAndSetPassword("validPassword1");
@@ -56,11 +48,9 @@ public class UserTest {
     @Test(expected = IllegalArgumentException.class)
     public void UserMakesInvalidPassword(){
         User user = new User(
-                "username",
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Gender.FEMALE,
                 Role.ADMIN
         );
         user.hashAndSetPassword("a");
