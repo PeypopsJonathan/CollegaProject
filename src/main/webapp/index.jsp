@@ -26,11 +26,27 @@
 
 <main role="main" class="container">
 
-    <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
-            mostly barebones HTML document.</p>
+    <h3>Geef Ster</h3>
+    <div class="containerGiveStar">
+        <form action="/Controller?command=giveStar" POST>
+            <label for="receiver">receiver</label>
+            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id">
+            <label for="tags">tags</label>
+            <select name="tags" id="tags">
+                <option value="great">great</option>
+                <option value="awesome">awesome</option>
+                <option value="u suck">u suck</option>
+            </select>
+
+            <label for="description">description</label>
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="">description</textarea>
+
+            <input type="submit" value="submit">
+        </form>
+
+
     </div>
+
 
 </main>
 </body>
