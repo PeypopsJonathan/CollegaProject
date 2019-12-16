@@ -3,6 +3,7 @@ package ucll.project.ui;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
@@ -31,6 +32,15 @@ public class HomePageTest {
 
         driver.get(Config.BASE_URL);
         assertEquals("Hello world!", driver.getTitle());
+
+    }
+
+    @Test
+    public void VisitUsersPageTest() {
+
+        driver.get(Config.BASE_URL);
+        driver.get(Config.USERS_PAGE_URL);
+        assertEquals("All users", driver.getTitle());
 
     }
 
