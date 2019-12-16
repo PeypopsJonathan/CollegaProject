@@ -1,8 +1,6 @@
 package ucll.project.ui;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,16 +17,14 @@ public class UsersPageTest {
 
     private static WebDriver driver;
 
-    @BeforeClass
-    public static void SetupDriver() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.firefox();
-        driver = new RemoteWebDriver(new URL("http://projectweek.be:4444/wd/hub"), capability);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+    @Before
+    public void SetupDriver() {
+        driver = ChromeDriverHelper.getDriver();
+
     }
 
-    @AfterClass
-    public static void CloseBrowser() {
+    @After
+    public void CloseBrowser() {
         // close it in the end, comment this away to keep chrome open
         driver.close();
     }

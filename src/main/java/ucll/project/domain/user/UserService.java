@@ -6,7 +6,7 @@ public class UserService {
     private UserRepository userRepo;
 
     public UserService(){
-        userRepo = new UserRepositoryMemory();
+        userRepo = new UserRepositoryDb();
     }
 
     public List<User> getUsers(){
