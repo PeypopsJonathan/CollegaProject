@@ -20,16 +20,24 @@
 
 <!-- Navigation -->
 <%@ include file="components/navigation.jspf" %>
-
 <!-- Page Content -->
 
 
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
-            mostly barebones HTML document.</p>
+        <h1>Overview Stars</h1>
+        <p class="lead"></p>
+        <c:forEach var="star" items="${stars}">
+            <p>{star.sender} has sent {star.receiver} a star for {star.comment}.</p>
+            <div>
+                <ul>
+                    <c:forEach var="tag" items="${star.tags}">
+                        <li>{tag}</li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </c:forEach>
     </div>
 
 </main>
