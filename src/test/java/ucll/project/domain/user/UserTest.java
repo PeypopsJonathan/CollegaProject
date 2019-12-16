@@ -3,15 +3,11 @@ package ucll.project.domain.user;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
-/**
- * This is a sample unit test, write your own!
- */
-public class SampleUserTest {
+public class UserTest {
 
     @Test
-    public void CreateUserTest() {
+    public void CreateUserTest(){
 
         User user = new User(
                 "username",
@@ -30,6 +26,7 @@ public class SampleUserTest {
         assertEquals(user.getRole(), Role.ADMIN);
     }
 
+
     @Test(expected = IllegalArgumentException.class)
     public void CreateUserWithWrongEmailTest(){
         User user = new User(
@@ -41,5 +38,33 @@ public class SampleUserTest {
                 Role.ADMIN
         );
     }
+
+    @Test
+    public void UserMakesValidPassword(){
+        User user = new User(
+                "username",
+                "firstName",
+                "lastName",
+                "email@example.com",
+                Gender.FEMALE,
+                Role.ADMIN
+        );
+        user.hashAndSetPassword("validPassword1");
+        assertEquals(user.getHashedPassword(), user.getPasswordToHashedPassword("validPassword1"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void UserMakesInvalidPassword(){
+        User user = new User(
+                "username",
+                "firstName",
+                "lastName",
+                "email@example.com",
+                Gender.FEMALE,
+                Role.ADMIN
+        );
+        user.hashAndSetPassword("a");
+    }
+
 
 }
