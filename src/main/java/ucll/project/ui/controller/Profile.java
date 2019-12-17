@@ -13,6 +13,7 @@ public class Profile extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         //Session opalen en user bepalen
+        request.setAttribute("users", this.getUserService().getUsers());
         return "profile.jsp";
     }
 }

@@ -27,26 +27,85 @@
 <main role="main" class="container">
 
     <h3>Geef Ster</h3>
+    <c:if test="${!empty errors}">
+        <div class="alert-danger">
+            <c:forEach var="error" items="${errors}">
+                <li>
+                    <c:out value="${error}"></c:out>
+                </li>
+            </c:forEach>
+        </div>
+    </c:if>
     <div class="containerGiveStar">
-        <form novalidate="novalidate" action="/Controller?command=giveStar" method="post">
+        <form novalidate="novalidate" action="/Controller?command=GiveStar" method="post">
             <label for="receiver">receiver</label>
-            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id">
+            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
+                   value="${previous_input_receiver}">
             <label for="tags">tags</label>
-            <select name="tags" id="tags">
-                <option value="great">great</option>
-                <option value="awesome">awesome</option>
-                <option value="too bad">too bad</option>
+
+            <select id="select" name="tags" id="tags" onchange="addTag()">
+                <option></option>
+                <c:forEach var="tag" items="${tags}">
+                    <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
+                        <c:out value="${tag}"></c:out>
+                    </option>
+                </c:forEach>
             </select>
 
-            <label for="description">description</label>
+            <p id="tagsAdded">
+            <h2>Tags Added: </h2>
+            </p>
+
+            <input type="hidden" class="What a great worker." name="0" id="0">
+            <input type="hidden" class="Awesome stuff." name="1" id="1">
+            <input type="hidden" class="Have my children." name="2" id="2">
+            <input type="hidden" class="Happy with your service." name="3" id="3">
+
+            <label for="description" value="${previous_input_description}">description</label>
             <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
 
             <input type="submit" value="submit">
         </form>
 
-
     </div>
+    <script>
+        window.addEventListener("load", initPage, false);
 
+        var counterList;
+
+        function initPage() {
+            counterList = 0;
+        }
+
+        function addTag() {
+
+            if (counterList > 3) {
+
+            } else {
+                var currentSelection = document.getElementById("select").value
+
+                var button = document.createElement("button");
+                button.innerHTML = currentSelection + "(Click to remove)"
+                button.id = currentSelection;
+
+                var hiddenTags = document.getElementsByClassName(currentSelection);
+                hiddenTags[0].value = currentSelection;
+
+                button.addEventListener("click", function () {
+                    document.getElementById("tagsAdded").removeChild(button);
+                    var buttonIdToRemove = button.id
+                    var hiddenTagToRemove = document.getElementsByClassName(buttonIdToRemove);
+                    hiddenTagToRemove[0].value = "";
+
+                    counterList--;
+                }, false);
+
+                counterList++;
+                document.getElementById("tagsAdded").appendChild(button)
+            }
+        }
+
+    </script>
 
 </main>
 </body>

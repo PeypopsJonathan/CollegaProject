@@ -11,6 +11,10 @@ public class Star {
     private ArrayList<String> tags;
     private Timestamp timestamp;
 
+    public Star() {
+
+    }
+
     public Star(int receiver_id, int sender_id, String comment, int star_id, ArrayList<String> tags) {
         setReceiver_id(receiver_id);
         setSender_id(sender_id);
@@ -45,6 +49,8 @@ public class Star {
     }
 
     public void setComment(String comment) {
+        if (comment.trim().isEmpty())
+            throw new DomainException("Comment can't be empty");
         this.comment = comment;
     }
 
