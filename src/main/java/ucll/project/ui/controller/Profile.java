@@ -20,9 +20,9 @@ public class Profile extends RequestHandler {
         //Session opalen en user bepalen
         UserRepository userRep = new UserRepositoryDb();
         User currentUser = userRep.get(1);
-        request.setAttribute("firstname",currentUser.getFirstName());
-        request.setAttribute("lastname",currentUser.getLastName());
-        request.setAttribute("email",currentUser.getEmail());
+        request.setAttribute("firstname", currentUser.getFirstName().trim());
+        request.setAttribute("lastname", currentUser.getLastName().trim());
+        request.setAttribute("email", currentUser.getEmail().trim());
 
 
         return "profile.jsp";

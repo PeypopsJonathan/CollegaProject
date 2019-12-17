@@ -27,8 +27,7 @@
 <main>
     <section class="profileOverview">
         <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
-        <h1 class="profileOverviewItem">
-            ${firstname} ${lastname} <br></h1>
+        <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}
         </p>
     </section>
