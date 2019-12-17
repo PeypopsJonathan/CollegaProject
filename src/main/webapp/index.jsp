@@ -38,8 +38,9 @@
     </c:if>
     <div class="containerGiveStar">
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
+
             <label for="receiver">receiver</label>
-            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
+            <input type="text" id="receiver" name="receiver" placeholder="enter receiver name"
                    value="${previous_input_receiver}">
             <label for="tags">tags</label>
 

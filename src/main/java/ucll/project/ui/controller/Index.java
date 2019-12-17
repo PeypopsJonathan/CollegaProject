@@ -80,21 +80,19 @@ public class Index extends RequestHandler {
 
     private void receiverValidator(Star star, HttpServletRequest request, ArrayList<String> errorList) {
         try {
-            String receiver_id = request.getParameter("receiver");
+            String receiver_name = request.getParameter("receiver");
 
-            if (!receiver_id.trim().isEmpty()) {
-                request.setAttribute("previous_input_receiver", receiver_id);
-                int receiver = Integer.parseInt(receiver_id);
-                if (this.getUserService().getUserById(receiver) == null) {
-                    errorList.add("User dosn't exist");
-                } else {
-                    star.setReceiver_id(receiver);
-                }
+            if (!receiver_name.trim().isEmpty()) {
+                request.setAttribute("previous_input_receiver", receiver_name);
+
+
+
+                // getUserService().getUserByName();
+
+
             } else {
-                errorList.add("Empty receiver id");
+                errorList.add("Enter name of receiver");
             }
-        } catch (NumberFormatException e) {
-            errorList.add("Please enter a number");
         } catch (DomainException e) {
             errorList.add("Please enter a correct receiver id");
         }
@@ -139,8 +137,9 @@ public class Index extends RequestHandler {
 
     private String submitForm(HttpServletRequest request) {
         Star star = new Star();
-        star.setSender_id(1);
-        star.setStar_id(0);
+        // TODO senderid text field and star id setting
+        //star.setSender_id(1);
+        //star.setStar_id(0);
         ArrayList<String> errorList = new ArrayList<>();
 
         receiverValidator(star, request, errorList);
@@ -148,6 +147,10 @@ public class Index extends RequestHandler {
         descriptionValidator(star, request, errorList);
 
         if (errorList.isEmpty()) {
+
+            //starDb.createStar(star);
+
+
             return "users.jsp"; // TODO Show success page
         } else {
             request.setAttribute("errors", errorList);

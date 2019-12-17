@@ -16,4 +16,8 @@ public class UserService {
     public User getUserById(int receiver_id) {
         return userRepo.get(receiver_id);
     }
+
+    public int getUserByName(String firstName, String lastName) {
+        return ((UserRepositoryDb)userRepo).UserIdByName(firstName, lastName);
+    }
 }
