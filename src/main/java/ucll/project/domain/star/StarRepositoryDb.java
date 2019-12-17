@@ -6,6 +6,7 @@ import ucll.project.domain.user.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StarRepositoryDb implements StarRepository{

@@ -5,7 +5,7 @@ import ucll.project.domain.DomainException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class Star {
+public class Star implements Comparable {
 
     private int receiver_id, sender_id, star_id;
     private String comment, receiver_name, sender_name;
@@ -111,5 +111,10 @@ public class Star {
                 ", tags=" + tags +
                 ", timestamp=" + timestamp +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return -1*this.timestamp.compareTo(((Star) o).getTimestamp());
     }
 }
