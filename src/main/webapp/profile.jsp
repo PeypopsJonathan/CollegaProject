@@ -1,9 +1,6 @@
-        <%@ page import="ucll.project.domain.user.User" %>
+<%@ page import="ucll.project.domain.user.User" %>
 <%@ page import="ucll.project.db.ConnectionPool" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="ucll.project.domain.user.Gender" %>
-        <%@ page import="ucll.project.ui.controller.Profile" %>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.sql.*" %><%@ page import="ucll.project.ui.controller.Profile" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
