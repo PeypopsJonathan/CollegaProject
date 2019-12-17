@@ -301,3 +301,55 @@ input[type=submit]:hover {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
+section.profileOverview{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: auto;
+}
+p.profileOverviewImage{
+    grid-area: span 3;
+    grid-row-start: 2;
+    grid-column-start: 4;
+    align-content: center;
+}
+
+h1.profileOverviewItem{
+    margin-top: 0.5em;
+    grid-area: span 1;
+    grid-row-start: 1;
+    grid-column-start: 4;
+    row-gap: 2em;
+    text-align: center;
+}
+
+p.profileOverviewItem{
+    grid-area: span 1;
+    grid-row-start: 3;
+    grid-column-start: 4;
+}
+
+.starText {
+    width: available;
+    border: 2px black solid;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 0px;
+    margin-top: 0px;
+}
+
+.starTag {
+    width: 50px;
+    border: 1px gray solid;
+    border-top: none;
+    padding: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+}

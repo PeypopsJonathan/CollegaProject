@@ -1,7 +1,8 @@
 package ucll.project.ui.controller;
 
-import ucll.project.domain.user.DomainException;
-import ucll.project.domain.user.Star;
+
+import ucll.project.domain.DomainException;
+import ucll.project.domain.star.Star;
 import ucll.project.domain.user.Tags;
 import ucll.project.domain.user.UserService;
 
@@ -29,7 +30,7 @@ public class GiveStar extends RequestHandler {
 
         star.setSender_id(1);
         star.setStar_id(0);
-        
+
         if (errorList.isEmpty()) {
             return "users.jsp";
         } else {

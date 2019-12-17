@@ -1,5 +1,7 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="ucll.project.domain.user.User" %>
+<%@ page import="ucll.project.db.ConnectionPool" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="ucll.project.ui.controller.Profile" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,19 +24,13 @@
 <%@ include file="components/navigation.jspf" %>
 
 <!-- Page Content -->
-<h1>Profile</h1>
 <main>
-    <table>
-        <tr>
-            <td><img src="https://brandyourself.com/blog/wp-content/uploads/linkedin-profile-picture-too-close.png"
-                     alt="profile-picture" style="max-width: 200px"></td>
-            <td>
-        <tr>Username</tr>
-        <tr>Rating 8/8</tr>
-        <tr>Favorite movie: Yeet</tr>
-        </td>
-        </tr>
-    </table>
+    <section class="profileOverview">
+        <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
+        <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
+        <p class="profileOverviewItem">${email}
+        </p>
+    </section>
 </main>
 
 

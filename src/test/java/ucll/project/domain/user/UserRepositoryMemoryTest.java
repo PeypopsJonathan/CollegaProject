@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class UserRepositoryMemoryTest {
 
     @Test
-    public void createUserWithUnusedUserAndPassword() {
+    public void createUserWithUnusedEmail() {
         User user = new User(
                 "firstName",
                 "lastName",
@@ -56,14 +56,15 @@ public class UserRepositoryMemoryTest {
 
     @Test
     public void loginUser() throws InvalidLogin {
-        User firstUser = new User(
+        User user = new User(
                 "firstName",
                 "lastName",
                 "email@example.com",
                 Role.ADMIN
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
-        u.createUser(firstUser, "Password1");
+        u.createUser(user, "Password1");
+        u.loginUser("email@example.com", "Password1");
     }
 
     @Test(expected = InvalidLogin.class)
@@ -76,7 +77,7 @@ public class UserRepositoryMemoryTest {
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");
-        u.loginUser("username1", "Password2");
+        u.loginUser("email@example.com", "Password2");
 
     }
 
@@ -90,6 +91,6 @@ public class UserRepositoryMemoryTest {
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");
-        u.loginUser("username2", "Password2");
+        u.loginUser("email@example2.com", "Password2");
     }
 }

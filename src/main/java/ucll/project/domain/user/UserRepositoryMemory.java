@@ -36,9 +36,9 @@ public class UserRepositoryMemory implements UserRepository {
     }
 
     @Override
-    public User loginUser(String username, String password) throws InvalidLogin {
+    public User loginUser(String email, String password) throws InvalidLogin {
         for (User u : users.values()) {
-            if (u.getEmail().equals(username)) {
+            if (u.getEmail().equals(email)) {
                 if (u.isValidPassword(password)) {
                     return u;
                 } else {
