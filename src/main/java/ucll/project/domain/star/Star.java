@@ -1,15 +1,18 @@
-package ucll.project.domain.user;
+package ucll.project.domain.star;
+
+import ucll.project.domain.DomainException;
 
 import java.sql.Timestamp;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class Star {
+public class Star implements Comparable {
 
     private int receiver_id, sender_id, star_id;
-    private String comment;
+    private String comment, receiver_name, sender_name;
     private ArrayList<String> tags;
     private Timestamp timestamp;
+
+    public Star(){}
 
     public Star(int receiver_id, int sender_id, String comment, int star_id, ArrayList<String> tags) {
         setReceiver_id(receiver_id);
@@ -18,6 +21,8 @@ public class Star {
         setTags(tags);
         setTimestamp();
         setStar_id(star_id);
+        receiver_name = "";
+        sender_name = "";
     }
 
     public int getReceiver_id() {
@@ -76,6 +81,26 @@ public class Star {
         this.timestamp = new Timestamp(System.currentTimeMillis());
     }
 
+    public void setTimestamp(Timestamp timestamp){
+        this.timestamp = timestamp;
+    }
+
+    public void setReceiver_name(String name){
+        this.receiver_name = name;
+    }
+
+    public void setSender_name(String name){
+        this.sender_name = name;
+    }
+
+    public String getReceiver_name(){
+        return this.receiver_name;
+    }
+
+    public String getSender_name(){
+        return this.sender_name;
+    }
+
     @Override
     public String toString() {
         return "Star{" +
@@ -86,5 +111,10 @@ public class Star {
                 ", tags=" + tags +
                 ", timestamp=" + timestamp +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return -1*this.timestamp.compareTo(((Star) o).getTimestamp());
     }
 }

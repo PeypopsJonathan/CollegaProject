@@ -1,6 +1,7 @@
 package ucll.project.domain.user;
 
 import org.junit.Test;
+import ucll.project.domain.star.Star;
 
 import java.util.ArrayList;
 
