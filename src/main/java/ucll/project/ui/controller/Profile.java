@@ -18,6 +18,9 @@ public class Profile extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         //Session opalen en user bepalen
+
+        request.setAttribute("users", this.getUserService().getUsers());
+
         UserRepository userRep = new UserRepositoryDb();
         int id = (int)request.getSession().getAttribute("user");
         User currentUser = userRep.get(id);

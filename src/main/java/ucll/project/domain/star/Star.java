@@ -12,6 +12,7 @@ public class Star implements Comparable {
     private ArrayList<String> tags;
     private Timestamp timestamp;
 
+
     public Star(){}
 
     public Star(int receiver_id, int sender_id, String comment, int star_id, ArrayList<String> tags) {
@@ -50,6 +51,8 @@ public class Star implements Comparable {
     }
 
     public void setComment(String comment) {
+        if (comment.trim().isEmpty())
+            throw new DomainException("Comment can't be empty");
         this.comment = comment;
     }
 
