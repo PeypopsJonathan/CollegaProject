@@ -30,7 +30,7 @@ public class Index extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 
         setTagAttribute(request);
-
+        getStars(request, response);
         return "index.jsp";
     }
 

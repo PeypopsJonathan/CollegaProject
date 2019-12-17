@@ -65,6 +65,17 @@
             <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
 
             <input type="submit" value="submit">
+
+            <div>
+                <c:forEach var="star" items="${stars}">
+                    <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
+                    <ul class="tags">
+                        <c:forEach var="tag" items="${star.tags}">
+                            <li class="starTag">${tag}</li>
+                        </c:forEach>
+                    </ul>
+                </c:forEach>
+            </div>
         </form>
 
     </div>
@@ -106,16 +117,7 @@
         }
 
     </script>
-    <div>
-        <c:forEach var="star" items="${stars}">
-            <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
-            <ul class="tags">
-                <c:forEach var="tag" items="${star.tags}">
-                    <li class="starTag">${tag}</li>
-                </c:forEach>
-            </ul>
-        </c:forEach>
-    </div>
+
 
 
 </main>
