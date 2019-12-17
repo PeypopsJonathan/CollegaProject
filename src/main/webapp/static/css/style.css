@@ -301,3 +301,28 @@ input[type=submit]:hover {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
+.starText {
+    width: available;
+    border: 2px black solid;
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 0px;
+    margin-top: 0px;
+}
+
+.starTag {
+    width: 50px;
+    border: 1px gray solid;
+    border-top: none;
+    padding: 5px;
+    margin-right: 5px;
+    font-size: 10px;
+}
