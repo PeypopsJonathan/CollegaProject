@@ -1,6 +1,9 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="ucll.project.domain.user.User" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ page import="ucll.project.domain.user.User" %>
+<%@ page import="ucll.project.db.ConnectionPool" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="ucll.project.domain.user.Gender" %>
+        <%@ page import="ucll.project.ui.controller.Profile" %>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -25,16 +28,12 @@
 <h1>Profile</h1>
 <main>
     <table>
-        <tr>
-            <td><img src="https://brandyourself.com/blog/wp-content/uploads/linkedin-profile-picture-too-close.png"
-                     alt="profile-picture" style="max-width: 200px"></td>
-            <td>
-        <tr>Username</tr>
-        <tr>Rating 8/8</tr>
-        <tr>Favorite movie: Yeet</tr>
-        </td>
+        <tr style="background: #5fbae9">
+            Name: ${firstname} ${lastname}
         </tr>
+        <tr>Email: ${email}</tr>
     </table>
+
 </main>
 
 

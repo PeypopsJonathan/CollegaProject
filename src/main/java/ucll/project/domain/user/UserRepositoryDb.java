@@ -116,11 +116,11 @@ public class UserRepositoryDb implements UserRepository {
     private static User userFromResult(ResultSet rs) throws SQLException {
         User user = new User();
         user.setUserId(rs.getInt("id"));
-        user.setUserName(rs.getString("username"));
+       // user.setUserName(rs.getString("username"));
         user.setFirstName(rs.getString("firstname"));
         user.setLastName(rs.getString("lastname"));
         user.setEmail(rs.getString("email"));
-        user.setGender(Gender.valueOf(rs.getString("gender")));
+        //user.setGender(Gender.valueOf(rs.getString("gender")));
         user.setRole(Role.valueOf(rs.getString("role")));
         user.setHashedPassword(rs.getString("password"));
         return user;
