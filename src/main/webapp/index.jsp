@@ -47,6 +47,14 @@
 
     </div>
 
+    <c:forEach var="star" items="${stars}">
+        <p>${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
+        <ul>
+            <c:forEach var="tag" items="${star.tags}">
+                <li>${tag}</li>
+            </c:forEach>
+        </ul>
+    </c:forEach>
 
 </main>
 </body>
