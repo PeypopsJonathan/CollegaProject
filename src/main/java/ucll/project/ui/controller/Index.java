@@ -10,6 +10,7 @@ import ucll.project.domain.user.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Index extends RequestHandler {
@@ -32,7 +33,11 @@ public class Index extends RequestHandler {
             star.setReceiver_name(userDb.get(star.getReceiver_id()).getFirstName() + " " + userDb.get(star.getReceiver_id()).getLastName());
             star.setSender_name(userDb.get(star.getSender_id()).getFirstName() + " " + userDb.get(star.getSender_id()).getLastName());
         }
-        System.out.println(localStars);
+        sortStars(localStars);
         request.setAttribute("stars", localStars);
+    }
+
+    private void sortStars(List<Star> unsortedStars){
+        Collections.sort(unsortedStars);
     }
 }
