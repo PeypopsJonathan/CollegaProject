@@ -26,7 +26,7 @@
 
 <main role="main" class="container">
 
-    <h3>Geef Ster</h3>
+    <h3>Give Star</h3>
     <c:if test="${!empty errors}">
         <div class="alert-danger">
             <c:forEach var="error" items="${errors}">
