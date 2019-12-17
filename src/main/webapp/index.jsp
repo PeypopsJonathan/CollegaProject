@@ -35,7 +35,7 @@
             <select name="tags" id="tags">
                 <option value="great">great</option>
                 <option value="awesome">awesome</option>
-                <option value="u suck">u suck</option>
+                <option value="too bad">too bad</option>
             </select>
 
             <label for="description">description</label>
