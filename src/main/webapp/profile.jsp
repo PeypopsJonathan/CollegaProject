@@ -1,8 +1,8 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="ucll.project.domain.user.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!-- Header -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,37 +22,22 @@
 <%@ include file="components/navigation.jspf" %>
 
 <!-- Page Content -->
-
-
-<main role="main" class="container">
-
-    <h3>Geef Ster</h3>
-    <div class="containerGiveStar">
-        <form novalidate="novalidate" action="/Controller?command=giveStar" method="post">
-            <label for="receiver">receiver</label>
-            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id">
-            <label for="tags">tags</label>
-            <select name="tags" id="tags">
-                <option value="great">great</option>
-                <option value="awesome">awesome</option>
-                <option value="too bad">too bad</option>
-            </select>
-
-            <label for="description">description</label>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
-
-            <input type="submit" value="submit">
-        </form>
-
-
-    </div>
-
-
+<h1>Profile</h1>
+<main>
+    <table>
+        <tr>
+            <td><img src="https://brandyourself.com/blog/wp-content/uploads/linkedin-profile-picture-too-close.png"
+                     alt="profile-picture" style="max-width: 200px"></td>
+            <td>
+        <tr>Username</tr>
+        <tr>Rating 8/8</tr>
+        <tr>Favorite movie: Yeet</tr>
+        </td>
+        </tr>
+    </table>
 </main>
-</body>
-<!-- Footer -->
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Bootstrap JS -->
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
