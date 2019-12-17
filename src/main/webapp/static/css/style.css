@@ -315,7 +315,7 @@ p.profileOverviewImage{
 }
 
 h1.profileOverviewItem{
-    margin-top: 2em;
+    margin-top: 0.5em;
     grid-area: span 1;
     grid-row-start: 1;
     grid-column-start: 4;
