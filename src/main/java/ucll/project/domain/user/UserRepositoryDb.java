@@ -12,9 +12,8 @@ public class UserRepositoryDb implements UserRepository {
     public void createUser(User user, String password) {
         try (Connection conn = ConnectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement("INSERT INTO \"award-team9\".user " +
-                     "(username, firstname, lastname, email, gender, role, password) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                     Statement.RETURN_GENERATED_KEYS))
-        {
+                             "(username, firstname, lastname, email, gender, role, password) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                     Statement.RETURN_GENERATED_KEYS)) {
             user.hashAndSetPassword(password);
             stmtSetUser(stmt, 1, user);
             if (stmt.executeUpdate() == 0) {
@@ -50,8 +49,7 @@ public class UserRepositoryDb implements UserRepository {
     public List<User> getAll() {
         try (Connection conn = ConnectionPool.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM \"award-team9\".user"))
-        {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM \"award-team9\".user")) {
             List<User> users = new ArrayList<>();
             while (rs.next()) {
                 users.add(userFromResult(rs));
@@ -65,8 +63,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public User loginUser(String username, String password) throws InvalidLogin {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".user WHERE username = ?"))
-        {
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".user WHERE username = ?")) {
             stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (!rs.next()) {
@@ -90,8 +87,7 @@ public class UserRepositoryDb implements UserRepository {
         try (Connection conn = ConnectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement("UPDATE \"award-team9\".user SET " +
                      "username = ?, firstname = ?, lastname = ?, email = ?, gender = ?, role = ?, password = ? " +
-                     "WHERE id = ? "))
-        {
+                     "WHERE id = ? ")) {
             int i = stmtSetUser(stmt, 1, user);
             stmt.setInt(i, user.getUserId());
             stmt.executeUpdate();
@@ -103,8 +99,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public void delete(User user) {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("DELETE FROM \"award-team9\".user WHERE id = ?"))
-        {
+             PreparedStatement stmt = conn.prepareStatement("DELETE FROM \"award-team9\".user WHERE id = ?")) {
             stmt.setInt(1, user.getUserId());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -132,14 +127,31 @@ public class UserRepositoryDb implements UserRepository {
         return i;
     }
 
-    public int UserIdByName(String firstname,String lastname){
-        try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where firstname = ? and lastname = ?"))
-        {
-            stmt.setString(1,firstname);
-            stmt.setString(2,lastname);
+    @Override
+    public int verify(String email, String password) {
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where email = ? and password = ?");
+            stmt.setString(1,email);
+            stmt.setString(2,password);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
+                return rs.getInt("id");
+            } else {
+                return -1;
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
+    public int UserIdByName(String firstname, String lastname) {
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where firstname = ? and lastname = ?")) {
+            stmt.setString(1, firstname);
+            stmt.setString(2, lastname);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
                 return rs.getInt("id");
             }
         } catch (SQLException e) {

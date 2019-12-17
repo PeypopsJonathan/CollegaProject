@@ -12,4 +12,8 @@ public class UserService {
     public List<User> getUsers(){
         return userRepo.getAll();
     }
+
+    public int verifyUserLogin(String email,String password){
+        return userRepo.verify(email,password);
+    }
 }
