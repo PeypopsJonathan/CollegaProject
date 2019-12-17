@@ -24,7 +24,7 @@ public class UserTest {
 
 
     @Test(expected = IllegalArgumentException.class)
-    public void CreateUserWithWrongEmailTest(){
+    public void CreateUserWithWrongEmailFormatTest(){
         User user = new User(
                 "firstName",
                 "lastName",
