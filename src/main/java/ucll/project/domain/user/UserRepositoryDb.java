@@ -33,8 +33,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public User get(int userId) {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".user WHERE id = ?"))
-        {
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".user WHERE id = ?")) {
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -131,5 +130,27 @@ public class UserRepositoryDb implements UserRepository {
         stmt.setString(i++, user.getRole().toString());
         stmt.setString(i++, user.getHashedPassword());
         return i;
+    }
+
+    public int UserIdByName(String firstname,String lastname){
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where firstname = ? and lastname = ?"))
+        {
+            stmt.setString(1,firstname);
+            stmt.setString(2,lastname);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        UserRepositoryDb db = new UserRepositoryDb();
+        int id = db.UserIdByName("Daan", "Heivers");
+        System.out.println(id);
     }
 }
