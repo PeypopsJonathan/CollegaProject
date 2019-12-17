@@ -28,7 +28,7 @@
 
     <h3>Geef Ster</h3>
     <div class="containerGiveStar">
-        <form action="/Controller?command=giveStar" POST>
+        <form novalidate="novalidate" action="/Controller?command=giveStar" method="post">
             <label for="receiver">receiver</label>
             <input type="text" id="receiver" name="receiver" placeholder="enter receiver id">
             <label for="tags">tags</label>
@@ -39,7 +39,7 @@
             </select>
 
             <label for="description">description</label>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="">description</textarea>
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
 
             <input type="submit" value="submit">
         </form>
