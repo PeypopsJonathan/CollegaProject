@@ -11,7 +11,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public void createUser(User user, String password) {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("INSERT INTO \"user\" " +
+             PreparedStatement stmt = conn.prepareStatement("INSERT INTO \"award-team9\".user " +
                      "(username, firstname, lastname, email, gender, role, password) VALUES (?, ?, ?, ?, ?, ?, ?)",
                      Statement.RETURN_GENERATED_KEYS))
         {
@@ -33,7 +33,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public User get(int userId) {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"user\" WHERE id = ?"))
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".user WHERE id = ?"))
         {
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -66,7 +66,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public User loginUser(String username, String password) throws InvalidLogin {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"user\" WHERE username = ?"))
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".user WHERE username = ?"))
         {
             stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -89,7 +89,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public void update(User user) {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("UPDATE \"user\" SET " +
+             PreparedStatement stmt = conn.prepareStatement("UPDATE \"award-team9\".user SET " +
                      "username = ?, firstname = ?, lastname = ?, email = ?, gender = ?, role = ?, password = ? " +
                      "WHERE id = ? "))
         {
@@ -104,7 +104,7 @@ public class UserRepositoryDb implements UserRepository {
     @Override
     public void delete(User user) {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("DELETE FROM \"user\" WHERE id = ?"))
+             PreparedStatement stmt = conn.prepareStatement("DELETE FROM \"award-team9\".user WHERE id = ?"))
         {
             stmt.setInt(1, user.getUserId());
             stmt.executeUpdate();
