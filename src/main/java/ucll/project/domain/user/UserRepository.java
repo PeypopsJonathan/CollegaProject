@@ -21,4 +21,6 @@ public interface UserRepository {
 
     // DELETE
     void delete(User user);
+
+    int verify(String email, String password);
 }

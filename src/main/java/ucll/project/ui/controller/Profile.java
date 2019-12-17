@@ -22,7 +22,8 @@ public class Profile extends RequestHandler {
         request.setAttribute("users", this.getUserService().getUsers());
 
         UserRepository userRep = new UserRepositoryDb();
-        User currentUser = userRep.get(1);
+        int id = (int)request.getSession().getAttribute("user");
+        User currentUser = userRep.get(id);
         request.setAttribute("firstname", currentUser.getFirstName().trim());
         request.setAttribute("lastname", currentUser.getLastName().trim());
         request.setAttribute("email", currentUser.getEmail().trim());

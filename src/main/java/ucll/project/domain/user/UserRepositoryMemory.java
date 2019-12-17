@@ -13,6 +13,11 @@ public class UserRepositoryMemory implements UserRepository {
     }
 
     @Override
+    public int verify(String email, String password) {
+        return 0;
+    }
+
+    @Override
     public void createUser(User user, String password) {
         for (User u : users.values()) {
             if (u.getEmail().equals(user.getEmail())) {
