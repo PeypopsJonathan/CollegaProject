@@ -9,11 +9,9 @@ import java.util.regex.Pattern;
 
 public class User {
     private int userId;
-    private String userName;
     private String firstName;
     private String lastName;
     private String email;
-    private Gender gender;
     private Role role;
 
     // hashed password
@@ -22,12 +20,10 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String firstName, String lastName, String email, Gender gender, Role role) {
-        setUserName(userName);
+    public User(String firstName, String lastName, String email, Role role) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
-        setGender(gender);
         setRole(role);
     }
 
@@ -64,10 +60,6 @@ public class User {
         return this.userId;
     }
 
-    public String getUserName() {
-        return this.userName;
-    }
-
     public String getFirstName() {
         return this.firstName;
     }
@@ -80,10 +72,6 @@ public class User {
         return this.email;
     }
 
-    public Gender getGender() {
-        return this.gender;
-    }
-
     public Role getRole() {
         return this.role;
     }
@@ -94,10 +82,6 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public void setFirstName(String firstName) {
@@ -115,10 +99,6 @@ public class User {
         this.email = email;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
     public void setRole(Role role) {
         this.role = role;
     }
@@ -128,6 +108,6 @@ public class User {
     }
 
     public String toString() {
-        return "User(userId=" + this.getUserId() + ", userName=" + this.getUserName() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", email=" + this.getEmail() + ", gender=" + this.getGender() + ", role=" + this.getRole() + ", hashedPassword=" + this.getHashedPassword() + ")";
+        return "User(userId=" + this.getUserId() + ", firstName=" + this.getFirstName() + ", lastName=" + this.getLastName() + ", email=" + this.getEmail() + ", role=" + this.getRole() + ", hashedPassword=" + this.getHashedPassword() + ")";
     }
 }

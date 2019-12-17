@@ -15,9 +15,6 @@ public class UserRepositoryMemory implements UserRepository {
     @Override
     public void createUser(User user, String password) {
         for (User u : users.values()) {
-            if (u.getUserName().equals(user.getUserName())) {
-                throw new IllegalArgumentException("Username already in use");
-            }
             if (u.getEmail().equals(user.getEmail())) {
                 throw new IllegalArgumentException("Email already in use");
             }
@@ -41,7 +38,7 @@ public class UserRepositoryMemory implements UserRepository {
     @Override
     public User loginUser(String username, String password) throws InvalidLogin {
         for (User u : users.values()) {
-            if (u.getEmail().equals(username) || u.getUserName().equals(username)) {
+            if (u.getEmail().equals(username)) {
                 if (u.isValidPassword(password)) {
                     return u;
                 } else {
