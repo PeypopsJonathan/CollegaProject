@@ -30,5 +30,7 @@ public interface UserRepository {
 
     void reassignStars();
 
+    void setAvailableStar(int aantal);
+
     List<Star> getStar(int id);
 }

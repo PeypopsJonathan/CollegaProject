@@ -208,7 +208,7 @@ public class Index extends RequestHandler {
             star.setStar_id(maxIdStar);
 
             starDb.createStar(star);
-
+            userDb.setAvailableStar(userDb.getAvailableStars(id) - 1);
 
             request.setAttribute("success", "Successfully Added Star!");
             return "index.jsp"; // TODO Show success page
