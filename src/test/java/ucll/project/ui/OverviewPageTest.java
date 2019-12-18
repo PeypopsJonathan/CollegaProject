@@ -4,6 +4,8 @@ import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ucll.project.domain.star.StarRepository;
 import ucll.project.domain.star.StarRepositoryDb;
 import ucll.project.domain.user.UserRepositoryDb;
@@ -35,7 +37,10 @@ public class OverviewPageTest {
     @Test
     public void CountParagraphsOnHomePage() {
         UiSuite.loginUser(driver);
-        int numberOfP = driver.findElements(By.tagName("p")).size()-2;
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("starsPar")));
+        WebElement starDiv = driver.findElement(By.name("starsPar"));
+        int numberOfP = starDiv.findElements(By.tagName("p")).size();
         StarRepository db = new StarRepositoryDb();
         System.out.println(db.getAll().size());
         assertEquals(db.getAll().size(), numberOfP);
