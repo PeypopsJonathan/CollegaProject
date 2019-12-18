@@ -38,7 +38,7 @@ public class OverviewPageTest {
         int numberOfP = driver.findElements(By.tagName("p")).size()-2;
         StarRepository db = new StarRepositoryDb();
         System.out.println(db.getAll().size());
-        //assertEquals(db.getAll().size(), numberOfP);
+        assertEquals(db.getAll().size(), numberOfP);
 
     }
 

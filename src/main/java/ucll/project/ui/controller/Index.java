@@ -14,12 +14,14 @@ import ucll.project.domain.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class Index extends RequestHandler {
@@ -123,14 +125,15 @@ public class Index extends RequestHandler {
 
     private void receiverValidator(Star star, HttpServletRequest request, ArrayList<String> errorList) {
         try {
-            String receiver_name = request.getParameter("receiver");
+            String receiver_name = request.getParameter("receiverName");
 
             if (!receiver_name.trim().isEmpty()) {
                 request.setAttribute("previous_input_receiver", receiver_name);
 
+                String[] splited = receiver_name.split("\\s+");
 
 
-                // getUserService().getUserByName();
+                star.setReceiver_id(getUserService().getUserByName(splited[0], splited[1]));
 
 
             } else {
@@ -150,16 +153,16 @@ public class Index extends RequestHandler {
             String tag2 = request.getParameter("1");
             String tag3 = request.getParameter("2");
             String tag4 = request.getParameter("3");
-            if (tag1 != null || !tag1.trim().isEmpty()) {
+            if (tag1 != null && !tag1.trim().isEmpty()) {
                 tagList.add(tag1);
             }
-            if (tag2 != null || !tag2.trim().isEmpty()) {
+            if (tag2 != null && !tag2.trim().isEmpty()) {
                 tagList.add(tag2);
             }
-            if (tag3 != null || !tag3.trim().isEmpty()) {
+            if (tag3 != null && !tag3.trim().isEmpty()) {
                 tagList.add(tag3);
             }
-            if (tag4 != null || !tag4.trim().isEmpty()) {
+            if (tag4 != null && !tag4.trim().isEmpty()) {
                 tagList.add(tag4);
             }
 
@@ -180,9 +183,17 @@ public class Index extends RequestHandler {
 
     private String submitForm(HttpServletRequest request) {
         Star star = new Star();
-        // TODO senderid text field and star id setting
-        //star.setSender_id(1);
-        //star.setStar_id(0);
+
+        int id = (Integer) request.getSession().getAttribute("user");
+
+        star.setSender_id(id);
+
+        Random r = new Random();
+        int low = 1;
+        int high = 100000;
+        int result = r.nextInt(high-low) + low;
+        star.setStar_id(result);
+
         ArrayList<String> errorList = new ArrayList<>();
 
         receiverValidator(star, request, errorList);
@@ -200,4 +211,5 @@ public class Index extends RequestHandler {
             return "index.jsp";
         }
     }
+
 }

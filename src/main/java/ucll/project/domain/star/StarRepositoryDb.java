@@ -19,6 +19,7 @@ public class StarRepositoryDb implements StarRepository{
                     Statement.RETURN_GENERATED_KEYS))
         {
             stmtSetStar(stmt, 1, star);
+            stmt.execute();
         }
         catch(SQLException e){
             throw new RuntimeException(e);
