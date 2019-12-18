@@ -62,7 +62,7 @@ public class StarRepositoryDb implements StarRepository{
         return i;
     }
 
-    private static Star starFromResultSet(ResultSet rs)throws SQLException{
+    public static Star starFromResultSet(ResultSet rs)throws SQLException{
         Star star = new Star();
         star.setReceiver_id(rs.getInt(1));
         star.setSender_id(rs.getInt(2));
@@ -80,5 +80,24 @@ public class StarRepositoryDb implements StarRepository{
             tags.add(rsTags[i]);
         }
         return tags;
+    }
+
+    @Override
+    public List<Star> getUserInvolvedInStarExchanges(int userId){
+        List<Star> exchanges = new ArrayList<>();
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".star WHERE receiver_id = ? OR sender_id = ?")) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    exchanges.add(starFromResultSet(rs));
+                    return exchanges;
+                }
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
