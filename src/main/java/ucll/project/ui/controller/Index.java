@@ -42,10 +42,15 @@ public class Index extends RequestHandler {
         checkStars();
 
         if (isFormSubmition(request)) {
-            return submitForm(request);
+            try {
+                return submitForm(request);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             return "index.jsp";
         }
+        return "index.jsp";
     }
 
     public void setTagAttribute(HttpServletRequest request) {
@@ -210,7 +215,7 @@ public class Index extends RequestHandler {
         return request.getParameter("isForm") != null;
     }
 
-    private String submitForm(HttpServletRequest request) {
+    private String submitForm(HttpServletRequest request) throws Exception {
         Star star = new Star();
 
         int id = (Integer) request.getSession().getAttribute("user");
@@ -243,6 +248,15 @@ public class Index extends RequestHandler {
 
                 userDb.setAvailableStar(availableStars - 1);
 
+            request.setAttribute("success", "Successfully Added Star!");
+
+            /**
+             * HARD CODED DAAN ZEN EMAIL
+             * */
+            SimpleMail.send("dennisw@live.be","Control alt de yeet");
+            System.out.println("MAIL");
+
+            // TODO Show success page
                 request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
                 request.setAttribute("success", "Successfully Added Star!");
                 return "index.jsp";
