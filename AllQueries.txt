@@ -1,0 +1,88 @@
+--BEGIN ALGEMENE QUERIES--
+
+--verwijder alle schemas
+drop table "award-team9".star cascade;
+drop table "award-team9".user cascade;
+
+--bouw schemas op van nul af aan
+create table "award-team9".star (receiver_id smallint NOT NULL, sender_id smallint NOT NULL, comment varchar(255) NOT NULL, tags varchar(255)[] NOT NULL, timestamp timestamp  NOT NULL, star_id SERIAL, primary key (star_id));
+create table "award-team9".user (id integer NOT NULL, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, role varchar(255) NOT NULL, password varchar(255) NOT NULL, available_stars smallint NOT NULL DEFAULT 3, primary key (id));
+
+--geef toestemming op tabellen
+grant all privileges on schema "award-team9".user, "award-team9".star to r0578690, r0711106, r0654233, r0729781, r0765653, r0664478, r0679673, r0759603, hakkaton_09;
+grant all privileges on "award-team9".user, "award-team9".star to r0578690, r0711106, r0654233, r0729781, r0765653, r0664478, r0679673, r0759603, hakkaton_09;
+grant all privileges on "award-team9".user, "award-team9".star to r0578690, r0711106, r0654233, r0729781, r0765653, r0664478, r0679673, r0759603, hakkaton_09;
+
+--EIND ALGEMENE QUERIES--
+
+--BEGIN QUERIES OP USER DATABAS--
+
+--verwijder alle gebruikers van de database
+delete
+from "award-team9".user
+where user_id > 0;
+
+--laat alle gebruikers in de database zien
+select * from "award-team9".user;
+
+--voeg tijdelijke testgebruikers too aan database
+insert into "award-team9".user values
+(1, 'Daan', 'Heivers', 'daan.heivers@student.ucll.be', 'ADMIN', 'test', 3),
+(2, 'Laurent', 'Bubba', 'laurent.bubba@student.ucll.be', 'ADMIN', 'test', 2),
+(3, 'Arno', 'Bunckens', 'arno.bunckens@student.ucll.be', 'SUPPORT', 'test', 2),
+(4, 'Jonathan', 'Peypops', 'jonathan.peypos@student.ucll.be', 'USER', 'test', 1),
+(5, 'Dennis', 'Winnepenninckx', 'dennis.winnepennincks@student.ucll.be', 'USER', 'test', 2),
+(6, 'Wouter', 'Van Elst', 'wouter.vanelst@student.ucll.be', 'ADMIN', 'ABCxyz123', 3),
+(7, 'Herman', 'Hermans', 'herman.hermans@gmail.com', 'USER', 'abcXYZ789', 2),
+(8, 'Jan', 'Janssen', 'jan.janssen@hotmail.com', 'USER', 'Wachtwoord123', 2),
+(9, 'Daan', 'Daans', 'daand@amail1.com', 'SUPPORT', 'Password5', 1),
+(10, 'Nick', 'Gevers', 'gnick@amail1.com', 'USER', 'HelloWorld', 2);
+
+--voeg gebruikers Ipsos toe aan database
+insert into "award-team9".user values
+(1, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'ADMIN', 'tmpPWD'),
+(2, 'Ahu', 'Alanya', 'Ahu.Alanya@ipsos.com', 'USER', 'tmpPWD'),
+(3, 'Anne', 'Esser', 'Anne.Esser@ipsos.com', 'USER', 'tmpPWD'),
+(4, 'Daan', 'Bijwaard', 'Daan.Bijwaard@ipsos.com', 'USER', 'tmpPWD'),
+(5, 'Femke', 'Dekeulenaer', 'Femke.Dekeulenaer@ipsos.com', 'USER', 'tmpPWD'),
+(6, 'Françoise', 'Schuster', 'Francoise.Schuster@ipsos.com', 'USER', 'tmpPWD'),
+(7, 'Aline', 'Moris', 'Aline.Moris@ipsos.com', 'USER', 'tmpPWD'),
+(8, 'Allison', 'Dunne', 'Allison.Dunne@ipsos.com', 'USER', 'tmpPWD'),
+(9, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'USER', 'tmpPWD'),
+(10, 'Femke', 'Maes', 'Femke.Maes@ipsos.com', 'USER', 'tmpPWD'),
+(11, 'Jonah', 'Rys', 'Jonah.Rys@ipsos.com', 'USER', 'tmpPWD'),
+(12, 'Kim', 'DeCuyper', 'Kim.DeCuyper@ipsos.com', 'USER', 'tmpPWD'),
+(13, 'Nancy', 'Heremans', 'Nancy.Heremans@ipsos.com', 'USER', 'tmpPWD'),
+(14, 'Pauline', 'Hardy', 'Pauline.Hardy@ipsos.com', 'USER', 'tmpPWD'),
+(15, 'Sara', 'Davidson', 'Sara.Davidson@ipsos.com', 'USER', 'tmpPWD'),
+(16, 'Sara', 'Gysen', 'Sara.Gysen@ipsos.com', 'USER', 'tmpPWD'),
+(17, 'Snezha', 'kazakova', 'Snezha.kazakova@ipsos.com', 'USER', 'tmpPWD'),
+(18, 'Suzanne', 'Dautzenberg', 'Suzanne.Dautzenberg@ipsos.com', 'USER', 'tmpPWD'),
+(19, 'Tim', 'Meeusen', 'Tim.Meeusen@ipsos.com', 'USER', 'tmpPWD');
+
+--EIND QUERIES OP USER DATABASE--
+
+--BEGIN QUERIES OP STAR DATABASE--
+
+--verwijder alle sterren van de database
+delete
+from "award-team9".star
+where star_id > 0;
+
+--laat alle sterren in de database zien
+select * from "award-team9".star;
+
+--voeg tijdelijke teststerren toe aan de database
+insert into "award-team9".star values
+(8, 2, 'Thanks for helping me with Excel!', ARRAY ['Integrity','Collaboration'], '2019-12-15 11:11:11'),
+(2, 3, 'Thanks for offering to help me!', ARRAY ['Curiosity','Collaboration','Entrepreneurship'], '2019-12-15 13:37:00'),
+(5, 4, 'Thank you for meeting my client when I fell sick.', ARRAY ['Client first','Entrepreneurship'], '2019-12-15 14:14:14'),
+(7, 5, 'The team building your organised was amazingly enjoyable!', ARRAY ['Move faster','Go further','Team spirit'], '2019-12-16 12:04:20'),
+(6, 7, 'Thank you for always being so supportive!', ARRAY ['Office spirit','Team spirit'], '2019-12-16 16:16:16'),
+(3, 8, 'I like that you take initiative when you need help.', ARRAY ['Act smarter','Go further','Entrepreneurship'], '2019-12-16 16:59:59'),
+(1, 9, 'I always learn new things when working with you!', ARRAY ['Collaboration'], '2019-12-17 10:39:39'),
+(4, 10, 'Thanks for checking up on my progress!', ARRAY ['Entrepreneurship','Curiosity'], '2019-12-17 12:30:01'),
+(2, 4, 'Your teamwork is exceptional', ARRAY ['Integrity'], '2019-12-18 09:00:01'),
+(10, 9, 'You are a great team leader!', ARRAY ['Move faster', 'Go further'], '2019-12-18 11:59:59');
+
+--EIND QUERIES OP STAR DATABASE--

@@ -18,4 +18,6 @@ public interface StarRepository {
 
     // DELETE
     void delete(Star star);
+
+    List<Star> getUserInvolvedInStarExchanges(int userId);
 }

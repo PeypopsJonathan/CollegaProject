@@ -24,7 +24,6 @@
 <!-- Page Content -->
 
 
-
 <main role="main" class="container">
 
 
@@ -62,10 +61,17 @@
             <h2>Tags Added: </h2>
             </p>
 
-            <input type="hidden" class="What a great worker." name="0" id="0">
-            <input type="hidden" class="Awesome stuff." name="1" id="1">
-            <input type="hidden" class="Have my children." name="2" id="2">
-            <input type="hidden" class="Happy with your service." name="3" id="3">
+            <input type="hidden" class="Integrity" name="0" id="0">
+            <input type="hidden" class="Curiosity" name="1" id="1">
+            <input type="hidden" class="Collaboration" name="2" id="2">
+            <input type="hidden" class="Client first" name="3" id="3">
+            <input type="hidden" class="Entrepreneurship" name="4" id="4">
+            <input type="hidden" class="Move Faster" name="5" id="5">
+            <input type="hidden" class="Act smarter" name="6" id="6">
+            <input type="hidden" class="Go further" name="7" id="7">
+            <input type="hidden" class="Be sure" name="8" id="8">
+            <input type="hidden" class="Team spirit" name="9" id="9">
+            <input type="hidden" class="Office spirit" name="10" id="10">
 
             <label for="description" value="${previous_input_description}">description</label>
             <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
@@ -75,8 +81,10 @@
 
         </form>
         </form>
+        <h3>${success}</h3>
     </div>
         <section class="starOverview">
+
 
             <div>
                 <c:forEach var="star" items="${stars}">

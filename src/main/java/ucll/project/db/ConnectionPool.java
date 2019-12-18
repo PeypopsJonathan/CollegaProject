@@ -28,6 +28,7 @@ public class ConnectionPool {
         p.setInitialSize(1);
         p.setMinIdle(1);
         p.setMaxIdle(4);
+        p.setMaxAge(10000);
         dataSource = new DataSource();
         dataSource.setPoolProperties(p);
     }
