@@ -237,7 +237,6 @@
         var names = [];
         names = ${listName};
         console.log(names);
-        //var names = [Roshan, "Pim", "Niels", "Daan", "Bubba"];
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
     </script>

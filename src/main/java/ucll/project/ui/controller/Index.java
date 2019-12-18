@@ -241,7 +241,7 @@ public class Index extends RequestHandler {
             if (availableStars > 0) {
                 starDb.createStar(star);
 
-                userDb.setAvailableStar(availableStars - 1);
+                userDb.setAvailableStar(id, availableStars - 1);
 
                 request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
                 request.setAttribute("success", "Successfully Added Star!");
