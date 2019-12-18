@@ -207,11 +207,22 @@ public class Index extends RequestHandler {
             maxIdStar++;
             star.setStar_id(maxIdStar);
 
-            starDb.createStar(star);
-            userDb.setAvailableStar(userDb.getAvailableStars(id) - 1);
+            int availableStars = userDb.getAvailableStars(id);
 
-            request.setAttribute("success", "Successfully Added Star!");
-            return "index.jsp"; // TODO Show success page
+            if (availableStars > 0) {
+                starDb.createStar(star);
+
+                userDb.setAvailableStar(availableStars - 1);
+
+                request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
+                request.setAttribute("success", "Successfully Added Star!");
+                return "index.jsp";
+            } else {
+                errorList.add("No more stars left to give :(");
+                request.setAttribute("errors", errorList);
+                return "index.jsp";
+            }
+
         } else {
             request.setAttribute("errors", errorList);
             return "index.jsp";
