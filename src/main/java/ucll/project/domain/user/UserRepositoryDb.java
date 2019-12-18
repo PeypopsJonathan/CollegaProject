@@ -208,6 +208,18 @@ public class UserRepositoryDb implements UserRepository {
         return -1;
     }
 
+    public void setAvailableStar(int aantal){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user\n" +
+                    "set available_stars = ?");
+            stmt.setInt(1, aantal);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
     public void reassignStars(){
         try (Connection conn = ConnectionPool.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user\n" +
