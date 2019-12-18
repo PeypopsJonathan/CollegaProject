@@ -188,12 +188,6 @@ public class Index extends RequestHandler {
 
         star.setSender_id(id);
 
-        Random r = new Random();
-        int low = 1;
-        int high = 100000;
-        int result = r.nextInt(high-low) + low;
-        star.setStar_id(result);
-
         ArrayList<String> errorList = new ArrayList<>();
 
         receiverValidator(star, request, errorList);
@@ -202,7 +196,8 @@ public class Index extends RequestHandler {
 
         if (errorList.isEmpty()) {
 
-            //starDb.createStar(star);
+
+            starDb.createStar(star);
 
 
             return "users.jsp"; // TODO Show success page
