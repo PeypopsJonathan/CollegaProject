@@ -29,7 +29,7 @@ public class UserProfileTest {
 
     }
 
-    @Test
+    /*@Test
     public void VisitUsersProfilePageTest() {
         UiSuite.loginUser(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -59,7 +59,7 @@ public class UserProfileTest {
         WebElement link = driver.findElement(By.linkText("Profile"));
         link.click();
         assertTrue(Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", driver.findElement(By.cssSelector("p.profileOverviewItem")).getText()));
-    }
+    }*/
 
 
 
