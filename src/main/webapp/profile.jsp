@@ -30,9 +30,8 @@
     <section class="profileOverview">
         <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
-        <p class="profileOverviewItem">${email}
-        </p>
-        <p class="profileOverviewItem">you have ${availableStars} available</p>
+        <p class="profileOverviewItem">${email}</p>
+        <p class="profileOverviewItem2">you have ${availableStars} stars left to give this month</p>
         <div class="profileStarOverview">
             <c:forEach var="star" items="${stars}">
                 <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
@@ -43,7 +42,6 @@
                 </ul>
             </c:forEach>
         </div>
-        <p style="grid-area: span 1; grid-column-start: 4; grid-row-start: 4; text-align: center">${stars}</p>
     </section>
 </main>
 

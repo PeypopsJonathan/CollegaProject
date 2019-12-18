@@ -93,11 +93,10 @@ public class StarRepositoryDb implements StarRepository{
             stmt.setInt(1, userId);
             stmt.setInt(2, userId);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     exchanges.add(starFromResultSet(rs));
-                    return exchanges;
                 }
-                return null;
+                return exchanges;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

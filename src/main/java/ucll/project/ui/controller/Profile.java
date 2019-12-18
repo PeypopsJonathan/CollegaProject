@@ -36,12 +36,7 @@ public class Profile extends RequestHandler {
         request.setAttribute("firstname", currentUser.getFirstName().trim());
         request.setAttribute("lastname", currentUser.getLastName().trim());
         request.setAttribute("email", currentUser.getEmail().trim());
-        List<Star> userStars = userRep.getStar((Integer) request.getSession().getAttribute("user"));
-        if (userStars != null) {
-            request.setAttribute("stars", userStars.size());
-        } else {
-            request.setAttribute("stars", "Star list is null");
-        }
+        request.setAttribute("availableStars",userRep.getAvailableStars((int)request.getSession().getAttribute("user")));
         getUserStars(request, response, currentUser.getUserId());
 
         return "profile.jsp";
