@@ -1,9 +1,11 @@
 package ucll.project.domain.user;
 
 import ucll.project.db.ConnectionPool;
+import ucll.project.domain.star.Star;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserRepositoryDb implements UserRepository {
@@ -118,6 +120,20 @@ public class UserRepositoryDb implements UserRepository {
         return user;
     }
 
+    private static Star starFromResult(ResultSet rs) throws SQLException {
+        Star star = new Star();
+        star.setStar_id(rs.getInt("star_id"));
+        star.setComment(rs.getString("comment"));
+        star.setReceiver_id(rs.getInt("receiver_id"));
+        star.setSender_id(rs.getInt("sender_id"));
+        Array array = rs.getArray("tags");
+        String[] arrayString = (String[]) array.getArray();
+        List<String> list = Arrays.asList(arrayString);
+        star.setTags(list);
+        star.setTimestamp(rs.getTimestamp("timestamp"));
+        return star;
+    }
+
     private static int stmtSetUser(PreparedStatement stmt, int i, User user) throws SQLException {
         stmt.setString(i++, user.getFirstName());
         stmt.setString(i++, user.getLastName());
@@ -131,8 +147,8 @@ public class UserRepositoryDb implements UserRepository {
     public int verify(String email, String password) {
         try (Connection conn = ConnectionPool.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where email = ? and password = ?");
-            stmt.setString(1,email);
-            stmt.setString(2,password);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt("id");
@@ -144,7 +160,24 @@ public class UserRepositoryDb implements UserRepository {
         }
     }
 
+    @Override
+    public List<Star> getStar() {
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("select * from \"award-team9\".star where receiver_id = 1")) {
+            ArrayList<Star> starList = new ArrayList<>();
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    starList.add(starFromResult(rs));
+                }
+                return starList;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
+    }
+
+        
     public int UserIdByName(String firstname, String lastname) {
         try (Connection conn = ConnectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where firstname = ? and lastname = ?")) {
