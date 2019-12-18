@@ -34,7 +34,7 @@ public class OverviewPageTest {
     /**
      * This is a sample test, remove this test and write your own!
      */
-    @Test
+    /*@Test
     public void CountParagraphsOnHomePage() {
         UiSuite.loginUser(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -55,6 +55,6 @@ public class OverviewPageTest {
             if (ul.findElement(By.tagName("li")) == null) foundLi = false;
         }
         assertEquals(true, foundLi);
-    }
+    }*/
 
 }
