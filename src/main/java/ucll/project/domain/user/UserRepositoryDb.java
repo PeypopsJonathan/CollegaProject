@@ -18,6 +18,7 @@ public class UserRepositoryDb implements UserRepository {
                      Statement.RETURN_GENERATED_KEYS)) {
             user.hashAndSetPassword(password);
             stmtSetUser(stmt, 1, user);
+
             if (stmt.executeUpdate() == 0) {
                 throw new RuntimeException("Failed to create user");
             }
