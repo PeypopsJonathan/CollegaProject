@@ -220,14 +220,14 @@
             document.addEventListener("click", function (e) {
                 closeAllLists(e.target);
             });
-        }
+        }dx
 
         /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
         console.log(names);
-        //var names = [Roshan, "Pim", "Niels", "Daan", "Bubba"];
-        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+        //vxr names = [Roshan, "Pim", "Niels", "Daan", "Bubba"];
+        /*ini siate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
     </script>
 
