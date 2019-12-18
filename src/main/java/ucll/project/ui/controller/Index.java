@@ -13,6 +13,7 @@ import ucll.project.domain.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import java.util.Collections;
@@ -81,7 +82,7 @@ public class Index extends RequestHandler {
 
     private void receiverValidator(Star star, HttpServletRequest request, ArrayList<String> errorList) {
         try {
-            String receiver_name = request.getParameter("receiver");
+            String receiver_name = request.getParameter("receiverName");
 
             if (!receiver_name.trim().isEmpty()) {
                 request.setAttribute("previous_input_receiver", receiver_name);
@@ -109,16 +110,16 @@ public class Index extends RequestHandler {
             String tag2 = request.getParameter("1");
             String tag3 = request.getParameter("2");
             String tag4 = request.getParameter("3");
-            if (tag1 != null || !tag1.trim().isEmpty()) {
+            if (tag1 != null && !tag1.trim().isEmpty()) {
                 tagList.add(tag1);
             }
-            if (tag2 != null || !tag2.trim().isEmpty()) {
+            if (tag2 != null && !tag2.trim().isEmpty()) {
                 tagList.add(tag2);
             }
-            if (tag3 != null || !tag3.trim().isEmpty()) {
+            if (tag3 != null && !tag3.trim().isEmpty()) {
                 tagList.add(tag3);
             }
-            if (tag4 != null || !tag4.trim().isEmpty()) {
+            if (tag4 != null && !tag4.trim().isEmpty()) {
                 tagList.add(tag4);
             }
 
@@ -157,9 +158,11 @@ public class Index extends RequestHandler {
         descriptionValidator(star, request, errorList);
 
         if (errorList.isEmpty()) {
-            
-            starDb.createStar(star);
 
+            star.setComment("Comment");
+            System.out.println(star);
+
+            starDb.createStar(star);
 
             return "users.jsp"; // TODO Show success page
         } else {

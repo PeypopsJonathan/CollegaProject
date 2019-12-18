@@ -42,7 +42,8 @@
             <div class="autocomplete">
                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
             </div>
-            <label for="tags">tags</label>
+            <h2>Choose/Enter Correct Name</h2>
+            <h2 for="tags">tags</h2>
 
             <select id="select" name="tags" id="tags" onchange="addTag()">
                 <option></option>
