@@ -32,6 +32,7 @@
         <p class="profileOverviewItem">${email}
         </p>
         <p class="profileOverviewItem">you have ${availableStars} available</p>
+        <p style="grid-area: span 1; grid-column-start: 4; grid-row-start: 4; text-align: center">${stars}</p>
     </section>
 </main>
 

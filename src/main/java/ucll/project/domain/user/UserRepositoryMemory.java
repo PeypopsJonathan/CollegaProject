@@ -1,5 +1,7 @@
 package ucll.project.domain.user;
 
+import ucll.project.domain.star.Star;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,5 +73,10 @@ public class UserRepositoryMemory implements UserRepository {
 
     @Override
     public void reassignStars() {
+    }
+
+    @Override
+    public List<Star> getStar() {
+        return new ArrayList<Star>();
     }
 }

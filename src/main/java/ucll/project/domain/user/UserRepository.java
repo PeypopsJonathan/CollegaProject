@@ -1,5 +1,7 @@
 package ucll.project.domain.user;
 
+import ucll.project.domain.star.Star;
+
 import java.util.List;
 
 public interface UserRepository {
@@ -27,4 +29,6 @@ public interface UserRepository {
     int getAvailableStars(int id);
 
     void reassignStars();
+
+    List<Star> getStar();
 }

@@ -42,6 +42,9 @@
             <label for="receiver">receiver</label>
             <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
                    value="${previous_input_receiver}">
+            <div class="autocomplete">
+                <input id="receiverName" type="text" name="receiverName" placeholder="Names">
+            </div>
             <label for="tags">tags</label>
 
             <select id="select" name="tags" id="tags" onchange="addTag()">
