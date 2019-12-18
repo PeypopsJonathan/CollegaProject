@@ -32,7 +32,7 @@ public class Index extends RequestHandler {
 
         setTagAttribute(request);
         getStars(request);
-
+        request.setAttribute("listName", getUserService().getAllNames());
         if (isFormSubmition(request)) {
             return submitForm(request);
         } else {
@@ -157,4 +157,5 @@ public class Index extends RequestHandler {
             return "index.jsp";
         }
     }
+
 }
