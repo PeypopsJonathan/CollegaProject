@@ -26,7 +26,7 @@
 
 <!-- Page Content -->
 <main>
-    <a href="Controller?command=Signout">log out</a>
+
     <section class="profileOverview">
         <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
