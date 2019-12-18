@@ -26,8 +26,9 @@
 
 <main role="main" class="container">
 
-    <h3>Geef Ster</h3>
+
     <div class="containerGiveStar">
+        <h3>Give Star</h3>
         <form action="/Controller?command=giveStar" POST>
             <label for="receiver">receiver</label>
             <input type="text" id="receiver" name="receiver" placeholder="enter receiver id">
@@ -39,7 +40,7 @@
             </select>
 
             <label for="description">description</label>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="">description</textarea>
+            <textarea name="description" id="description" cols="30" rows="5" placeholder="">description</textarea>
 
             <input type="submit" value="submit">
         </form>
