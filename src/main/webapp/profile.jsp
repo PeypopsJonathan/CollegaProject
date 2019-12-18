@@ -30,6 +30,7 @@
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}
         </p>
+        <p style="grid-area: span 1; grid-column-start: 4; grid-row-start: 4; text-align: center">${stars}</p>
     </section>
 </main>
 

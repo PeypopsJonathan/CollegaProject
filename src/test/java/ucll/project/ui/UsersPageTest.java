@@ -19,7 +19,7 @@ public class UsersPageTest {
 
     @Before
     public void SetupDriver() {
-        driver = ChromeDriverHelper.getDriver();
+        driver = DriverHelper.getDriver();
 
     }
 

@@ -5,16 +5,16 @@ import java.util.List;
 public class UserService {
     private UserRepository userRepo;
 
-    public UserService() {
+    public UserService(){
         userRepo = new UserRepositoryDb();
     }
 
-    public List<User> getUsers() {
+    public List<User> getUsers(){
         return userRepo.getAll();
     }
 
-    public User getUserById(int receiver_id) {
-        return userRepo.get(receiver_id);
+    public int verifyUserLogin(String email,String password){
+        return userRepo.verify(email,password);
     }
 
     public int getUserByName(String firstName, String lastName) {
