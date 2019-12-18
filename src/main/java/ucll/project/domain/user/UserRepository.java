@@ -26,5 +26,5 @@ public interface UserRepository {
 
     int verify(String email, String password);
 
-    List<Star> getStar();
+    List<Star> getStar(int id);
 }
