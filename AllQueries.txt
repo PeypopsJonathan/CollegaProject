@@ -40,25 +40,25 @@ insert into "award-team9".user values
 
 --voeg gebruikers Ipsos toe aan database
 insert into "award-team9".user values
-(1, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'ADMIN', 'tmpPWD'),
-(2, 'Ahu', 'Alanya', 'Ahu.Alanya@ipsos.com', 'USER', 'tmpPWD'),
-(3, 'Anne', 'Esser', 'Anne.Esser@ipsos.com', 'USER', 'tmpPWD'),
-(4, 'Daan', 'Bijwaard', 'Daan.Bijwaard@ipsos.com', 'USER', 'tmpPWD'),
-(5, 'Femke', 'Dekeulenaer', 'Femke.Dekeulenaer@ipsos.com', 'USER', 'tmpPWD'),
-(6, 'Françoise', 'Schuster', 'Francoise.Schuster@ipsos.com', 'USER', 'tmpPWD'),
-(7, 'Aline', 'Moris', 'Aline.Moris@ipsos.com', 'USER', 'tmpPWD'),
-(8, 'Allison', 'Dunne', 'Allison.Dunne@ipsos.com', 'USER', 'tmpPWD'),
-(9, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'USER', 'tmpPWD'),
-(10, 'Femke', 'Maes', 'Femke.Maes@ipsos.com', 'USER', 'tmpPWD'),
-(11, 'Jonah', 'Rys', 'Jonah.Rys@ipsos.com', 'USER', 'tmpPWD'),
-(12, 'Kim', 'DeCuyper', 'Kim.DeCuyper@ipsos.com', 'USER', 'tmpPWD'),
-(13, 'Nancy', 'Heremans', 'Nancy.Heremans@ipsos.com', 'USER', 'tmpPWD'),
-(14, 'Pauline', 'Hardy', 'Pauline.Hardy@ipsos.com', 'USER', 'tmpPWD'),
-(15, 'Sara', 'Davidson', 'Sara.Davidson@ipsos.com', 'USER', 'tmpPWD'),
-(16, 'Sara', 'Gysen', 'Sara.Gysen@ipsos.com', 'USER', 'tmpPWD'),
-(17, 'Snezha', 'kazakova', 'Snezha.kazakova@ipsos.com', 'USER', 'tmpPWD'),
-(18, 'Suzanne', 'Dautzenberg', 'Suzanne.Dautzenberg@ipsos.com', 'USER', 'tmpPWD'),
-(19, 'Tim', 'Meeusen', 'Tim.Meeusen@ipsos.com', 'USER', 'tmpPWD');
+(1, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'ADMIN', 'tmpPWD', 3),
+(2, 'Ahu', 'Alanya', 'Ahu.Alanya@ipsos.com', 'USER', 'tmpPWD', 3),
+(3, 'Anne', 'Esser', 'Anne.Esser@ipsos.com', 'USER', 'tmpPWD', 3),
+(4, 'Daan', 'Bijwaard', 'Daan.Bijwaard@ipsos.com', 'USER', 'tmpPWD', 3),
+(5, 'Femke', 'Dekeulenaer', 'Femke.Dekeulenaer@ipsos.com', 'USER', 'tmpPWD', 3),
+(6, 'Françoise', 'Schuster', 'Francoise.Schuster@ipsos.com', 'USER', 'tmpPWD', 3),
+(7, 'Aline', 'Moris', 'Aline.Moris@ipsos.com', 'USER', 'tmpPWD', 3),
+(8, 'Allison', 'Dunne', 'Allison.Dunne@ipsos.com', 'USER', 'tmpPWD', 3),
+(9, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'USER', 'tmpPWD', 3),
+(10, 'Femke', 'Maes', 'Femke.Maes@ipsos.com', 'USER', 'tmpPWD', 3),
+(11, 'Jonah', 'Rys', 'Jonah.Rys@ipsos.com', 'USER', 'tmpPWD', 3),
+(12, 'Kim', 'DeCuyper', 'Kim.DeCuyper@ipsos.com', 'USER', 'tmpPWD', 3),
+(13, 'Nancy', 'Heremans', 'Nancy.Heremans@ipsos.com', 'USER', 'tmpPWD', 3),
+(14, 'Pauline', 'Hardy', 'Pauline.Hardy@ipsos.com', 'USER', 'tmpPWD', 3),
+(15, 'Sara', 'Davidson', 'Sara.Davidson@ipsos.com', 'USER', 'tmpPWD', 3),
+(16, 'Sara', 'Gysen', 'Sara.Gysen@ipsos.com', 'USER', 'tmpPWD', 3),
+(17, 'Snezha', 'kazakova', 'Snezha.kazakova@ipsos.com', 'USER', 'tmpPWD', 3),
+(18, 'Suzanne', 'Dautzenberg', 'Suzanne.Dautzenberg@ipsos.com', 'USER', 'tmpPWD', 3),
+(19, 'Tim', 'Meeusen', 'Tim.Meeusen@ipsos.com', 'USER', 'tmpPWD', 3);
 
 --EIND QUERIES OP USER DATABASE--
 
