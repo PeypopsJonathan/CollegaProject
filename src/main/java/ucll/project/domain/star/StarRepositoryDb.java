@@ -58,7 +58,8 @@ public class StarRepositoryDb implements StarRepository{
 
     }
 
-    private static int stmtSetStar(PreparedStatement stmt, int i, Star star)throws SQLException{
+    private static int
+    stmtSetStar(PreparedStatement stmt, int i, Star star)throws SQLException{
         stmt.setInt(i++, star.getSender_id());
         return i;
     }

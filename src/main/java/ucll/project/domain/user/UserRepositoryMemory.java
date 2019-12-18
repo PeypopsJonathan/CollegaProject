@@ -57,6 +57,11 @@ public class UserRepositoryMemory implements UserRepository {
     }
 
     @Override
+    public int getAvailableStars(int id) {
+        return -1;
+    }
+
+    @Override
     public void update(User user) {
         users.replace(user.getUserId(), user);
     }
@@ -64,6 +69,10 @@ public class UserRepositoryMemory implements UserRepository {
     @Override
     public void delete(User user) {
         users.remove(user.getUserId());
+    }
+
+    @Override
+    public void reassignStars() {
     }
 
     @Override

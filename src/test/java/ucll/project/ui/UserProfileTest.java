@@ -8,8 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
@@ -20,14 +22,14 @@ public class UserProfileTest {
 
     @Before
     public void SetupDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Laure\\Documents\\FASE 2\\Webontwikkeling 3\\JARS etc\\chromedriver.exe");
-        //driver = ChromeDriverHelper.getDriver();
+        driver = DriverHelper.getDriver();
         driver.get(Config.BASE_URL);
 
     }
 
     @Test
     public void VisitUsersProfilePageTest() {
+        UiSuite.loginUser(driver);
         WebElement link = driver.findElement(By.linkText("Profile"));
         link.click();
 
@@ -36,16 +38,21 @@ public class UserProfileTest {
 
     @Test
     public void CheckNameIsRight(){
-        driver.get("http://localhost:8080/Controller?command=Profile");
+        UiSuite.loginUser(driver);
+        WebElement link = driver.findElement(By.linkText("Profile"));
+        link.click();
         WebElement naam = driver.findElement(By.cssSelector(".profileOverview h1"));
         assertEquals("Daan Heivers", naam.getText().trim());
     }
 
     @Test
     public void EmailadresIsCorrectFormat(){
-        driver.get("http://localhost:8080/Controller?command=Profile");
+        UiSuite.loginUser(driver);
+        WebElement link = driver.findElement(By.linkText("Profile"));
+        link.click();
         assertTrue(Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", driver.findElement(By.cssSelector("p.profileOverviewItem")).getText()));
     }
+
 
 
 

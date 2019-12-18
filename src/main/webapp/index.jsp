@@ -37,8 +37,8 @@
         </div>
     </c:if>
     <div class="containerGiveStar">
-        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
-
+        <p>you have ${availableStars} left to give this month</p>
+        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
             <div class="autocomplete">
                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
             </div>
