@@ -31,8 +31,8 @@
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}
         </p>
-        <p class="profileOverviewItem">you have ${availableStars} available</p>
-        <p style="grid-area: span 1; grid-column-start: 4; grid-row-start: 4; text-align: center">${stars}</p>
+        <p class="profileOverviewItem2">you have ${availableStars} stars available</p>
+        <p style="grid-area: span 1; grid-column-start: 4; grid-row-start: 5; text-align: center">You have received ${stars} stars</p>
     </section>
 </main>
 

@@ -24,6 +24,7 @@
 <!-- Page Content -->
 
 
+
 <main role="main" class="container">
 
 
@@ -36,6 +37,7 @@
             </c:forEach>
         </div>
     </c:if>
+    <h1>Star feed</h1>
     <div class="containerGiveStar">
         <h3>Give Star</h3>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
@@ -75,7 +77,6 @@
         </form>
     </div>
         <section class="starOverview">
-
 
             <div>
                 <c:forEach var="star" items="${stars}">

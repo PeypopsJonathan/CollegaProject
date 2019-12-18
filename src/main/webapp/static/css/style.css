@@ -42,24 +42,32 @@ main.container {
     grid-gap: 2rem;
     line-height: 120%;
 
+
+}
+
+main.container.h1{
+    grid-column: 1 / span 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    justify-content: center;
 }
 
 .starOverview{
     grid-column-start: 1;
     grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
 
 }
 
 
 .containerGiveStar{
+    align-content: start;
     grid-column-start: 2 ;
     grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
-
 
 
 h2 {
@@ -393,7 +401,15 @@ p.profileOverviewItem{
     grid-area: span 1;
     grid-row-start: 3;
     grid-column-start: 4;
+    justify-content: center;
 }
+p.profileOverviewItem2 {
+    grid-area: span 1;
+    grid-column-start: 4;
+    grid-row-start: 4;
+    justify-content: center;
+}
+
 
 .starText {
     width: available;
@@ -412,10 +428,11 @@ p.profileOverviewItem{
 }
 
 .starTag {
-    width: 50px;
+    width: auto;
     border: 1px gray solid;
     border-top: none;
     padding: 5px;
     margin-right: 5px;
     font-size: 12px;
+
 }
