@@ -161,10 +161,11 @@ public class UserRepositoryDb implements UserRepository {
     }
 
     @Override
-    public List<Star> getStar() {
+    public List<Star> getStar(int receiver_id) {
         try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("select * from \"award-team9\".star where receiver_id = 1")) {
+             PreparedStatement stmt = conn.prepareStatement("select * from \"award-team9\".star where receiver_id = ?")) {
             ArrayList<Star> starList = new ArrayList<>();
+            stmt.setInt(1,receiver_id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     starList.add(starFromResult(rs));
@@ -177,7 +178,7 @@ public class UserRepositoryDb implements UserRepository {
 
     }
 
-        
+
     public int UserIdByName(String firstname, String lastname) {
         try (Connection conn = ConnectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where firstname = ? and lastname = ?")) {
