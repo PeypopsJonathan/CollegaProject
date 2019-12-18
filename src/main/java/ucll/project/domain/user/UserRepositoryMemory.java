@@ -1,5 +1,7 @@
 package ucll.project.domain.user;
 
+import ucll.project.domain.star.Star;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,11 @@ public class UserRepositoryMemory implements UserRepository {
 
     public UserRepositoryMemory() {
         DummyUserData.addData(this);
+    }
+
+    @Override
+    public int verify(String email, String password) {
+        return 0;
     }
 
     @Override
@@ -57,5 +64,10 @@ public class UserRepositoryMemory implements UserRepository {
     @Override
     public void delete(User user) {
         users.remove(user.getUserId());
+    }
+
+    @Override
+    public List<Star> getStar() {
+        return new ArrayList<Star>();
     }
 }

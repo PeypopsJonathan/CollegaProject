@@ -31,9 +31,18 @@ public class Profile extends RequestHandler {
         request.setAttribute("users", this.getUserService().getUsers());
 
         User currentUser = userRep.get(1);
+        UserRepository userRep = new UserRepositoryDb();
+        int id = (int)request.getSession().getAttribute("user");
+        User currentUser = userRep.get(id);
         request.setAttribute("firstname", currentUser.getFirstName().trim());
         request.setAttribute("lastname", currentUser.getLastName().trim());
         request.setAttribute("email", currentUser.getEmail().trim());
+        List<Star> userStars = userRep.getStar();
+        if (userStars != null) {
+            request.setAttribute("stars", userStars.size());
+        } else {
+            request.setAttribute("stars", "Star list is null");
+        }
         getUserStars(request, response, currentUser.getUserId());
 
 

@@ -40,6 +40,7 @@
                 </ul>
             </c:forEach>
         </div>
+        <p style="grid-area: span 1; grid-column-start: 4; grid-row-start: 4; text-align: center">${stars}</p>
     </section>
 </main>
 

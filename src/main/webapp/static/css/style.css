@@ -10,7 +10,7 @@ body {
 /* BASIC */
 
 html {
-    background-color: #56baed;
+    background-color: #2f469c;
 }
 
 body {
@@ -25,6 +25,20 @@ a {
     font-weight: 400;
 }
 
+main{
+    display: grid;
+
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+
+}
+
+.containerGiveStar{
+    width: 80%;
+    height: auto;
+}
+
 h2 {
     text-align: center;
     font-size: 16px;
@@ -34,8 +48,6 @@ h2 {
     margin: 40px 8px 10px 8px;
     color: #cccccc;
 }
-
-
 
 /* STRUCTURE */
 
@@ -149,11 +161,43 @@ input[type=text]:focus {
     border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
+input[type=text]::placeholder {
     color: #cccccc;
 }
 
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
 
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
 
 /* ANIMATIONS */
 
@@ -298,8 +342,7 @@ input[type=submit]:hover {
 
 .container {
     border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+    background-color: white;
 }
 
 section.profileOverview{

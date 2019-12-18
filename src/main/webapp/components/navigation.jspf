@@ -17,6 +17,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/Controller?command=Profile">Profile</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Controller?command=Login">Log in</a>
+            </li>
          <!--   <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com/" id="dropdown01" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">Dropdown</a>
