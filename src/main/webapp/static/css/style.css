@@ -372,6 +372,18 @@ p.profileOverviewItem{
     grid-column-start: 4;
 }
 
+p.profileOverviewItem2{
+    grid-area: span 1;
+    grid-row-start: 4;
+    grid-column-start: 4;
+}
+
+div.profileStarOverview{
+    grid-row-start: 5;
+    grid-column-start: 2;
+    grid-column-end: 7;
+}
+
 .starText {
     width: available;
     border: 2px black solid;
@@ -389,7 +401,7 @@ p.profileOverviewItem{
 }
 
 .starTag {
-    width: 50px;
+    width: 150px;
     border: 1px gray solid;
     border-top: none;
     padding: 5px;

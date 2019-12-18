@@ -37,7 +37,7 @@
         </div>
     </c:if>
     <div class="containerGiveStar">
-        <p>you have ${availableStars} left to give this month</p>
+        <p>you have ${availableStars} stars left to give this month</p>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
             <div class="autocomplete">
                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
@@ -58,10 +58,17 @@
             <h2>Tags Added: </h2>
             </p>
 
-            <input type="hidden" class="What a great worker." name="0" id="0">
-            <input type="hidden" class="Awesome stuff." name="1" id="1">
-            <input type="hidden" class="Have my children." name="2" id="2">
-            <input type="hidden" class="Happy with your service." name="3" id="3">
+            <input type="hidden" class="Integrity" name="0" id="0">
+            <input type="hidden" class="Curiosity" name="1" id="1">
+            <input type="hidden" class="Collaboration" name="2" id="2">
+            <input type="hidden" class="Client first" name="3" id="3">
+            <input type="hidden" class="Entrepreneurship" name="4" id="4">
+            <input type="hidden" class="Move Faster" name="5" id="5">
+            <input type="hidden" class="Act smarter" name="6" id="6">
+            <input type="hidden" class="Go further" name="7" id="7">
+            <input type="hidden" class="Be sure" name="8" id="8">
+            <input type="hidden" class="Team spirit" name="9" id="9">
+            <input type="hidden" class="Office spirit" name="10" id="10">
 
             <label for="description" value="${previous_input_description}">description</label>
             <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>

@@ -88,4 +88,23 @@ public class StarRepositoryDb implements StarRepository {
         }
         return tags;
     }
+
+
+    @Override
+    public List<Star> getUserInvolvedInStarExchanges(int userId){
+        List<Star> exchanges = new ArrayList<>();
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".star WHERE receiver_id = ? OR sender_id = ?")) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    exchanges.add(starFromResultSet(rs));
+                }
+                return exchanges;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
