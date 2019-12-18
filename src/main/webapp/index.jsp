@@ -39,6 +39,8 @@
     <div class="containerGiveStar">
         <h3>Give Star</h3>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
+        <p>you have ${availableStars} left to give this month</p>
+        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
             <label for="receiver">receiver</label>
             <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
                    value="${previous_input_receiver}">
@@ -71,6 +73,7 @@
             <input type="submit" value="submit">
 
 
+        </form>
         </form>
     </div>
         <section class="starOverview">
@@ -223,7 +226,10 @@
         }
 
         /*An array containing all the country names in the world:*/
-        var names = ["Roshan", "Pim", "Niels", "Daan", "Bubba"];
+        var names = [];
+        names = ${listName};
+        console.log(names);
+        //var names = [Roshan, "Pim", "Niels", "Daan", "Bubba"];
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
     </script>

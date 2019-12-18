@@ -15,6 +15,11 @@ public class UserRepositoryMemory implements UserRepository {
     }
 
     @Override
+    public int verify(String email, String password) {
+        return 0;
+    }
+
+    @Override
     public void createUser(User user, String password) {
         for (User u : users.values()) {
             if (u.getEmail().equals(user.getEmail())) {
@@ -52,6 +57,11 @@ public class UserRepositoryMemory implements UserRepository {
     }
 
     @Override
+    public int getAvailableStars(int id) {
+        return -1;
+    }
+
+    @Override
     public void update(User user) {
         users.replace(user.getUserId(), user);
     }
@@ -62,12 +72,11 @@ public class UserRepositoryMemory implements UserRepository {
     }
 
     @Override
-    public int verify(String email, String password) {
-        return 0;
+    public void reassignStars() {
     }
 
     @Override
-    public List<Star> getStar() {
+    public List<Star> getStar(int id) {
         return new ArrayList<Star>();
     }
 }

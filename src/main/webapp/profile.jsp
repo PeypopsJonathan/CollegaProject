@@ -2,6 +2,7 @@
 <%@ page import="ucll.project.db.ConnectionPool" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="ucll.project.ui.controller.Profile" %>
+<%@ page import="org.openqa.selenium.remote.SessionId" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,17 +20,18 @@
     <title>Hello world!</title>
 </head>
 <body>
-
 <!-- Navigation -->
 <%@ include file="components/navigation.jspf" %>
 
 <!-- Page Content -->
 <main>
+    <a href="Controller?command=Signout">log out</a>
     <section class="profileOverview">
         <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}
         </p>
+        <p class="profileOverviewItem">you have ${availableStars} available</p>
         <p style="grid-area: span 1; grid-column-start: 4; grid-row-start: 4; text-align: center">${stars}</p>
     </section>
 </main>
