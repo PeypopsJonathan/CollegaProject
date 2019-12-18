@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 public class UserProfileTest {
     private static WebDriver driver;
 
-    @Before
+   @Before
     public void SetupDriver() {
         driver = DriverHelper.getDriver();
         driver.get(Config.BASE_URL);
@@ -45,7 +45,6 @@ public class UserProfileTest {
         driver.get("http://localhost:8080/Controller?command=Profile");
         assertTrue(Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", driver.findElement(By.cssSelector("p.profileOverviewItem")).getText()));
     }
-
 
 
 

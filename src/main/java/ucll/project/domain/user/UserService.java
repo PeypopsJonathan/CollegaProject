@@ -16,4 +16,8 @@ public class UserService {
     public int verifyUserLogin(String email,String password){
         return userRepo.verify(email,password);
     }
+
+    public int getUserByName(String firstName, String lastName) {
+        return ((UserRepositoryDb)userRepo).UserIdByName(firstName, lastName);
+    }
 }
