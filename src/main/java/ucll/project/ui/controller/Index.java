@@ -57,7 +57,7 @@ public class Index extends RequestHandler {
     }
 
 
-    private void getStars(HttpServletRequest request, HttpServletResponse response){
+    private void getStars(HttpServletRequest request){
         List<Star> localStars = starDb.getAll();
         for (Star star : localStars) {
             star.setReceiver_name(userDb.get(star.getReceiver_id()).getFirstName() + " " + userDb.get(star.getReceiver_id()).getLastName());
