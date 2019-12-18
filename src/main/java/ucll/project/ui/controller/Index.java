@@ -257,7 +257,7 @@ public class Index extends RequestHandler {
             System.out.println("MAIL");
 
             // TODO Show success page
-                request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
+                request.setAttribute("availableStars", availableStars - 1);
                 request.setAttribute("success", "Successfully Added Star!");
                 return "index.jsp";
             } else {
