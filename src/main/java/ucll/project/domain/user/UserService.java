@@ -1,5 +1,6 @@
 package ucll.project.domain.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -13,7 +14,21 @@ public class UserService {
         return userRepo.getAll();
     }
 
+    public List<String> getAllNames(){
+        List<String> names = new ArrayList<>();
+        String temp;
+        for (User u: getUsers()) {
+            temp = '"'+ u.getFirstName() + " " + u.getLastName() + '"';
+            names.add(temp);
+        }
+        return names;
+    }
+
     public int verifyUserLogin(String email,String password){
         return userRepo.verify(email,password);
+    }
+
+    public int getUserByName(String firstName, String lastName) {
+        return ((UserRepositoryDb)userRepo).UserIdByName(firstName, lastName);
     }
 }
