@@ -32,7 +32,7 @@ public class Index extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        getStars(request);
+        getStars(request,response);
         request.setAttribute("availableStars",userDb.getAvailableStars((int)request.getSession().getAttribute("user")));
         checkStars();
 
