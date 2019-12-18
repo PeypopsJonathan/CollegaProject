@@ -38,7 +38,7 @@ public class Index extends RequestHandler {
         setTagAttribute(request);
         getStars(request);
         request.setAttribute("listName", getUserService().getAllNames());
-        request.setAttribute("availableStars",userDb.getAvailableStars((int)request.getSession().getAttribute("user")));
+        request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
         checkStars();
 
         if (isFormSubmition(request)) {
@@ -59,7 +59,7 @@ public class Index extends RequestHandler {
     }
 
 
-    private void getStars(HttpServletRequest request){
+    private void getStars(HttpServletRequest request) {
         List<Star> localStars = starDb.getAll();
         for (Star star : localStars) {
             star.setReceiver_name(userDb.get(star.getReceiver_id()).getFirstName() + " " + userDb.get(star.getReceiver_id()).getLastName());
@@ -69,37 +69,37 @@ public class Index extends RequestHandler {
         request.setAttribute("stars", localStars);
     }
 
-    private void checkStars(){
+    private void checkStars() {
         boolean reassign = false;
-        try (Connection conn = ConnectionPool.getConnection()){
+        try (Connection conn = ConnectionPool.getConnection()) {
             String sql = "select * from \"award-team9\".checkdate";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 Timestamp stamp = rs.getTimestamp("date");
                 LocalDate date = stamp.toLocalDateTime().toLocalDate();
                 LocalDate now = LocalDate.now();
-                if (now.getMonth().getValue() > date.getMonth().getValue()){
+                if (now.getMonth().getValue() > date.getMonth().getValue()) {
                     reassign = true;
                 }
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        if (reassign){
+        if (reassign) {
             userDb.reassignStars();
         }
         safeDate();
     }
 
 
-    private void safeDate(){
-        try (Connection conn = ConnectionPool.getConnection()){
+    private void safeDate() {
+        try (Connection conn = ConnectionPool.getConnection()) {
             String sql = "update \"award-team9\".checkdate\n" +
                     "set date = \tCURRENT_TIMESTAMP";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.executeUpdate();
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -196,11 +196,22 @@ public class Index extends RequestHandler {
 
         if (errorList.isEmpty()) {
 
+            int maxIdStar = starDb.getAll().get(0).getStar_id();
+            for (Star s : starDb.getAll()) {
+                int temp = s.getStar_id();
+
+                if (temp > maxIdStar) {
+                    maxIdStar = temp;
+                }
+            }
+            maxIdStar++;
+            star.setStar_id(maxIdStar);
 
             starDb.createStar(star);
 
 
-            return "users.jsp"; // TODO Show success page
+            request.setAttribute("success", "Successfully Added Star!");
+            return "index.jsp"; // TODO Show success page
         } else {
             request.setAttribute("errors", errorList);
             return "index.jsp";
