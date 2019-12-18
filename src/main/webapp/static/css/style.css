@@ -372,12 +372,6 @@ p.profileOverviewItem{
     grid-column-start: 4;
 }
 
-div.profileStarOverview{
-    grid-row-start: 4;
-    grid-column-start: 2;
-    grid-column-end: 7;
-}
-
 .starText {
     width: available;
     border: 2px black solid;
