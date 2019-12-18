@@ -1,12 +1,12 @@
 --BEGIN ALGEMENE QUERIES--
 
 --verwijder alle schemas
-drop table "award-team9".star cascade
-drop table "award-team9".user cascade
+drop table "award-team9".star cascade;
+drop table "award-team9".user cascade;
 
 --bouw schemas op van nul af aan
 create table "award-team9".star (receiver_id smallint NOT NULL, sender_id smallint NOT NULL, comment varchar(255) NOT NULL, tags varchar(255)[] NOT NULL, timestamp timestamp  NOT NULL, star_id SERIAL, primary key (star_id));
-create table "award-team9".user (id integer NOT NULL, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, role varchar(255) NOT NULL, password varchar(255) NOT NULL, available_stars smallint NOT NULL DEFAULT 3, primary key (id))
+create table "award-team9".user (id integer NOT NULL, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, role varchar(255) NOT NULL, password varchar(255) NOT NULL, available_stars smallint NOT NULL DEFAULT 3, primary key (id));
 
 --geef toestemming op tabellen
 grant all privileges on schema "award-team9".user, "award-team9".star to r0578690, r0711106, r0654233, r0729781, r0765653, r0664478, r0679673, r0759603, hakkaton_09;
@@ -20,10 +20,10 @@ grant all privileges on "award-team9".user, "award-team9".star to r0578690, r071
 --verwijder alle gebruikers van de database
 delete
 from "award-team9".user
-where star_id = not
+where user_id > 0;
 
 --laat alle gebruikers in de database zien
-select * from "award-team9".user
+select * from "award-team9".user;
 
 --voeg tijdelijke testgebruikers too aan database
 insert into "award-team9".user values
@@ -36,7 +36,7 @@ insert into "award-team9".user values
 (7, 'Herman', 'Hermans', 'herman.hermans@gmail.com', 'USER', 'abcXYZ789', 2),
 (8, 'Jan', 'Janssen', 'jan.janssen@hotmail.com', 'USER', 'Wachtwoord123', 2),
 (9, 'Daan', 'Daans', 'daand@amail1.com', 'SUPPORT', 'Password5', 1),
-(10, 'Nick', 'Gevers', 'gnick@amail1.com', 'USER', 'HelloWorld', 2)
+(10, 'Nick', 'Gevers', 'gnick@amail1.com', 'USER', 'HelloWorld', 2);
 
 --voeg gebruikers Ipsos toe aan database
 insert into "award-team9".user values
@@ -58,7 +58,7 @@ insert into "award-team9".user values
 (16, 'Sara', 'Gysen', 'Sara.Gysen@ipsos.com', 'USER', 'tmpPWD'),
 (17, 'Snezha', 'kazakova', 'Snezha.kazakova@ipsos.com', 'USER', 'tmpPWD'),
 (18, 'Suzanne', 'Dautzenberg', 'Suzanne.Dautzenberg@ipsos.com', 'USER', 'tmpPWD'),
-(19, 'Tim', 'Meeusen', 'Tim.Meeusen@ipsos.com', 'USER', 'tmpPWD')
+(19, 'Tim', 'Meeusen', 'Tim.Meeusen@ipsos.com', 'USER', 'tmpPWD');
 
 --EIND QUERIES OP USER DATABASE--
 
@@ -67,10 +67,10 @@ insert into "award-team9".user values
 --verwijder alle sterren van de database
 delete
 from "award-team9".star
-where star_id > 0
+where star_id > 0;
 
 --laat alle sterren in de database zien
-select * from "award-team9".star
+select * from "award-team9".star;
 
 --voeg tijdelijke teststerren toe aan de database
 insert into "award-team9".star values
@@ -83,6 +83,6 @@ insert into "award-team9".star values
 (1, 9, 'I always learn new things when working with you!', ARRAY ['Collaboration'], '2019-12-17 10:39:39'),
 (4, 10, 'Thanks for checking up on my progress!', ARRAY ['Entrepreneurship','Curiosity'], '2019-12-17 12:30:01'),
 (2, 4, 'Your teamwork is exceptional', ARRAY ['Integrity'], '2019-12-18 09:00:01'),
-(10, 9, 'You are a great team leader!', ARRAY ['Move faster', 'Go further'], '2019-12-18 11:59:59')
+(10, 9, 'You are a great team leader!', ARRAY ['Move faster', 'Go further'], '2019-12-18 11:59:59');
 
 --EIND QUERIES OP STAR DATABASE--
