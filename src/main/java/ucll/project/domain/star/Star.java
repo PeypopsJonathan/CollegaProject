@@ -4,12 +4,13 @@ import ucll.project.domain.DomainException;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Star implements Comparable {
 
     private int receiver_id, sender_id, star_id;
     private String comment, receiver_name, sender_name;
-    private ArrayList<String> tags;
+    private List<String> tags;
     private Timestamp timestamp;
 
 
@@ -66,11 +67,11 @@ public class Star implements Comparable {
         this.star_id = star_id;
     }
 
-    public ArrayList<String> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(ArrayList<String> tags) {
+    public void setTags(List<String> tags) {
         if (tags == null || tags.isEmpty())
             throw new DomainException("Tags can't be empty.");
         this.tags = tags;

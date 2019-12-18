@@ -1,6 +1,7 @@
 package ucll.project.ui.controller;
 
 import ucll.project.db.ConnectionPool;
+import ucll.project.domain.star.Star;
 import ucll.project.domain.user.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class Profile extends RequestHandler {
     public Profile(String command, UserService userService) {
@@ -27,6 +29,12 @@ public class Profile extends RequestHandler {
         request.setAttribute("firstname", currentUser.getFirstName().trim());
         request.setAttribute("lastname", currentUser.getLastName().trim());
         request.setAttribute("email", currentUser.getEmail().trim());
+        List<Star> userStars = userRep.getStar();
+        if (userStars != null) {
+            request.setAttribute("stars", userStars.size());
+        } else {
+            request.setAttribute("stars", "Star list is null");
+        }
 
 
         return "profile.jsp";
