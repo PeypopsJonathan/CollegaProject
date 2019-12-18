@@ -4,10 +4,17 @@ import java.util.ArrayList;
 
 public enum Tags {
 
-    TAG1("What a great worker."),
-    TAG2("Awesome stuff."),
-    TAG3("Have my children."),
-    TAG4("Happy with your service.");
+    TAG1("Integrity"),
+    TAG2("Curiosity"),
+    TAG3("Collaboration"),
+    TAG4("Client first"),
+    TAG5("Entrepreneurship"),
+    TAG6("Move Faster"),
+    TAG7("Act smarter"),
+    TAG8("Go further"),
+    TAG9("Be sure"),
+    TAG10("Team spirit"),
+    TAG11("Office spirit");
 
     private String tag;
 
