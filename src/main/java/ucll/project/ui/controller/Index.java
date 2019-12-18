@@ -1,5 +1,6 @@
 package ucll.project.ui.controller;
 
+import ucll.project.db.ConnectionPool;
 import ucll.project.domain.DomainException;
 import ucll.project.domain.user.Tags;
 
@@ -13,10 +14,14 @@ import ucll.project.domain.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class Index extends RequestHandler {
@@ -32,6 +37,9 @@ public class Index extends RequestHandler {
 
         setTagAttribute(request);
         getStars(request);
+        request.setAttribute("listName", getUserService().getAllNames());
+        request.setAttribute("availableStars",userDb.getAvailableStars((int)request.getSession().getAttribute("user")));
+        checkStars();
 
         if (isFormSubmition(request)) {
             return submitForm(request);
@@ -50,7 +58,8 @@ public class Index extends RequestHandler {
         request.setAttribute("tags", tempTags);
     }
 
-    private void getStars(HttpServletRequest request) {
+
+    private void getStars(HttpServletRequest request){
         List<Star> localStars = starDb.getAll();
         for (Star star : localStars) {
             star.setReceiver_name(userDb.get(star.getReceiver_id()).getFirstName() + " " + userDb.get(star.getReceiver_id()).getLastName());
@@ -59,6 +68,42 @@ public class Index extends RequestHandler {
         sortStars(localStars);
         request.setAttribute("stars", localStars);
     }
+
+    private void checkStars(){
+        boolean reassign = false;
+        try (Connection conn = ConnectionPool.getConnection()){
+            String sql = "select * from \"award-team9\".checkdate";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                Timestamp stamp = rs.getTimestamp("date");
+                LocalDate date = stamp.toLocalDateTime().toLocalDate();
+                LocalDate now = LocalDate.now();
+                if (now.getMonth().getValue() > date.getMonth().getValue()){
+                    reassign = true;
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        if (reassign){
+            userDb.reassignStars();
+        }
+        safeDate();
+    }
+
+
+    private void safeDate(){
+        try (Connection conn = ConnectionPool.getConnection()){
+            String sql = "update \"award-team9\".checkdate\n" +
+                    "set date = \tCURRENT_TIMESTAMP";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.executeUpdate();
+        } catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
 
     private void sortStars(List<Star> unsortedStars) {
         Collections.sort(unsortedStars);
@@ -80,14 +125,15 @@ public class Index extends RequestHandler {
 
     private void receiverValidator(Star star, HttpServletRequest request, ArrayList<String> errorList) {
         try {
-            String receiver_name = request.getParameter("receiver");
+            String receiver_name = request.getParameter("receiverName");
 
             if (!receiver_name.trim().isEmpty()) {
                 request.setAttribute("previous_input_receiver", receiver_name);
 
+                String[] splited = receiver_name.split("\\s+");
 
 
-                // getUserService().getUserByName();
+                star.setReceiver_id(getUserService().getUserByName(splited[0], splited[1]));
 
 
             } else {
@@ -107,16 +153,16 @@ public class Index extends RequestHandler {
             String tag2 = request.getParameter("1");
             String tag3 = request.getParameter("2");
             String tag4 = request.getParameter("3");
-            if (tag1 != null || !tag1.trim().isEmpty()) {
+            if (tag1 != null && !tag1.trim().isEmpty()) {
                 tagList.add(tag1);
             }
-            if (tag2 != null || !tag2.trim().isEmpty()) {
+            if (tag2 != null && !tag2.trim().isEmpty()) {
                 tagList.add(tag2);
             }
-            if (tag3 != null || !tag3.trim().isEmpty()) {
+            if (tag3 != null && !tag3.trim().isEmpty()) {
                 tagList.add(tag3);
             }
-            if (tag4 != null || !tag4.trim().isEmpty()) {
+            if (tag4 != null && !tag4.trim().isEmpty()) {
                 tagList.add(tag4);
             }
 
@@ -137,9 +183,17 @@ public class Index extends RequestHandler {
 
     private String submitForm(HttpServletRequest request) {
         Star star = new Star();
-        // TODO senderid text field and star id setting
-        //star.setSender_id(1);
-        //star.setStar_id(0);
+
+        int id = (Integer) request.getSession().getAttribute("user");
+
+        star.setSender_id(id);
+
+        Random r = new Random();
+        int low = 1;
+        int high = 100000;
+        int result = r.nextInt(high-low) + low;
+        star.setStar_id(result);
+
         ArrayList<String> errorList = new ArrayList<>();
 
         receiverValidator(star, request, errorList);
@@ -157,4 +211,5 @@ public class Index extends RequestHandler {
             return "index.jsp";
         }
     }
+
 }

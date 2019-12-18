@@ -1,8 +1,6 @@
 package ucll.project.ui;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,14 +16,15 @@ public class OverviewPageTest {
 
     private static WebDriver driver;
 
-    @BeforeClass
-    public static void SetupDriver() {
+    @Before
+    public void SetupDriver() {
         // Setup the Chrome driver for the whole class
         driver = DriverHelper.getDriver();
+        driver.get(Config.BASE_URL);
     }
 
-    @AfterClass
-    public static void CloseBrowser() {
+    @After
+    public void CloseBrowser() {
         // close it in the end, comment this away to keep chrome open
         driver.close();
     }
@@ -34,28 +33,24 @@ public class OverviewPageTest {
      * This is a sample test, remove this test and write your own!
      */
     @Test
-    public void CountParagraphsOnGomePage() {
-        driver.get(Config.BASE_URL);
-        int numberOfP = driver.findElements(By.tagName("p")).size();
+    public void CountParagraphsOnHomePage() {
+        UiSuite.loginUser(driver);
+        WebElement starDiv = driver.findElement(By.name("starsPar"));
+        int numberOfP = starDiv.findElements(By.tagName("p")).size();
         StarRepository db = new StarRepositoryDb();
         System.out.println(db.getAll().size());
-        //assertEquals(db.getAll().size(), numberOfP);
+        assertEquals(db.getAll().size(), numberOfP);
 
     }
 
     @Test
     public void TagsForAllStars(){
-        driver.get(Config.BASE_URL);
+        UiSuite.loginUser(driver);
         boolean foundLi = true;
         for (WebElement ul :driver.findElements(By.tagName("ul"))) {
             if (ul.findElement(By.tagName("li")) == null) foundLi = false;
         }
         assertEquals(true, foundLi);
-    }
-
-    @Test
-    public void AllStarsOrdered(){
-
     }
 
 }

@@ -37,14 +37,13 @@
         </div>
     </c:if>
     <div class="containerGiveStar">
-        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
-            <label for="receiver">receiver</label>
-            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
-                   value="${previous_input_receiver}">
+        <p>you have ${availableStars} left to give this month</p>
+        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
             <div class="autocomplete">
                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
             </div>
-            <label for="tags">tags</label>
+            <h2>Choose/Enter Correct Name</h2>
+            <h2 for="tags">tags</h2>
 
             <select id="select" name="tags" id="tags" onchange="addTag()">
                 <option></option>
@@ -76,7 +75,7 @@
 
             <input type="submit" value="submit">
 
-            <div>
+            <div name="starsPar">
                 <c:forEach var="star" items="${stars}">
                     <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
                     <ul class="tags">
@@ -224,7 +223,10 @@
         }
 
         /*An array containing all the country names in the world:*/
-        var names = ["Roshan", "Pim", "Niels", "Daan", "Bubba"];
+        var names = [];
+        names = ${listName};
+        console.log(names);
+        //var names = [Roshan, "Pim", "Niels", "Daan", "Bubba"];
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
     </script>
