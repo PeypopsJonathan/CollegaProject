@@ -33,7 +33,7 @@ public class UserProfileTest {
         WebElement link = driver.findElement(By.linkText("Profile"));
         link.click();
 
-        assertEquals("http://localhost:8080/Controller?command=Profile", driver.getCurrentUrl());
+        assertEquals(Config.BASE_URL + "/Controller?command=Profile", driver.getCurrentUrl());
     }
 
     @Test
