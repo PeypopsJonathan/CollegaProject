@@ -30,5 +30,5 @@ public interface UserRepository {
 
     void reassignStars();
 
-    List<Star> getStar();
+    List<Star> getStar(int id);
 }

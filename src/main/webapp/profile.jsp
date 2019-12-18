@@ -2,6 +2,7 @@
 <%@ page import="ucll.project.db.ConnectionPool" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="ucll.project.ui.controller.Profile" %>
+<%@ page import="org.openqa.selenium.remote.SessionId" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,7 +20,6 @@
     <title>Hello world!</title>
 </head>
 <body>
-
 <!-- Navigation -->
 <%@ include file="components/navigation.jspf" %>
 
