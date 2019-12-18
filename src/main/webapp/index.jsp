@@ -26,7 +26,7 @@
 
 <main role="main" class="container">
 
-    <h3>Give Star</h3>
+
     <c:if test="${!empty errors}">
         <div class="alert-danger">
             <c:forEach var="error" items="${errors}">
@@ -37,6 +37,7 @@
         </div>
     </c:if>
     <div class="containerGiveStar">
+        <h3>Give Star</h3>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
             <label for="receiver">receiver</label>
             <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
@@ -69,6 +70,12 @@
 
             <input type="submit" value="submit">
 
+
+        </form>
+    </div>
+        <section class="starOverview">
+
+
             <div>
                 <c:forEach var="star" items="${stars}">
                     <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
@@ -79,9 +86,8 @@
                     </ul>
                 </c:forEach>
             </div>
-        </form>
+        </section>
 
-    </div>
     <script>
         window.addEventListener("load", initPage, false);
 

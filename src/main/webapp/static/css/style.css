@@ -16,6 +16,8 @@ html {
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    background-color: #2f469c;
+    padding-top: 3.65rem;
 }
 
 a {
@@ -26,18 +28,39 @@ a {
 }
 
 main{
-    display: grid;
-
     align-items: center;
     justify-content: center;
     background-color: white;
+    padding-top: 1rem;
 
 }
+
+main.container {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: 1fr;
+    grid-gap: 2rem;
+    line-height: 120%;
+
+}
+
+.starOverview{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+}
+
 
 .containerGiveStar{
-    width: 80%;
-    height: auto;
+    grid-column-start: 2 ;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
+
+
 
 h2 {
     text-align: center;

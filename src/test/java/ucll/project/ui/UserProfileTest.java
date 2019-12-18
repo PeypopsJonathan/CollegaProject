@@ -21,7 +21,7 @@ public class UserProfileTest {
     @Before
     public void SetupDriver() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Laure\\Documents\\FASE 2\\Webontwikkeling 3\\JARS etc\\chromedriver.exe");
-        driver = ChromeDriverHelper.getDriver();
+        driver = DriverHelper.getDriver();
         driver.get(Config.BASE_URL);
 
     }
