@@ -75,7 +75,8 @@
 
             <input type="submit" value="submit">
 
-            <div name="starsPar">
+            <h3>${success}</h3>
+            <div>
                 <c:forEach var="star" items="${stars}">
                     <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
                     <ul class="tags">
