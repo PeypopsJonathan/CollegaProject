@@ -38,9 +38,7 @@
     </c:if>
     <div class="containerGiveStar">
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
-            <label for="receiver">receiver</label>
-            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
-                   value="${previous_input_receiver}">
+
             <div class="autocomplete">
                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
             </div>

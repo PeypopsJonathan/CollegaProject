@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class Index extends RequestHandler {
@@ -85,9 +86,10 @@ public class Index extends RequestHandler {
             if (!receiver_name.trim().isEmpty()) {
                 request.setAttribute("previous_input_receiver", receiver_name);
 
+                String[] splited = receiver_name.split("\\s+");
 
 
-                // getUserService().getUserByName();
+                star.setReceiver_id(getUserService().getUserByName(splited[0], splited[1]));
 
 
             } else {
@@ -137,9 +139,17 @@ public class Index extends RequestHandler {
 
     private String submitForm(HttpServletRequest request) {
         Star star = new Star();
-        // TODO senderid text field and star id setting
-        //star.setSender_id(1);
-        //star.setStar_id(0);
+
+        int id = (Integer) request.getSession().getAttribute("user");
+
+        star.setSender_id(id);
+
+        Random r = new Random();
+        int low = 1;
+        int high = 100000;
+        int result = r.nextInt(high-low) + low;
+        star.setStar_id(result);
+
         ArrayList<String> errorList = new ArrayList<>();
 
         receiverValidator(star, request, errorList);
@@ -147,8 +157,8 @@ public class Index extends RequestHandler {
         descriptionValidator(star, request, errorList);
 
         if (errorList.isEmpty()) {
-
-            //starDb.createStar(star);
+            
+            starDb.createStar(star);
 
 
             return "users.jsp"; // TODO Show success page

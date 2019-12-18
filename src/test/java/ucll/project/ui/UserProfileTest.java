@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 public class UserProfileTest {
     private static WebDriver driver;
 
-   /* @Before
+    @Before
     public void SetupDriver() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Laure\\Documents\\FASE 2\\Webontwikkeling 3\\JARS etc\\chromedriver.exe");
         //driver = ChromeDriverHelper.getDriver();
@@ -52,7 +52,7 @@ public class UserProfileTest {
     @After
     public void CloseBrowser() {
         driver.close();
-    }*/
+    }
 
 
 }
