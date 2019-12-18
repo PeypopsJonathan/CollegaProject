@@ -18,7 +18,7 @@ public class UserService {
         List<String> names = new ArrayList<>();
         String temp;
         for (User u: getUsers()) {
-            temp = '"'+ u.getFirstName() + '"';
+            temp = '"'+ u.getFirstName() + " " + u.getLastName() + '"';
             names.add(temp);
         }
         return names;
