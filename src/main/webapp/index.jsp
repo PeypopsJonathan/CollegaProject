@@ -37,6 +37,7 @@
         </div>
     </c:if>
     <div class="containerGiveStar">
+        <p>you have ${availableStars} left to give this month</p>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
             <label for="receiver">receiver</label>
             <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"

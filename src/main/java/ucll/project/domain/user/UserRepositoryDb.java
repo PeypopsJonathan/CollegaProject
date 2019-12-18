@@ -131,8 +131,8 @@ public class UserRepositoryDb implements UserRepository {
     public int verify(String email, String password) {
         try (Connection conn = ConnectionPool.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where email = ? and password = ?");
-            stmt.setString(1,email);
-            stmt.setString(2,password);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt("id");
@@ -146,8 +146,8 @@ public class UserRepositoryDb implements UserRepository {
 
 
     public int UserIdByName(String firstname, String lastname) {
-        try (Connection conn = ConnectionPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where firstname = ? and lastname = ?")) {
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT id from \"award-team9\".user where firstname = ? and lastname = ?");
             stmt.setString(1, firstname);
             stmt.setString(2, lastname);
             ResultSet rs = stmt.executeQuery();
@@ -160,9 +160,26 @@ public class UserRepositoryDb implements UserRepository {
         return -1;
     }
 
-    public static void main(String[] args) {
-        UserRepositoryDb db = new UserRepositoryDb();
-        int id = db.UserIdByName("Daan", "Heivers");
-        System.out.println(id);
+    public int getAvailableStars(int id) {
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT available_stars from \"award-team9\".user where id = ?");
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("available_stars");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+
+    public void reassignStars(){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user\n" +
+                    "set available_stars = 3");
+        } catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
     }
 }

@@ -23,4 +23,8 @@ public interface UserRepository {
     void delete(User user);
 
     int verify(String email, String password);
+
+    int getAvailableStars(int id);
+
+    void reassignStars();
 }

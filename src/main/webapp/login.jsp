@@ -20,7 +20,6 @@
 <body>
 
 <main>
-<%@ include file="components/navigation.jspf" %>
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
