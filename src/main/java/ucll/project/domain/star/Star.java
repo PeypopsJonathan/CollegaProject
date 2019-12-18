@@ -4,6 +4,7 @@ import ucll.project.domain.DomainException;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Star implements Comparable {
@@ -14,7 +15,9 @@ public class Star implements Comparable {
     private Timestamp timestamp;
 
 
-    public Star(){}
+    public Star(){
+        setTimestamp();
+    }
 
     public Star(int receiver_id, int sender_id, String comment, int star_id, ArrayList<String> tags) {
         setReceiver_id(receiver_id);
@@ -82,7 +85,11 @@ public class Star implements Comparable {
     }
 
     public void setTimestamp() {
-        this.timestamp = new Timestamp(System.currentTimeMillis());
+        Date date= new Date();
+
+        long time = date.getTime();
+
+        this.timestamp = new Timestamp(time);
     }
 
     public void setTimestamp(Timestamp timestamp){

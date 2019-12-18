@@ -41,13 +41,11 @@
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
         <p>you have ${availableStars} left to give this month</p>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
-            <label for="receiver">receiver</label>
-            <input type="text" id="receiver" name="receiver" placeholder="enter receiver id"
-                   value="${previous_input_receiver}">
             <div class="autocomplete">
                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
             </div>
-            <label for="tags">tags</label>
+            <h2>Choose/Enter Correct Name</h2>
+            <h2 for="tags">tags</h2>
 
             <select id="select" name="tags" id="tags" onchange="addTag()">
                 <option></option>
