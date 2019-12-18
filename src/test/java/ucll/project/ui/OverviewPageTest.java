@@ -35,7 +35,8 @@ public class OverviewPageTest {
     @Test
     public void CountParagraphsOnHomePage() {
         UiSuite.loginUser(driver);
-        int numberOfP = driver.findElements(By.tagName("p")).size()-2;
+        WebElement starDiv = driver.findElement(By.name("starsPar"));
+        int numberOfP = starDiv.findElements(By.tagName("p")).size();
         StarRepository db = new StarRepositoryDb();
         System.out.println(db.getAll().size());
         assertEquals(db.getAll().size(), numberOfP);
