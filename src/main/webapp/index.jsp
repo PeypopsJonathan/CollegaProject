@@ -37,25 +37,23 @@
         </div>
     </c:if>
     <h1>Stargazing</h1>
-        <section class="starOverview">
+    <section class="starOverview">
 
-        <div class="autocomplete">
-            <h2>Choose/Enter tag</h2>
-            <input id="filter" type="text" name="filter" placeholder="Search for a tag">
-        </div>
+        <form method="post" action="Controller?command=Index&iWantFilter=yes">
 
-            <article>
-                <c:forEach var="star" items="${stars}">
-                    <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
-                    <ul class="tags">
-                        <c:forEach var="tag" items="${star.tags}">
-                            <li class="starTag">${tag}</li>
-                        </c:forEach>
-                    </ul>
+            <select id="selectFilter" name="tagss" id="tagss">
+                <option>--Select a tag--</option>
+                <c:forEach var="tag" items="${tags}">
+                    <option name="<c:out value="${tag}"></c:out>" class="tagOptions"
+                            value="<c:out value="${tag}"></c:out>">
+                        <c:out value="${tag}"></c:out>
+                    </option>
                 </c:forEach>
-            </article>
-        </section>
-        <div>
+                <input type="submit" class="" value="filter">
+            </select>
+        </form>
+
+        <article>
             <c:forEach var="star" items="${stars}">
                 <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying
                     "${star.comment}"</p>
@@ -65,7 +63,9 @@
                     </c:forEach>
                 </ul>
             </c:forEach>
-        </div>
+        </article>
+    </section>
+
     </section>
 
     <script>
@@ -110,11 +110,13 @@
             the text field element and an array of possible autocompleted values:*/
             var currentFocus;
             /*execute a function when someone writes in the text field:*/
-            inp.addEventListener("input", function(e) {
+            inp.addEventListener("input", function (e) {
                 var a, b, i, val = this.value;
                 /*close any already open lists of autocompleted values*/
                 closeAllLists();
-                if (!val) { return false;}
+                if (!val) {
+                    return false;
+                }
                 currentFocus = -1;
                 /*create a DIV element that will contain the items (values):*/
                 a = document.createElement("SPAN");
@@ -134,7 +136,7 @@
                         /*insert a input field that will hold the current array item's value:*/
                         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                         /*execute a function when someone clicks on the item value (DIV element):*/
-                        b.addEventListener("click", function(e) {
+                        b.addEventListener("click", function (e) {
                             /*insert the value for the autocomplete text field:*/
                             inp.value = this.getElementsByTagName("input")[0].value;
                             /*close the list of autocompleted values,
@@ -170,6 +172,7 @@
                     }
                 }
             });
+
             function addActive(x) {
                 /*a function to classify an item as "active":*/
                 if (!x) return false;
@@ -180,12 +183,14 @@
                 /*add class "autocomplete-active":*/
                 x[currentFocus].classList.add("autocomplete-active");
             }
+
             function removeActive(x) {
                 /*a function to remove the "active" class from all autocomplete items:*/
                 for (var i = 0; i < x.length; i++) {
                     x[i].classList.remove("autocomplete-active");
                 }
             }
+
             function closeAllLists(elmnt) {
                 /*close all autocomplete lists in the document,
                 except the one passed as an argument:*/
@@ -196,13 +201,13 @@
                     }
                 }
             }
+
             /*execute a function when someone clicks in the document:*/
             document.addEventListener("click", function (e) {
                 closeAllLists(e.target);
             });
         }
 
-        /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
         var tags = [];
