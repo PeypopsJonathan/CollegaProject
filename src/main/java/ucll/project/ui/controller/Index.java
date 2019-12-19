@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-
 public class Index extends RequestHandler {
     UserRepository userDb = new UserRepositoryDb();
     StarRepository starDb = new StarRepositoryDb();
@@ -51,7 +50,7 @@ public class Index extends RequestHandler {
         return "index.jsp";
     }
 
-    public List<String> getAllTags(){
+    public List<String> getAllTags() {
         ArrayList<String> listTags = new ArrayList<>();
         String tags;
 
@@ -69,7 +68,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", getAllTags());
+        request.setAttribute("tags", tempTags);
     }
 
 
@@ -257,18 +256,18 @@ public class Index extends RequestHandler {
 
                 userDb.setAvailableStar(userId, availableStars - 1);
 
-            request.setAttribute("success", "Successfully Added Star!");
+                request.setAttribute("success", "Successfully Added Star!");
 
-            String mail = getMailReceiver(star.getReceiver_id());
-            String senderName = getUserService().getUserNameById(id);
-            List<User> managers = getUserService().getAllManagers();
-            SimpleMail.send(mail,request.getParameter("receiverName"));
-            for (User manager : managers) {
-                SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
-            }
-            System.out.println("MAIL");
+                //String mail = getMailReceiver(star.getReceiver_id());
+                String senderName = getUserService().getUserNameById(userId);
+                List<User> managers = getUserService().getAllManagers();
+                //SimpleMail.send(mail,request.getParameter("receiverName"));
+                for (User manager : managers) {
+                    SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName() + " " + manager.getLastName());
+                }
+                System.out.println("MAIL");
 
-            // TODO Show success page
+
                 request.setAttribute("availableStars", availableStars - 1);
                 request.setAttribute("success", "Successfully Added Star!");
                 return "index.jsp";
