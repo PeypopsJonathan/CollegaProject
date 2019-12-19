@@ -16,6 +16,10 @@
     <link href="/static/css/style.css" rel="stylesheet">
     <title>Hello world!</title>
 </head>
+<!-- Navigation -->
+<%@ include file="components/navigation.jspf" %>
+
+<!-- Page Content -->
 <body>
 <h1>voeg persoon toe</h1>
 <div id="errors">
@@ -27,9 +31,9 @@
 <form action="Controller?command=SetPassword" method="post">
 
     <label for="password">password</label>
-    <input type="text" name="password" id="password">
+    <input type="password" name="password" id="password">
     <label for="confirmPassword">confirm password</label>
-    <input type="text" name="confirmPassword" id="confirmPassword">
+    <input type="password" name="confirmPassword" id="confirmPassword">
 
     <input type="submit" value="set password">
 </form>

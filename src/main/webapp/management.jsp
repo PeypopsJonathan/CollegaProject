@@ -25,22 +25,61 @@
 
 
 <main role="main" class="container">
+    <div id="errors">
+        <c:forEach items="${errors}" var="error">
+            <p>${error}</p>
+        </c:forEach>
+    </div>
 
     <h3>Management Actions</h3>
-    <div>
-        <form action="Controller?command=Management&IsForm=true" method="post">
-            <select name="action">
-                <option>--Select an action--</option>
-                <option value="AddUser">Add User</option>
+    <select onchange="stateChange()">
+        <option value="">--Select an action--</option>
+        <option value="add">Add User</option>
+    </select>
+
+
+    <form id="addUser" style="display: none">
+        <div>
+            <label for="firstname">first name</label>
+            <input id="firstname" name="firstname" type="text" value="${previousFirstname}">
+
+            <label for="lastname">last name</label>
+            <input id="lastname" name="lastname" type="text" value="${previousLastname}">
+
+            <label for="email">e-mail</label>
+            <input id="email" name="email" type="text" value="${previousEmail}">
+
+            <label for="role">role</label>
+            <select name="role" id="role">
+                <option value="USER" <c:if test="${USER}"> selected</c:if>>user</option>
+                <option value="ADMIN"<c:if test="${ADMIN}"> selected</c:if>>admin</option>
             </select>
-            <input type="submit" value="submit">
-        </form>
-    </div>
+
+            <label for="manager">manager</label>
+            <input id="manager" name="manager" type="checkbox"
+                   <c:if test="${previousManager}">checked </c:if> >
+
+            <label for="superuser">superuser</label>
+            <input id="superuser" name="superuser" type="checkbox" <c:if test="${previousSuperuser}"> checked </c:if>>
+
+            <input type="submit" value="voeg toe">
+        </div>
+    </form>
 </main>
-</body>
+
 <!-- Footer -->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Bootstrap JS -->
+<script>
+    function stateChange() {
+        var x = document.getElementById("addUser");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

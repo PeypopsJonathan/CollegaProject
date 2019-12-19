@@ -50,7 +50,7 @@ public class Index extends RequestHandler {
         return "index.jsp";
     }
 
-    public List<String> getAllTags(){
+    public List<String> getAllTags() {
         ArrayList<String> listTags = new ArrayList<>();
         String tags;
 
@@ -79,7 +79,23 @@ public class Index extends RequestHandler {
             star.setSender_name(userDb.get(star.getSender_id()).getFirstName() + " " + userDb.get(star.getSender_id()).getLastName());
         }
         sortStars(localStars);
-        request.setAttribute("stars", localStars);
+
+        String filterOrNah = request.getParameter("iWantFilter");
+        System.out.println(filterOrNah + "-------------");
+        if (filterOrNah != null) {
+            // filter button pressed
+            List<Star> filteredStars = new ArrayList<>();
+            for (Star s : localStars) {
+                if (s.getTags().contains(request.getParameter("tagss"))) {
+                    filteredStars.add(s);
+                }
+            }
+            System.out.println(filteredStars.toString());
+            request.setAttribute("stars", filteredStars);
+        } else {
+            request.setAttribute("stars", localStars);
+        }
+
     }
 
     private void checkStars() {
@@ -248,11 +264,14 @@ public class Index extends RequestHandler {
             }
             maxIdStar++;
             star.setStar_id(maxIdStar);
-
-            int availableStars = userDb.getAvailableStars(userId);
+            int availableStars = 3;
+            UserRepositoryDb db = new UserRepositoryDb();
+            if (!db.isSuperUser(userId))
+                availableStars = userDb.getAvailableStars(userId);
 
             if (availableStars > 0) {
                 starDb.createStar(star);
+
                 userDb.setAvailableStar(userId, availableStars - 1);
 
                 request.setAttribute("success", "Successfully Added Star!");
@@ -264,8 +283,6 @@ public class Index extends RequestHandler {
             for (User manager : managers) {
                 SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
             }
-            System.out.println("MAIL");
-                //HARD CODED DAAN ZEN EMAIL
 
 
                 request.setAttribute("availableStars", availableStars - 1);
