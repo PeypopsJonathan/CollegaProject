@@ -161,4 +161,49 @@ public class StarRepositoryDb implements StarRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<ArrayList<String>> getAllTagsDb() {
+        List<ArrayList<String>> tags = new ArrayList<>();
+        try (Connection conn = ConnectionPool.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT tags FROM \"award-team9\".star")) {
+             try (ResultSet rs = stmt.executeQuery()) {
+                 while (rs.next()){
+                     tags.add(sqlArrayToArrayList(rs.getArray("tags")));
+                     System.out.println(tags.toString());
+                 }
+                 return tags;
+             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int countGivenStars(int userId){
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM \"award-team9\".star WHERE sender_id = ?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next())return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+
+    @Override
+    public int countReceivedStars(int userId){
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM \"award-team9\".star WHERE receiver_id = ?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
 }

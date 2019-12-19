@@ -68,6 +68,7 @@
 
     </section>
 
+            </article>
     <script>
         window.addEventListener("load", initPage, false);
 
@@ -93,7 +94,7 @@
 
                 button.addEventListener("click", function () {
                     document.getElementById("tagsAdded").removeChild(button);
-                    var buttonIdToRemove = button.id
+                    var buttonIdToRemove = button.id;
                     var hiddenTagToRemove = document.getElementsByClassName(buttonIdToRemove);
                     hiddenTagToRemove[0].value = "";
 
@@ -208,6 +209,7 @@
             });
         }
 
+        /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
         var tags = [];

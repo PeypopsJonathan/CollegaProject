@@ -169,7 +169,7 @@ public class Index extends RequestHandler {
                 errorList.add("Enter name of receiver");
             }
         } catch (DomainException e) {
-            errorList.add("Please enter a correct receiver id");
+            errorList.add("Please enter a correct receiver name");
         }
     }
 
@@ -274,14 +274,15 @@ public class Index extends RequestHandler {
 
                 request.setAttribute("success", "Successfully Added Star!");
 
-                String mailReceiver = getMailReceiver(star.getReceiver_id());
-                String senderName = getUserService().getUserNameById(star.getSender_id());
-                List<User> managers = getUserService().getAllManagers();
-                SimpleMail.send(mailReceiver, request.getParameter("receiverName"));
-                for (User manager : managers) {
-                    SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName() + " " + manager.getLastName());
-                }
-                System.out.println("MAIL");
+            String mailReceiver = getMailReceiver(star.getReceiver_id());
+            String senderName = getUserService().getUserNameById(star.getSender_id());
+            List<User> managers = getUserService().getAllManagers();
+            SimpleMail.send(mailReceiver,request.getParameter("receiverName"));
+            for (User manager : managers) {
+                SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
+            }
+            System.out.println("MAIL");
+                //HARD CODED DAAN ZEN EMAIL
 
 
                 request.setAttribute("availableStars", availableStars - 1);
@@ -298,8 +299,16 @@ public class Index extends RequestHandler {
             return "index.jsp";
         }
     }
+    /**
+    public String filterTag(){
+        Star star = new Star();
+        List<ArrayList<String>> tagsDb = starDb.getAllTagsDb();
+        List<String> tags= getAllTags();
 
-    private String getMailReceiver(int id) {
+        return "";
+    }**/
+
+    private String getMailReceiver(int id){
         return getUserService().getUserMailById(id);
     }
 }
