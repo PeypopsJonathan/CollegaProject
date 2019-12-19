@@ -1,5 +1,6 @@
 package ucll.project.domain.star;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface StarRepository {
@@ -20,4 +21,6 @@ public interface StarRepository {
     void delete(Star star);
 
     List<Star> getUserInvolvedInStarExchanges(int userId);
+
+    List<ArrayList<String>> getAllTagsDb();
 }

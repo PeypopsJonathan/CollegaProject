@@ -79,16 +79,23 @@
 
             <input type="submit" value="submit">
 
+            <h3>${success}</h3>
+        </form>
+        </form>
 
-        </form>
-        </form>
-        <h3>${success}</h3>
     </div>
         <section class="starOverview">
 
-            <div class="autocomplete">
-                <h2>Choose/Enter tag</h2>
-                <input id="filter" type="text" name="filter" placeholder="Search for a tag">
+            <div class="filter">
+                <select id="filter" name="filter" onchange="addTag()">
+                    <option>--Select a tag--</option>
+                    <c:forEach var="tag" items="${tags}">
+                        <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
+                            <c:out value="${tag}"></c:out>
+                        </option>
+                    </c:forEach>
+                </select>
+
             </div>
 
             <div>
@@ -113,9 +120,7 @@
         }
 
         function addTag() {
-
             if (counterList > 3) {
-
             } else {
                 var currentSelection = document.getElementById("select").value
 
@@ -128,10 +133,9 @@
 
                 button.addEventListener("click", function () {
                     document.getElementById("tagsAdded").removeChild(button);
-                    var buttonIdToRemove = button.id
+                    var buttonIdToRemove = button.id;
                     var hiddenTagToRemove = document.getElementsByClassName(buttonIdToRemove);
                     hiddenTagToRemove[0].value = "";
-
                     counterList--;
                 }, false);
 
@@ -240,11 +244,8 @@
         /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
-        var tags = [];
-        tags = ${listTag};
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
-        autocomplete(document.getElementById("filter"), tags)
 
     </script>
 

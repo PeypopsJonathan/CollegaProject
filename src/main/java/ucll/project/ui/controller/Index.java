@@ -42,6 +42,7 @@ public class Index extends RequestHandler {
         int userId = (int) request.getSession().getAttribute("user");
         request.setAttribute("availableStars", userDb.getAvailableStars(userId));
         checkStars();
+        System.out.println(starDb.getAllTagsDb().toString());
 
         if (isFormSubmition(request)) {
             try {
@@ -73,7 +74,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", getAllTags());
+        request.setAttribute("tags", tempTags);
     }
 
 
@@ -150,7 +151,6 @@ public class Index extends RequestHandler {
 
                 String[] splited = receiver_name.split("\\s+");
 
-
                 star.setReceiver_id(getUserService().getUserByName(splited[0], splited[1]));
 
 
@@ -158,7 +158,7 @@ public class Index extends RequestHandler {
                 errorList.add("Enter name of receiver");
             }
         } catch (DomainException e) {
-            errorList.add("Please enter a correct receiver id");
+            errorList.add("Please enter a correct receiver name");
         }
     }
 
@@ -258,9 +258,7 @@ public class Index extends RequestHandler {
 
             if (availableStars > 0) {
                 starDb.createStar(star);
-
                 userDb.setAvailableStar(userId, availableStars - 1);
-
 
                 //HARD CODED DAAN ZEN EMAIL
 
@@ -280,5 +278,13 @@ public class Index extends RequestHandler {
             return "index.jsp";
         }
     }
+    /**
+    public String filterTag(){
+        Star star = new Star();
+        List<ArrayList<String>> tagsDb = starDb.getAllTagsDb();
+        List<String> tags= getAllTags();
+
+        return "";
+    }**/
 
 }

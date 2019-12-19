@@ -1,13 +1,9 @@
 package ucll.project.domain.star;
 
 import ucll.project.db.ConnectionPool;
-import ucll.project.domain.user.Role;
-import ucll.project.domain.user.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class StarRepositoryDb implements StarRepository {
@@ -103,6 +99,23 @@ public class StarRepositoryDb implements StarRepository {
                 }
                 return exchanges;
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<ArrayList<String>> getAllTagsDb() {
+        List<ArrayList<String>> tags = new ArrayList<>();
+        try (Connection conn = ConnectionPool.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT tags FROM \"award-team9\".star")) {
+             try (ResultSet rs = stmt.executeQuery()) {
+                 while (rs.next()){
+                     tags.add(sqlArrayToArrayList(rs.getArray("tags")));
+                     System.out.println(tags.toString());
+                 }
+                 return tags;
+             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
