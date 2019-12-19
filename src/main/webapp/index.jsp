@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
-    <title>Hello world!</title>
+    <title>Stargazing</title>
 </head>
 <body>
 
@@ -55,22 +55,20 @@
             </select>
         </form>
 
-        <article>
-            <c:forEach var="star" items="${stars}">
-                <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying
-                    "${star.comment}"</p>
-                <ul class="tags">
-                    <c:forEach var="tag" items="${star.tags}">
-                        <li class="starTag">${tag}</li>
-                    </c:forEach>
-                </ul>
-            </c:forEach>
-        </article>
-    </section>
-
-    </section>
-
+            <article>
+                <c:forEach var="star" items="${stars}">
+                    <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying:<br/>"${star.comment}"</p>
+                    <ul class="tags">
+                        <c:forEach var="tag" items="${star.tags}">
+                            <li class="starTag">${tag}</li>
+                        </c:forEach>
+                            <li class="starTag">${star.timestamp}</li>
+                    </ul>
+                </c:forEach>
             </article>
+        </section>
+    </section>
+
     <script>
         window.addEventListener("load", initPage, false);
 

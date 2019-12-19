@@ -3,6 +3,8 @@ package ucll.project.domain.star;
 import ucll.project.domain.DomainException;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,7 +82,11 @@ public class Star implements Comparable {
         this.tags = tags;
     }
 
-    public Timestamp getTimestamp() {
+    public String getTimestamp() {
+        return timestamp.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    public Timestamp getTimeStampNotFormatted(){
         return timestamp;
     }
 
@@ -130,6 +136,6 @@ public class Star implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return -1*this.timestamp.compareTo(((Star) o).getTimestamp());
+        return -1*this.timestamp.compareTo(((Star) o).getTimeStampNotFormatted());
     }
 }

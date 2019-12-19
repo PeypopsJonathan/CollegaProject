@@ -35,11 +35,11 @@ public class AddUserVerification extends RequestHandler {
 
         if (error.size() >  0) {
             request.setAttribute("errors", error);
-            return "addUser.jsp";
+            return "management.jsp";
         }
         UserRepositoryDb userDB = new UserRepositoryDb();
         userDB.addUserWithoutPassword(user);
-        return "index.jsp";
+        return "Controller?command=Index";
     }
 
     private void setSuperuser(User user, HttpServletRequest request, boolean superuser, ArrayList<String> error) {

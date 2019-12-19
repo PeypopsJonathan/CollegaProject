@@ -266,8 +266,10 @@ public class Index extends RequestHandler {
             }
             maxIdStar++;
             star.setStar_id(maxIdStar);
-
-            int availableStars = userDb.getAvailableStars(userId);
+            int availableStars = 3;
+            UserRepositoryDb db = new UserRepositoryDb();
+            if (!db.isSuperUser(userId))
+                availableStars = userDb.getAvailableStars(userId);
 
             if (availableStars > 0) {
                 starDb.createStar(star);
@@ -283,8 +285,6 @@ public class Index extends RequestHandler {
             for (User manager : managers) {
                 SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
             }
-            System.out.println("MAIL");
-                //HARD CODED DAAN ZEN EMAIL
 
 
                 request.setAttribute("availableStars", availableStars - 1);

@@ -334,4 +334,16 @@ public class UserRepositoryDb implements UserRepository {
             throw new RuntimeException(ex);
         }
     }
+
+    public boolean isSuperUser(int id){
+        try (Connection conn = ConnectionPool.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("select superuser from \"award-team9\".user where id = ?");
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getBoolean(1);
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
