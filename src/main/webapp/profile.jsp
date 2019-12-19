@@ -32,12 +32,6 @@
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}</p>
         <p class="profileOverviewItem2">you have ${availableStars} stars left to give this month</p>
-        <div id="filterContainer">
-            <button class="btn active filterMiddle" onclick="filterSelection('all')">No filter (${totalStars})</button>
-            <button class="btn filterLeft" onclick="filterSelection('receivedStar')">Filter on stars I received (${receivedStars})
-            </button>
-            <button class="btn filterRight" onclick="filterSelection('givenStar')">Filter on stars I sent (${givenStars})</button>
-        </div>
         <div class="profileStarOverview">
             <c:forEach var="star" items="${stars}">
                 <c:choose>
@@ -67,6 +61,13 @@
 
             </c:forEach>
         </div>
+
+        <section id="filterContainer">
+            <button class="btn active filterMiddle" onclick="filterSelection('all')">No filter (${totalStars})</button>
+            <button class="btn filterLeft" onclick="filterSelection('receivedStar')">Filter on stars I received (${receivedStars})
+            </button>
+            <button class="btn filterRight" onclick="filterSelection('givenStar')">Filter on stars I sent (${givenStars})</button>
+        </section>
         <script>
             filterSelection("all")
 
