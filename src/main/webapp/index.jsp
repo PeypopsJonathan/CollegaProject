@@ -10,13 +10,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>Stargazing</title>
 </head>
-<body>
+<body style="font-family: 'Montserrat', sans-serif">
 
 <!-- Navigation -->
 <%@ include file="components/navigation.jspf" %>
@@ -25,18 +28,7 @@
 
 
 <main role="main" class="container">
-
-
-    <c:if test="${!empty errors}">
-        <div class="alert-danger">
-            <c:forEach var="error" items="${errors}">
-                <li>
-                    <c:out value="${error}"></c:out>
-                </li>
-            </c:forEach>
-        </div>
-    </c:if>
-    <h1>Stargazing</h1>
+    <h1 style="font-family: 'Orbitron', sans-serif; text-align: center; font-size: 3rem">Stargazing</h1>
     <section class="starOverview">
 
         <form method="post" action="Controller?command=Index&iWantFilter=yes" autocomplete="off">
@@ -51,13 +43,23 @@
                         <c:out value="${tag}"></c:out>
                     </option>
                 </c:forEach>
-                <input type="submit" class="" value="filter">
+
+                <article class="autocomplete">
+                    <input id="receiverNameFilter" type="text" name="receiverNameFilter" placeholder="Names">
+                </article>
+                <input type="submit" value="filter" id="btn2">
             </select>
-            <article class="autocomplete">
-                <input id="receiverNameFilter" type="text" name="receiverName" placeholder="Names">
-            </article>
         </form>
 
+        <c:if test="${!empty errors}">
+            <div class="alert-danger">
+                <c:forEach var="error" items="${errors}">
+                    <li>
+                        <c:out value="${error}"></c:out>
+                    </li>
+                </c:forEach>
+            </div>
+        </c:if>
             <article>
                 <c:forEach var="star" items="${stars}">
                     <p class="starText"> <b>${star.sender_name}</b> has sent <b>${star.receiver_name}</b> a star, saying:<br/><i>"${star.comment}"</i></p>

@@ -17,9 +17,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>Profile</title>
 </head>
-<body onload="addActiveClassToCurrentButton()">
+<body onload="addActiveClassToCurrentButton()" style="font-family: 'Montserrat', sans-serif">
 
 <!-- Navigation -->
 <%@ include file="components/navigation.jspf" %>
@@ -28,7 +29,7 @@
 <main class="container">
 
     <section class="profileOverview">
-        <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
+        <p class="profileOverviewImage"><img id="profilePicture" src="static/images/salesman.png"></p>
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}</p>
         <p class="profileOverviewItem2" style="text-align: center">Stars available: ${availableStars}</p>
@@ -43,8 +44,8 @@
                 <c:choose>
                     <c:when test="${star.starWasReceivedBy(userId)}">
                         <div class="starDiv receivedStar">
-                            <p class="starText receivedStar">${star.sender_name} has sent ${star.receiver_name} a star,
-                                saying "${star.comment}"</p>
+                            <p class="starText receivedStar"> <b>${star.sender_name}</b> has sent <b>${star.receiver_name}</b> a star,
+                                saying: <br/>  <i> "${star.comment}"</i></p>
                             <ul class="tags receivedStar">
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
@@ -55,8 +56,8 @@
                     </c:when>
                     <c:otherwise>
                         <div class="starDiv givenStar">
-                            <p class="starText givenStar">${star.sender_name} has sent ${star.receiver_name} a
-                                star, saying "${star.comment}"</p>
+                            <p class="starText givenStar"><b>${star.sender_name}</b> has sent <b>${star.receiver_name} </b>a
+                                star, saying: </br> <i>"${star.comment}"</i></p>
                             <ul class="tags givenStar">
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
