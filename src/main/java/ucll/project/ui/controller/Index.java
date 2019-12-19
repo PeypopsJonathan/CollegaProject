@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 
 public class Index extends RequestHandler {
@@ -257,7 +256,7 @@ public class Index extends RequestHandler {
 
                 userDb.setAvailableStar(userId, availableStars - 1);
 
-            request.setAttribute("success", "Successfully Added Star!");
+                request.setAttribute("success", "Successfully Added Star!");
 
             String mailReceiver = getMailReceiver(star.getReceiver_id());
             String senderName = getUserService().getUserNameById(star.getSender_id());
@@ -268,7 +267,7 @@ public class Index extends RequestHandler {
             }
             System.out.println("MAIL");
 
-            // TODO Show success page
+
                 request.setAttribute("availableStars", availableStars - 1);
                 request.setAttribute("success", "Successfully Added Star!");
                 return "index.jsp";

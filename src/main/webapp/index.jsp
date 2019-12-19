@@ -41,67 +41,69 @@
         <h3>Give Star</h3>
 
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
-        <p>you have ${availableStars} left to give this month</p>
-        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
-            <div class="autocomplete">
-                <h2>Choose/Enter Correct Name</h2>
-                <input id="receiverName" type="text" name="receiverName" placeholder="Names">
-            </div>
-            <h2 for="tags">tags</h2>
+            <p>you have ${availableStars} left to give this month</p>
+            <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
+                <div class="autocomplete">
+                    <h2>Choose/Enter Correct Name</h2>
+                    <input id="receiverName" type="text" name="receiverName" placeholder="Names">
+                </div>
+                <h2 for="tags">tags</h2>
 
-            <select id="select" name="tags" id="tags" onchange="addTag()">
-                <option>--Select a tag--</option>
-                <c:forEach var="tag" items="${tags}">
-                    <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
-                        <c:out value="${tag}"></c:out>
-                    </option>
-                </c:forEach>
-            </select>
+                <select id="select" name="tags" id="tags" onchange="addTag()">
+                    <option>--Select a tag--</option>
+                    <c:forEach var="tag" items="${tags}">
+                        <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
+                            <c:out value="${tag}"></c:out>
+                        </option>
+                    </c:forEach>
+                </select>
 
-            <p id="tagsAdded">
-            <h2>Tags Added: </h2>
-            </p>
+                <p id="tagsAdded">
+                <h2>Tags Added: </h2>
+                </p>
 
-            <input type="hidden" class="Integrity" name="0" id="0">
-            <input type="hidden" class="Curiosity" name="1" id="1">
-            <input type="hidden" class="Collaboration" name="2" id="2">
-            <input type="hidden" class="Client first" name="3" id="3">
-            <input type="hidden" class="Entrepreneurship" name="4" id="4">
-            <input type="hidden" class="Move Faster" name="5" id="5">
-            <input type="hidden" class="Act smarter" name="6" id="6">
-            <input type="hidden" class="Go further" name="7" id="7">
-            <input type="hidden" class="Be sure" name="8" id="8">
-            <input type="hidden" class="Team spirit" name="9" id="9">
-            <input type="hidden" class="Office spirit" name="10" id="10">
+                <input type="hidden" class="Integrity" name="0" id="0">
+                <input type="hidden" class="Curiosity" name="1" id="1">
+                <input type="hidden" class="Collaboration" name="2" id="2">
+                <input type="hidden" class="Client first" name="3" id="3">
+                <input type="hidden" class="Entrepreneurship" name="4" id="4">
+                <input type="hidden" class="Move Faster" name="5" id="5">
+                <input type="hidden" class="Act smarter" name="6" id="6">
+                <input type="hidden" class="Go further" name="7" id="7">
+                <input type="hidden" class="Be sure" name="8" id="8">
+                <input type="hidden" class="Team spirit" name="9" id="9">
+                <input type="hidden" class="Office spirit" name="10" id="10">
 
-            <label for="description" value="${previous_input_description}">description</label>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
+                <label for="description" value="${previous_input_description}">description</label>
+                <textarea name="description" id="description" cols="30" rows="10"
+                          placeholder="enter decription"></textarea>
 
-            <input type="submit" value="submit">
+                <input type="submit" value="submit">
 
 
-        </form>
+            </form>
         </form>
         <h3>${success}</h3>
     </div>
-        <section class="starOverview">
+    <section class="starOverview">
 
-            <div class="autocomplete">
-                <h2>Choose/Enter tag</h2>
-                <input id="filter" type="text" name="filter" placeholder="Search for a tag">
-            </div>
+        <div class="autocomplete">
+            <h2>Choose/Enter tag</h2>
+            <input id="filter" type="text" name="filter" placeholder="Search for a tag">
+        </div>
 
-            <div>
-                <c:forEach var="star" items="${stars}">
-                    <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
-                    <ul class="tags">
-                        <c:forEach var="tag" items="${star.tags}">
-                            <li class="starTag">${tag}</li>
-                        </c:forEach>
-                    </ul>
-                </c:forEach>
-            </div>
-        </section>
+        <div>
+            <c:forEach var="star" items="${stars}">
+                <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying
+                    "${star.comment}"</p>
+                <ul class="tags">
+                    <c:forEach var="tag" items="${star.tags}">
+                        <li class="starTag">${tag}</li>
+                    </c:forEach>
+                </ul>
+            </c:forEach>
+        </div>
+    </section>
 
     <script>
         window.addEventListener("load", initPage, false);
@@ -124,6 +126,7 @@
                 button.id = currentSelection;
 
                 var hiddenTags = document.getElementsByClassName(currentSelection);
+
                 hiddenTags[0].value = currentSelection;
 
                 button.addEventListener("click", function () {
@@ -145,11 +148,13 @@
             the text field element and an array of possible autocompleted values:*/
             var currentFocus;
             /*execute a function when someone writes in the text field:*/
-            inp.addEventListener("input", function(e) {
+            inp.addEventListener("input", function (e) {
                 var a, b, i, val = this.value;
                 /*close any already open lists of autocompleted values*/
                 closeAllLists();
-                if (!val) { return false;}
+                if (!val) {
+                    return false;
+                }
                 currentFocus = -1;
                 /*create a DIV element that will contain the items (values):*/
                 a = document.createElement("DIV");
@@ -169,7 +174,7 @@
                         /*insert a input field that will hold the current array item's value:*/
                         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                         /*execute a function when someone clicks on the item value (DIV element):*/
-                        b.addEventListener("click", function(e) {
+                        b.addEventListener("click", function (e) {
                             /*insert the value for the autocomplete text field:*/
                             inp.value = this.getElementsByTagName("input")[0].value;
                             /*close the list of autocompleted values,
@@ -181,7 +186,7 @@
                 }
             });
             /*execute a function presses a key on the keyboard:*/
-            inp.addEventListener("keydown", function(e) {
+            inp.addEventListener("keydown", function (e) {
                 var x = document.getElementById(this.id + "autocomplete-list");
                 if (x) x = x.getElementsByTagName("div");
                 if (e.keyCode == 40) {
@@ -205,6 +210,7 @@
                     }
                 }
             });
+
             function addActive(x) {
                 /*a function to classify an item as "active":*/
                 if (!x) return false;
@@ -215,12 +221,14 @@
                 /*add class "autocomplete-active":*/
                 x[currentFocus].classList.add("autocomplete-active");
             }
+
             function removeActive(x) {
                 /*a function to remove the "active" class from all autocomplete items:*/
                 for (var i = 0; i < x.length; i++) {
                     x[i].classList.remove("autocomplete-active");
                 }
             }
+
             function closeAllLists(elmnt) {
                 /*close all autocomplete lists in the document,
                 except the one passed as an argument:*/
@@ -231,6 +239,7 @@
                     }
                 }
             }
+
             /*execute a function when someone clicks in the document:*/
             document.addEventListener("click", function (e) {
                 closeAllLists(e.target);
