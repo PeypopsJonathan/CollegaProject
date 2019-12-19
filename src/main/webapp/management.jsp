@@ -38,12 +38,13 @@
     </select>
 
 
-    <form id="addUser" style="display: none" class="addUserForm">
+    <form action="Controller?command=AddUserVerification" method="post" id="addUser" style="display: none" class="addUserForm">
         <div class="addUserDiv">
             <span id="firstname">
             <label for="firstname">First name</label>
             <input placeholder="First Name" name="firstname" type="text" value="${previousFirstname}">
             </span>
+
 
             <span id="lastname" >
             <label for="lastname">Last name</label>

@@ -5,10 +5,8 @@ import ucll.project.domain.user.Role;
 import ucll.project.domain.user.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class StarRepositoryDb implements StarRepository {
 
@@ -41,11 +39,20 @@ public class StarRepositoryDb implements StarRepository {
     @Override
     public List<Star> getAll() {
         try (Connection conn = ConnectionPool.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM \"award-team9\".star")) {
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".star WHERE timestamp > ?")) {
+            //Getting the date 3 months ago
+            LocalDateTime now = LocalDateTime.now();
+            Timestamp oldTs = Timestamp.valueOf(now);
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.MONTH, -3);
+            oldTs = new Timestamp(cal.getTime().getTime());
+            cal.setTimeInMillis(oldTs.getTime());
+            stmt.setTimestamp(1, oldTs);
             List<Star> stars = new ArrayList<>();
-            while (rs.next()) {
-                stars.add(starFromResultSet(rs));
+            try(ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    stars.add(starFromResultSet(rs));
+                }
             }
             return stars;
         } catch (SQLException e) {
