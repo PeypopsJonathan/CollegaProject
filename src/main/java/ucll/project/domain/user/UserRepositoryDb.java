@@ -122,6 +122,22 @@ public class UserRepositoryDb implements UserRepository {
         return user;
     }
 
+    private static List<User> usersFromResult(ResultSet rs) throws SQLException {
+        List<User> users = new ArrayList<>();
+        while (rs.next()) {
+            User user = new User();
+            user.setUserId(rs.getInt("id"));
+            user.setFirstName(rs.getString("firstname"));
+            user.setLastName(rs.getString("lastname"));
+            user.setEmail(rs.getString("email"));
+            user.setRole(Role.valueOf(rs.getString("role")));
+            user.setHashedPassword(rs.getString("password"));
+            user.setManager(rs.getBoolean("manager"));
+            users.add(user);
+        }
+        return users;
+    }
+
     private static Star starFromResult(ResultSet rs) throws SQLException {
         Star star = new Star();
         star.setStar_id(rs.getInt("star_id"));
@@ -196,6 +212,49 @@ public class UserRepositoryDb implements UserRepository {
         return -1;
     }
 
+    public String userMailById(int id){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT email from \"award-team9\".user where id = ?");
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("email");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
+    public String userNameById(int id){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT firstname, lastname from \"award-team9\".user where id = ?");
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            String name = "";
+            if (rs.next()) {
+                name  += rs.getString("firstname");
+                name += " " + rs.getString("lastname");
+                return name;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
+    public List<User> getAllMAnagers(){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * from \"award-team9\".user where manager = ?");
+            stmt.setBoolean(1, true);
+            ResultSet rs = stmt.executeQuery();
+            List<User> managers = usersFromResult(rs);
+            return managers;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public int getAvailableStars(int id) {
         try (Connection conn = ConnectionPool.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT available_stars from \"award-team9\".user where id = ?");
@@ -216,7 +275,7 @@ public class UserRepositoryDb implements UserRepository {
                     "set available_stars = ?" + "where id = ? ");
             stmt.setInt(1, aantal);
             stmt.setInt(2, id);
-            stmt.executeUpdate();
+            stmt.executeQuery();
 
         } catch (SQLException ex){
             throw new RuntimeException(ex);

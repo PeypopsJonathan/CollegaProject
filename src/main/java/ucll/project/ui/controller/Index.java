@@ -2,15 +2,11 @@ package ucll.project.ui.controller;
 
 import ucll.project.db.ConnectionPool;
 import ucll.project.domain.DomainException;
-import ucll.project.domain.user.Tags;
+import ucll.project.domain.user.*;
 
 import ucll.project.domain.star.Star;
 import ucll.project.domain.star.StarRepository;
 import ucll.project.domain.star.StarRepositoryDb;
-import ucll.project.domain.user.UserRepository;
-import ucll.project.domain.user.UserRepositoryDb;
-
-import ucll.project.domain.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +34,9 @@ public class Index extends RequestHandler {
         setTagAttribute(request);
         getStars(request);
         request.setAttribute("listName", getUserService().getAllNames());
-        request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
+        request.setAttribute("listTag", getAllTags());
+        int userId = (int) request.getSession().getAttribute("user");
+        request.setAttribute("availableStars", userDb.getAvailableStars(userId));
         checkStars();
 
         if (isFormSubmition(request)) {
@@ -53,6 +51,17 @@ public class Index extends RequestHandler {
         return "index.jsp";
     }
 
+    public List<String> getAllTags(){
+        ArrayList<String> listTags = new ArrayList<>();
+        String tags;
+
+        for (int i = 0; i < Tags.values().length; i++) {
+            tags = '"' + Tags.values()[i].getTag() + '"';
+            listTags.add(tags);
+        }
+        return listTags;
+    }
+
     public void setTagAttribute(HttpServletRequest request) {
         ArrayList<String> tempTags = new ArrayList<>();
 
@@ -60,7 +69,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", tempTags);
+        request.setAttribute("tags", getAllTags());
     }
 
 
@@ -218,9 +227,9 @@ public class Index extends RequestHandler {
     private String submitForm(HttpServletRequest request) throws Exception {
         Star star = new Star();
 
-        int id = (Integer) request.getSession().getAttribute("user");
+        int userId = (Integer) request.getSession().getAttribute("user");
 
-        star.setSender_id(id);
+        star.setSender_id(userId);
 
         ArrayList<String> errorList = new ArrayList<>();
 
@@ -241,17 +250,22 @@ public class Index extends RequestHandler {
             maxIdStar++;
             star.setStar_id(maxIdStar);
 
-            int availableStars = userDb.getAvailableStars(id);
+            int availableStars = userDb.getAvailableStars(userId);
 
             if (availableStars > 0) {
                 starDb.createStar(star);
 
-                userDb.setAvailableStar(id, availableStars - 1);
+                userDb.setAvailableStar(userId, availableStars - 1);
 
             request.setAttribute("success", "Successfully Added Star!");
 
-            String comment = request.getParameter("");
-            SimpleMail.send("dennisw@live.be","Control alt de yeet");
+            String mail = getMailReceiver(star.getReceiver_id());
+            String senderName = getUserService().getUserNameById(id);
+            List<User> managers = getUserService().getAllManagers();
+            SimpleMail.send(mail,request.getParameter("receiverName"));
+            for (User manager : managers) {
+                SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
+            }
             System.out.println("MAIL");
 
             // TODO Show success page
