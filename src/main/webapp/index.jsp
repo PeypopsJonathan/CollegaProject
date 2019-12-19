@@ -86,6 +86,10 @@
     </div>
         <section class="starOverview">
 
+            <div class="autocomplete">
+                <h2>Choose/Enter tag</h2>
+                <input id="filter" type="text" name="filter" placeholder="Search for a tag">
+            </div>
 
             <div>
                 <c:forEach var="star" items="${stars}">
@@ -236,9 +240,12 @@
         /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
-        console.log(names);
+        var tags = [];
+        tags = ${listTag};
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
+        autocomplete(document.getElementById("filter"), tags)
+
     </script>
 
 

@@ -1,6 +1,7 @@
 package ucll.project.domain.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public enum Tags {
 
