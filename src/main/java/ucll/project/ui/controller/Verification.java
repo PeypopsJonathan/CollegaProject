@@ -1,5 +1,6 @@
 package ucll.project.ui.controller;
 
+import ucll.project.domain.user.User;
 import ucll.project.domain.user.UserService;
 import ucll.project.ui.controller.RequestHandler;
 
@@ -21,6 +22,8 @@ public class Verification extends RequestHandler {
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(-1);
             session.setAttribute("user",id);
+            boolean isManager = this.getUserService().getManagerStatusUser(id);
+            request.setAttribute("isManager", isManager);
             return "Controller?command=Index";
         }
         else

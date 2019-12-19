@@ -250,9 +250,7 @@ public class Index extends RequestHandler {
 
             request.setAttribute("success", "Successfully Added Star!");
 
-            /**
-             * HARD CODED DAAN ZEN EMAIL
-             * */
+            String comment = request.getParameter("");
             SimpleMail.send("dennisw@live.be","Control alt de yeet");
             System.out.println("MAIL");
 
