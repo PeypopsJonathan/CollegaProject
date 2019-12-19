@@ -37,6 +37,53 @@
         </div>
     </c:if>
     <h1>Stargazing</h1>
+    <div class="containerGiveStar">
+        <h3>Give Star</h3>
+
+        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
+        <p>you have ${availableStars} left to give this month</p>
+        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
+            <div class="autocomplete">
+                <h2>Choose/Enter Correct Name</h2>
+                <input id="receiverName" type="text" name="receiverName" placeholder="Names">
+            </div>
+            <h2 for="tags">tags</h2>
+
+            <select id="select" name="tags" id="tags" onchange="addTag()">
+                <option>--Select a tag--</option>
+                <c:forEach var="tag" items="${tags}">
+                    <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
+                        <c:out value="${tag}"></c:out>
+                    </option>
+                </c:forEach>
+            </select>
+
+            <p id="tagsAdded">
+            <h2>Tags Added: </h2>
+            </p>
+
+            <input type="hidden" class="Integrity" name="0" id="0">
+            <input type="hidden" class="Curiosity" name="1" id="1">
+            <input type="hidden" class="Collaboration" name="2" id="2">
+            <input type="hidden" class="Client first" name="3" id="3">
+            <input type="hidden" class="Entrepreneurship" name="4" id="4">
+            <input type="hidden" class="Move Faster" name="5" id="5">
+            <input type="hidden" class="Act smarter" name="6" id="6">
+            <input type="hidden" class="Go further" name="7" id="7">
+            <input type="hidden" class="Be sure" name="8" id="8">
+            <input type="hidden" class="Team spirit" name="9" id="9">
+            <input type="hidden" class="Office spirit" name="10" id="10">
+
+            <label for="description" value="${previous_input_description}">description</label>
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
+
+            <input type="submit" value="submit">
+
+
+        </form>
+        </form>
+        <h3>${success}</h3>
+    </div>
         <section class="starOverview">
 
         <div class="autocomplete">
@@ -54,20 +101,6 @@
                     </ul>
                 </c:forEach>
             </article>
-        </section>
-        <div>
-            <c:forEach var="star" items="${stars}">
-                <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying
-                    "${star.comment}"</p>
-                <ul class="tags">
-                    <c:forEach var="tag" items="${star.tags}">
-                        <li class="starTag">${tag}</li>
-                    </c:forEach>
-                </ul>
-            </c:forEach>
-        </div>
-    </section>
-
     <script>
         window.addEventListener("load", initPage, false);
 
@@ -93,7 +126,7 @@
 
                 button.addEventListener("click", function () {
                     document.getElementById("tagsAdded").removeChild(button);
-                    var buttonIdToRemove = button.id
+                    var buttonIdToRemove = button.id;
                     var hiddenTagToRemove = document.getElementsByClassName(buttonIdToRemove);
                     hiddenTagToRemove[0].value = "";
 
@@ -205,11 +238,8 @@
         /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
-        var tags = [];
-        tags = ${listTag};
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
-        autocomplete(document.getElementById("filter"), tags)
 
     </script>
 

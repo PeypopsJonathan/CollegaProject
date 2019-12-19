@@ -153,7 +153,7 @@ public class Index extends RequestHandler {
                 errorList.add("Enter name of receiver");
             }
         } catch (DomainException e) {
-            errorList.add("Please enter a correct receiver id");
+            errorList.add("Please enter a correct receiver name");
         }
     }
 
@@ -253,7 +253,6 @@ public class Index extends RequestHandler {
 
             if (availableStars > 0) {
                 starDb.createStar(star);
-
                 userDb.setAvailableStar(userId, availableStars - 1);
 
                 request.setAttribute("success", "Successfully Added Star!");
@@ -266,6 +265,7 @@ public class Index extends RequestHandler {
                 SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
             }
             System.out.println("MAIL");
+                //HARD CODED DAAN ZEN EMAIL
 
 
                 request.setAttribute("availableStars", availableStars - 1);
@@ -282,6 +282,14 @@ public class Index extends RequestHandler {
             return "index.jsp";
         }
     }
+    /**
+    public String filterTag(){
+        Star star = new Star();
+        List<ArrayList<String>> tagsDb = starDb.getAllTagsDb();
+        List<String> tags= getAllTags();
+
+        return "";
+    }**/
 
     private String getMailReceiver(int id){
         return getUserService().getUserMailById(id);
