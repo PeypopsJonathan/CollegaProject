@@ -36,7 +36,7 @@
             </c:forEach>
         </div>
     </c:if>
-    <h1>Star feed</h1>
+    <h1>Stargazing</h1>
     <div class="containerGiveStar">
         <h3>Give Star</h3>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
