@@ -290,4 +290,49 @@ public class UserRepositoryDb implements UserRepository {
             throw new RuntimeException(ex);
         }
     }
+
+    public void addUserWithoutPassword(User user){
+        try (Connection conn = ConnectionPool.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("insert into \"award-team9\".user\n" +
+                    "(id,firstname,lastname,email,role,password,available_stars,superuser,manager)\n" +
+                    "values (\n" +
+                    "?, ?, ?,?, ?, '', 3, ?, ?\n" +
+                    ")");
+            stmt.setInt(1,getHighestID() + 1);
+            stmt.setString(2,user.getFirstName());
+            stmt.setString(3,user.getLastName());
+            stmt.setString(4,user.getEmail());
+            stmt.setString(5,user.getRole().toString());
+            stmt.setBoolean(6,user.isSuperuser());
+            stmt.setBoolean(7,user.isManager());
+            stmt.executeUpdate();
+
+        } catch ( SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public int getHighestID(){
+        try (Connection conn = ConnectionPool.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("select id from \"award-team9\".user order by id desc");
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                return rs.getInt("id");
+            }
+            throw new RuntimeException("could not find id in database");
+        } catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void setPassword(int id,String password){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user set password = ? where id = ?");
+            stmt.setString(1,password);
+            stmt.setInt(2,id);
+            stmt.executeUpdate();
+        } catch ( SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
 }
