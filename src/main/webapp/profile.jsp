@@ -43,8 +43,8 @@
                 <c:choose>
                     <c:when test="${star.starWasReceivedBy(userId)}">
                         <div class="starDiv receivedStar">
-                            <p class="starText receivedStar">${star.sender_name} has sent ${star.receiver_name} a star,
-                                saying "${star.comment}"</p>
+                            <p class="starText receivedStar"> <b>${star.sender_name}</b> has sent <b>${star.receiver_name}</b> a star,
+                                saying: <br/>  <i> "${star.comment}"</i></p>
                             <ul class="tags receivedStar">
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
