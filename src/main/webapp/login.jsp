@@ -29,8 +29,8 @@
 
             <!-- Login Form -->
             <form method="post" action="Controller?command=Verification">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-                <input type="password" id="password" class="fadeIn second" name="password" placeholder="password">
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
+                <input type="password" id="password" class="fadeIn second" name="password" placeholder="Password">
                 <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
 

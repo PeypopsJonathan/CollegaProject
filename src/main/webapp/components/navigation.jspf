@@ -6,7 +6,7 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/Controller?command=Index">Home</a>
             </li>
             <li class="nav-item">
@@ -23,7 +23,7 @@
                 <a class="nav-link" href="Controller?command=Signout">Log out</a>
             </li>
             <li class="giveStarButton">
-                <button type="button" class="open-overlay">Give star</button>
+                <button type="button" class="open-overlay" id="btn">Give star</button>
             </li>
         </ul>
         <section class="overlay" aria-hidden="true">

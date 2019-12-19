@@ -25,7 +25,7 @@
 <%@ include file="components/navigation.jspf" %>
 
 <!-- Page Content -->
-<main>
+<main class="container">
 
     <section class="profileOverview">
         <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
