@@ -50,7 +50,7 @@ public class Index extends RequestHandler {
         return "index.jsp";
     }
 
-    public List<String> getAllTags() {
+    public List<String> getAllTags(){
         ArrayList<String> listTags = new ArrayList<>();
         String tags;
 
@@ -68,7 +68,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", tempTags);
+        request.setAttribute("tags", getAllTags());
     }
 
 
