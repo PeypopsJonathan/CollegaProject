@@ -19,7 +19,7 @@
     <link href="/static/css/style.css" rel="stylesheet">
     <title>Hello world!</title>
 </head>
-<body>
+<body onload="addActiveClassToCurrentButton()">
 
 <!-- Navigation -->
 <%@ include file="components/navigation.jspf" %>
@@ -41,8 +41,12 @@
         <div class="profileStarOverview">
             <c:forEach var="star" items="${stars}">
                 <c:choose>
-                    <c:when test="star.starWasReceivedBy(${userId}, ${star.star_id})"><p class="starText receivedStar">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p></c:when>
-                    <c:otherwise><p class="starText givenStar">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p></c:otherwise>
+                    <c:when test="${star.starWasReceivedBy(userId)}">
+                        <p class="starText receivedStar">${star.sender_name} has sent ${star.receiver_name} a star,
+                        saying "${star.comment}"</p>
+                    </c:when>
+                    <c:otherwise><p class="starText givenStar">${star.sender_name} has sent ${star.receiver_name} a
+                        star, saying "${star.comment}"</p></c:otherwise>
                 </c:choose>
                 <ul class="tags">
                     <c:forEach var="tag" items="${star.tags}">
@@ -53,13 +57,16 @@
         </div>
         <script>
             filterSelection("all")
+
             function filterSelection(c) {
-                var x, i;
+                var x, i, y;
                 x = document.getElementsByClassName("starText");
                 if (c == "all") c = "";
                 for (i = 0; i < x.length; i++) {
-                    removeFilterClass(x[i], "show");
-                    if (x[i].className.indexOf(c) > -1) addFilterClass(x[i], "show");
+                    removeFilterClass(x[i], "noshow");
+                    if (!(x[i].className.indexOf(c) > -1)){
+                        addFilterClass(x[i], "noshow");
+                    }
                 }
             }
 
@@ -68,7 +75,9 @@
                 arr1 = element.className.split(" ");
                 arr2 = name.split(" ");
                 for (i = 0; i < arr2.length; i++) {
-                    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+                    if (arr1.indexOf(arr2[i]) == -1) {
+                        element.className += " " + arr2[i];
+                    }
                 }
             }
 
@@ -84,16 +93,23 @@
                 element.className = arr1.join(" ");
             }
 
-            // Add active class to the current button (highlight it)
-            var buttonContainer = document.getElementById("filterContainer");
-            var buttons = buttonContainer.getElementsByName("button");
-            for (var i = 0; i < btns.length; i++) {
-                buttons[i].addEventListener("click", function(){
-                    var current = document.getElementsByClassName("active");
-                    current[0].className = current[0].className.replace(" active", "");
-                    this.className += " active";
-                });
+            function addActiveClassToCurrentButton() {
+                // Add active class to the current button (highlight it)
+                var buttonContainer = document.getElementById("filterContainer");
+                var buttons = buttonContainer.getElementsByClassName("btn");
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].addEventListener("click", function () {
+                        var current = document.getElementsByClassName("active");
+                        for (var j = 0 ; j < current.length ; j++) {
+                            current[j].classList.remove("active");
+                        }
+
+                        event.srcElement.classList.add("active")
+                    });
+                }
             }
+
+
         </script>
     </section>
 </main>

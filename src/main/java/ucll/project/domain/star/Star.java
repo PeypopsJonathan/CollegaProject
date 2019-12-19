@@ -112,6 +112,10 @@ public class Star implements Comparable {
         return this.sender_name;
     }
 
+    public boolean starWasReceivedBy(int userId){
+        return this.receiver_id == userId;
+    }
+
     @Override
     public String toString() {
         return "Star{" +
