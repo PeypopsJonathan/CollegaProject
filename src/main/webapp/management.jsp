@@ -38,31 +38,45 @@
     </select>
 
 
-    <form action="Controller?command=AddUserVerification" method="post" id="addUser" style="display: none">
-        <div>
-            <label for="firstname">first name</label>
-            <input id="firstname" name="firstname" type="text" value="${previousFirstname}">
+    <form action="Controller?command=AddUserVerification" method="post" id="addUser" style="display: none" class="addUserForm">
+        <div class="addUserDiv">
+            <span id="firstname">
+            <label for="firstname">First name</label>
+            <input placeholder="First Name" name="firstname" type="text" value="${previousFirstname}">
+            </span>
 
-            <label for="lastname">last name</label>
-            <input id="lastname" name="lastname" type="text" value="${previousLastname}">
 
-            <label for="email">e-mail</label>
-            <input id="email" name="email" type="text" value="${previousEmail}">
+            <span id="lastname" >
+            <label for="lastname">Last name</label>
+            <input placeholder="Last name" name="lastname" type="text" value="${previousLastname}">
+            </span>
 
-            <label for="role">role</label>
-            <select name="role" id="role">
-                <option value="USER" <c:if test="${USER}"> selected</c:if>>user</option>
-                <option value="ADMIN"<c:if test="${ADMIN}"> selected</c:if>>admin</option>
+            <span id="email">
+            <label for="email">E-mail</label>
+            <input placeholder="E-mail"  name="email" type="text" value="${previousEmail}">
+            </span>
+
+            <span id="role">
+            <label for="role">Role</label>
+            <select name="role">
+                <option value="USER" <c:if test="${USER}"> selected</c:if>>User</option>
+                <option value="ADMIN"<c:if test="${ADMIN}"> selected</c:if>>Admin</option>
             </select>
+            </span>
 
-            <label for="manager">manager</label>
-            <input id="manager" name="manager" type="checkbox"
+            <span id="manager">
+            <label for="manager">Manager</label>
+            <input name="manager" type="checkbox"
                    <c:if test="${previousManager}">checked </c:if> >
+            </span>
 
-            <label for="superuser">superuser</label>
-            <input id="superuser" name="superuser" type="checkbox" <c:if test="${previousSuperuser}"> checked </c:if>>
+            <span id="superuser">
+            <label for="superuser">Superuser</label>
+            <input name="superuser" type="checkbox" <c:if test="${previousSuperuser}"> checked </c:if>>
+            </span>
 
-            <input type="submit" value="voeg toe">
+
+            <input type="submit" value="Add" id="add">
         </div>
     </form>
 </main>
