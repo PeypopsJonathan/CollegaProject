@@ -81,25 +81,14 @@ public class Index extends RequestHandler {
         sortStars(localStars);
 
         String filterOrNah = request.getParameter("iWantFilter");
-        String filterTag = request.getParameter("tagss");
-        String filterName = request.getParameter("receiverNameFilter");
         if (filterOrNah != null) {
-            List<Star> filteredStars = new ArrayList<>();
-            if((filterTag.equals("--Select a tag--") || filterTag.equals("All Tags")) && (filterName == null || filterName.equals(""))){
+            if(request.getParameter("tagss").equals("All Tags")){
                 request.setAttribute("stars", localStars);
-            }
-            else if((filterTag.equals("--Select a tag--") || filterTag.equals("All Tags")) && filterName != null){
-                for (Star s : localStars) {
-                    if ((s.getReceiver_name().equals(filterName) || s.getSender_name().equals(filterName)) && s.getTags().contains(filterTag)) {
-                        filteredStars.add(s);
-                    }
-                }
-                request.setAttribute("stars", filteredStars);
-            }
-            else{
+            } else {
                 // filter button pressed
+                List<Star> filteredStars = new ArrayList<>();
                 for (Star s : localStars) {
-                    if (s.getTags().contains(filterTag)) {
+                    if (s.getTags().contains(request.getParameter("tagss"))) {
                         filteredStars.add(s);
                     }
                 }

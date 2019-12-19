@@ -34,6 +34,7 @@
                     <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off"
                           method="post">
                         <p>you have ${availableStars} left to give this month</p>
+                        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
                             <article class="autocomplete">
                                 <h2>Choose/Enter Correct Name</h2>
                                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
@@ -72,6 +73,7 @@
                             <input type="submit" value="submit" class="close-overlay">
                             <input type="button"  value="close" class="close-overlay" id="close-overlay">
                         </form>
+                    </form>
                     <h3>${success}</h3>
                 </article>
             </div>
