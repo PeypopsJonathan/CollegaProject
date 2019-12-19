@@ -69,6 +69,9 @@
     </section>
 
             </article>
+        </section>
+    </section>
+
     <script>
         window.addEventListener("load", initPage, false);
 
