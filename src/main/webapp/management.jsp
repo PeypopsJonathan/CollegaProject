@@ -38,7 +38,7 @@
     </select>
 
 
-    <form id="addUser" style="display: none">
+    <form action="Controller?command=AddUserVerification" method="post" id="addUser" style="display: none">
         <div>
             <label for="firstname">first name</label>
             <input id="firstname" name="firstname" type="text" value="${previousFirstname}">
