@@ -31,14 +31,20 @@
         <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}</p>
-        <p class="profileOverviewItem2">you have ${availableStars} stars left to give this month</p>
+        <p class="profileOverviewItem2" style="text-align: center">Stars available: ${availableStars}</p>
+        <button class="btn filterLeft" onclick="filterSelection('all')">No filter (${totalStars})</button>
+        <button class="btn filterMiddle" onclick="filterSelection('receivedStar')">Filter on stars I received
+            (${receivedStars})
+        </button>
+        <button class="btn filterRight" onclick="filterSelection('givenStar')">Filter on stars I sent (${givenStars})
+        </button>
         <div class="profileStarOverview">
             <c:forEach var="star" items="${stars}">
                 <c:choose>
                     <c:when test="${star.starWasReceivedBy(userId)}">
                         <div class="starDiv receivedStar">
                             <p class="starText receivedStar">${star.sender_name} has sent ${star.receiver_name} a star,
-                            saying "${star.comment}"</p>
+                                saying "${star.comment}"</p>
                             <ul class="tags receivedStar">
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
@@ -47,9 +53,9 @@
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <div  class="starDiv givenStar">
+                        <div class="starDiv givenStar">
                             <p class="starText givenStar">${star.sender_name} has sent ${star.receiver_name} a
-                            star, saying "${star.comment}"</p>
+                                star, saying "${star.comment}"</p>
                             <ul class="tags givenStar">
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
@@ -62,12 +68,7 @@
             </c:forEach>
         </div>
 
-        <section id="filterContainer">
-            <button class="btn active filterMiddle" onclick="filterSelection('all')">No filter (${totalStars})</button>
-            <button class="btn filterLeft" onclick="filterSelection('receivedStar')">Filter on stars I received (${receivedStars})
-            </button>
-            <button class="btn filterRight" onclick="filterSelection('givenStar')">Filter on stars I sent (${givenStars})</button>
-        </section>
+
         <script>
             filterSelection("all")
 
@@ -77,7 +78,7 @@
                 if (c == "all") c = "";
                 for (i = 0; i < x.length; i++) {
                     removeFilterClass(x[i], "noshow");
-                    if (!(x[i].className.indexOf(c) > -1)){
+                    if (!(x[i].className.indexOf(c) > -1)) {
                         addFilterClass(x[i], "noshow");
                     }
                 }
@@ -113,7 +114,7 @@
                 for (var i = 0; i < buttons.length; i++) {
                     buttons[i].addEventListener("click", function () {
                         var current = document.getElementsByClassName("active");
-                        for (var j = 0 ; j < current.length ; j++) {
+                        for (var j = 0; j < current.length; j++) {
                             current[j].classList.remove("active");
                         }
 
