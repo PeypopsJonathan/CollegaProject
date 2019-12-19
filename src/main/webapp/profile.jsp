@@ -43,6 +43,7 @@
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
                                 </c:forEach>
+                                    <li class="starTag">${star.timestamp}</li>
                             </ul>
                         </div>
                     </c:when>
@@ -54,6 +55,7 @@
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
                                 </c:forEach>
+                                    <li class="starTag">${star.timestamp}</li>
                             </ul>
                         </div>
                     </c:otherwise>
