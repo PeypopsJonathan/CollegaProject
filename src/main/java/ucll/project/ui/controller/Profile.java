@@ -33,6 +33,7 @@ public class Profile extends RequestHandler {
         UserRepository userRep = new UserRepositoryDb();
         int id = (int)request.getSession().getAttribute("user");
         User currentUser = userRep.get(id);
+        request.setAttribute("userId", currentUser.getUserId());
         request.setAttribute("firstname", currentUser.getFirstName().trim());
         request.setAttribute("lastname", currentUser.getLastName().trim());
         request.setAttribute("email", currentUser.getEmail().trim());

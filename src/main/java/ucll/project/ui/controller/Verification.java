@@ -22,8 +22,6 @@ public class Verification extends RequestHandler {
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(-1);
             session.setAttribute("user",id);
-            boolean isManager = this.getUserService().getManagerStatusUser(id);
-            request.setAttribute("isManager", isManager);
             if (password.isEmpty()){
                 return "setPassword.jsp";
             }

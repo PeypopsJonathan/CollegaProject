@@ -1,11 +1,11 @@
 body {
     padding-top: 5rem;
 }
-
 .starter-template {
     padding: 3rem 1.5rem;
     text-align: center;
 }
+
 
 /* BASIC */
 
@@ -18,7 +18,7 @@ body {
     height: 100vh;
     background-image: url("1200px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg");
     background-position: center;
-    background-size: cover;
+    background-size:cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     padding-top: 3.65rem;
@@ -26,12 +26,12 @@ body {
 
 a {
     color: #92badd;
-    display: inline-block;
+    display:inline-block;
     text-decoration: none;
     font-weight: 400;
 }
 
-main {
+main{
     align-items: center;
     justify-content: center;
     background-color: white;
@@ -46,16 +46,17 @@ main.container {
     grid-gap: 2rem;
     line-height: 120%;
 
+
 }
 
-main.container.h1 {
+main.container.h1{
     grid-column: 1 / span 2;
     grid-row-start: 1;
     grid-row-end: 2;
     justify-content: center;
 }
 
-.starOverview {
+.starOverview{
     overflow: auto;
     align-self: start;
     height: 50em;
@@ -66,9 +67,7 @@ main.container.h1 {
 
 }
 
-.noscroll {
-    overflow: hidden;
-}
+.noscroll { overflow: hidden; }
 
 .overlay {
     position: fixed;
@@ -83,9 +82,7 @@ main.container.h1 {
     display: none;
 }
 
-[aria-hidden="false"] {
-    display: block;
-}
+
 
 /* this code is not strictly necessary: just to make this demo a bit pleasant */
 
@@ -93,29 +90,31 @@ main.container.h1 {
     margin: 8vh auto;
     max-width: 650px;
     padding: 30px;
-    background: rgba(255, 255, 255, 1);
+    background: rgba(255,255,255, 1);
 }
 
 .overlay {
-    background: rgba(40, 40, 40, .75);
+    background:  rgba(40,40,40, .75);
 }
 
-article.containerGiveStar {
-    display: flex;
+
+article.containerGiveStar{
+    display:flex;
     flex-flow: column;
-    align-content: flex-start;
-    grid-column-start: 2;
+    align-content:flex-start;
+    grid-column-start: 2 ;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
 }
+
 
 h2 {
     text-align: center;
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-    display: inline-block;
+    display:inline-block;
     color: #cccccc;
 }
 
@@ -154,6 +153,8 @@ h2 {
     border-radius: 0 0 10px 10px;
 }
 
+
+
 /* TABS */
 
 h2.inactive {
@@ -165,9 +166,11 @@ h2.active {
     border-bottom: 2px solid #5fbae9;
 }
 
+
+
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset] {
+input[type=button], input[type=submit], input[type=reset]  {
     background-color: #56baed;
     border: none;
     color: white;
@@ -177,8 +180,8 @@ input[type=button], input[type=submit], input[type=reset] {
     display: inline-block;
     text-transform: uppercase;
     font-size: 13px;
-    -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
-    box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+    -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     margin: 5px 20px 40px 20px;
@@ -189,11 +192,11 @@ input[type=button], input[type=submit], input[type=reset] {
     transition: all 0.3s ease-in-out;
 }
 
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
     background-color: #39ace7;
 }
 
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
@@ -231,14 +234,9 @@ input[type=text]::placeholder {
     color: #cccccc;
 }
 
-input[type=password]::placeholder {
-    color: #cccccc;
-}
-
 .autocomplete {
     position: relative;
 }
-
 .autocomplete-items {
     position: absolute;
     border: 1px solid #d4d4d4;
@@ -271,7 +269,6 @@ input[type=password]::placeholder {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
-
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
@@ -311,46 +308,23 @@ input[type=password]::placeholder {
 }
 
 /* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@-moz-keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 .fadeIn {
-    opacity: 0;
-    -webkit-animation: fadeIn ease-in 1;
-    -moz-animation: fadeIn ease-in 1;
-    animation: fadeIn ease-in 1;
+    opacity:0;
+    -webkit-animation:fadeIn ease-in 1;
+    -moz-animation:fadeIn ease-in 1;
+    animation:fadeIn ease-in 1;
 
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode:forwards;
+    -moz-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
 
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    animation-duration: 1s;
+    -webkit-animation-duration:1s;
+    -moz-animation-duration:1s;
+    animation-duration:1s;
 }
 
 .fadeIn.first {
@@ -393,9 +367,11 @@ input[type=password]::placeholder {
     color: #0d0d0d;
 }
 
-.underlineHover:hover:after {
+.underlineHover:hover:after{
     width: 100%;
 }
+
+
 
 /* OTHERS */
 
@@ -404,18 +380,14 @@ input[type=password]::placeholder {
 }
 
 #icon {
-    width: 60%;
+    width:60%;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-* {
-    box-sizing: border-box;
-}
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
 
 input[type=text], select, textarea {
+    width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -456,20 +428,19 @@ input[type=submit]:hover {
     background-color: white;
 }
 
-section.profileOverview {
+section.profileOverview{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-auto-rows: auto;
 }
-
-p.profileOverviewImage {
+p.profileOverviewImage{
     grid-area: span 3;
     grid-row-start: 2;
     grid-column-start: 4;
     align-content: center;
 }
 
-h1.profileOverviewItem {
+h1.profileOverviewItem{
     margin-top: 0.5em;
     grid-area: span 1;
     grid-row-start: 1;
@@ -478,13 +449,13 @@ h1.profileOverviewItem {
     text-align: center;
 }
 
-p.profileOverviewItem {
+p.profileOverviewItem{
     grid-area: span 1;
     grid-row-start: 3;
     grid-column-start: 4;
 }
 
-p.profileOverviewItem2 {
+p.profileOverviewItem2{
     grid-area: span 1;
     grid-row-start: 4;
     grid-column-start: 4;
@@ -495,6 +466,53 @@ div.profileStarOverview {
     grid-column-start: 2;
     grid-column-end: 7;
 }
+
+
+#filterContainer{
+    grid-row: 5;
+    grid-column: 3/6;
+    display: grid;
+    grid-template-colums: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    padding-bottom: 20px;
+}
+
+.filterLeft{
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.filterMiddle{
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.filterRight{
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.btn{
+    border: none;
+    outline: none;
+    padding: 10px 10px;
+    background-color: #ace;
+}
+
+.btn:hover{
+    background-color: #8888ff;
+}
+
+.btn.active {
+    background-color: #2222ff;
+    border: 5px solid #000;
+    color: white;
+}
+
+.noshow {
+    display: none;
+}
+
 
 .starText {
     width: available;
@@ -522,7 +540,7 @@ div.profileStarOverview {
 
 }
 
-li.giveStarButton {
+li.giveStarButton{
     margin-top: 0.5vh;
     float: right;
 }
