@@ -40,4 +40,17 @@ public class UserService {
         }
         return false;
     }
+
+    public String getUserMailById(int id) {
+        return ((UserRepositoryDb)userRepo).userMailById(id);
+    }
+
+    public String getUserNameById(int id) {
+        return ((UserRepositoryDb)userRepo).userNameById(id);
+    }
+
+
+    public List<User> getAllManagers() {
+        return ((UserRepositoryDb)userRepo).getAllMAnagers();
+    }
 }

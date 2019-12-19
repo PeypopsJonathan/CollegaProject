@@ -2,15 +2,11 @@ package ucll.project.ui.controller;
 
 import ucll.project.db.ConnectionPool;
 import ucll.project.domain.DomainException;
-import ucll.project.domain.user.Tags;
+import ucll.project.domain.user.*;
 
 import ucll.project.domain.star.Star;
 import ucll.project.domain.star.StarRepository;
 import ucll.project.domain.star.StarRepositoryDb;
-import ucll.project.domain.user.UserRepository;
-import ucll.project.domain.user.UserRepositoryDb;
-
-import ucll.project.domain.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -250,8 +246,13 @@ public class Index extends RequestHandler {
 
             request.setAttribute("success", "Successfully Added Star!");
 
-            String comment = request.getParameter("");
-            SimpleMail.send("dennisw@live.be","Control alt de yeet");
+            String mail = getMailReceiver(star.getReceiver_id());
+            String senderName = getUserService().getUserNameById(id);
+            List<User> managers = getUserService().getAllManagers();
+            SimpleMail.send(mail,request.getParameter("receiverName"));
+            for (User manager : managers) {
+                SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
+            }
             System.out.println("MAIL");
 
             // TODO Show success page
@@ -270,4 +271,7 @@ public class Index extends RequestHandler {
         }
     }
 
+    private String getMailReceiver(int id){
+        return this.getUserService().getUserMailById(id);
+    }
 }
