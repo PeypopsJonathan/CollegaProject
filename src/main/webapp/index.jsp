@@ -55,7 +55,7 @@
 
             <article>
                 <c:forEach var="star" items="${stars}">
-                    <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying:<br/>"${star.comment}"</p>
+                    <p class="starText"> <b>${star.sender_name}</b> has sent <b>${star.receiver_name}</b> a star, saying:<br/><i>"${star.comment}"</i></p>
                     <ul class="tags">
                         <c:forEach var="tag" items="${star.tags}">
                             <li class="starTag">${tag}</li>
