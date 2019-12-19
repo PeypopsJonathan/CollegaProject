@@ -13,7 +13,7 @@ public class User {
     private String lastName;
     private String email;
     private Role role;
-    private boolean isManager;
+    private boolean manager,superuser;
 
     // hashed password
     private transient String hashedPassword;
@@ -26,7 +26,7 @@ public class User {
         setLastName(lastName);
         setEmail(email);
         setRole(role);
-        this.isManager = isManager;
+        setManager(isManager);
     }
 
     public void hashAndSetPassword(String password) {
@@ -58,6 +58,24 @@ public class User {
     }
 
     // Getters and setters and toString
+
+
+    public boolean isManager() {
+        return manager;
+    }
+
+    public void setManager(boolean manager) {
+        this.manager = manager;
+    }
+
+    public boolean isSuperuser() {
+        return superuser;
+    }
+
+    public void setSuperuser(boolean superuser) {
+        this.superuser = superuser;
+    }
+
     public int getUserId() {
         return this.userId;
     }
@@ -95,7 +113,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Pattern pattern = Pattern.compile(".*@.*\\..*");
         Matcher mat = pattern.matcher(email);
         if (email.trim().isEmpty() || !mat.matches()) throw new IllegalArgumentException("invalid email");
         this.email = email;
@@ -107,14 +125,6 @@ public class User {
 
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
-    }
-
-    public void setManager(boolean isManager){
-        this.isManager = isManager;
-    }
-
-    public boolean isManager(){
-        return this.isManager;
     }
 
     public String toString() {

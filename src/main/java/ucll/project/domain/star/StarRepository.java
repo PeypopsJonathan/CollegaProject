@@ -23,4 +23,9 @@ public interface StarRepository {
     List<Star> getUserInvolvedInStarExchanges(int userId);
 
     List<ArrayList<String>> getAllTagsDb();
+
+    List<Star> getStarsSent(int userId);
+
+    List<Star> getStarsReceived(int userId);
+
 }

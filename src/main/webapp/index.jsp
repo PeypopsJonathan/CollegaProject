@@ -79,26 +79,19 @@
 
             <input type="submit" value="submit">
 
-            <h3>${success}</h3>
-        </form>
-        </form>
 
+        </form>
+        </form>
+        <h3>${success}</h3>
     </div>
         <section class="starOverview">
 
-            <div class="filter">
-                <select id="filter" name="filter" onchange="addTag()">
-                    <option>--Select a tag--</option>
-                    <c:forEach var="tag" items="${tags}">
-                        <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
-                            <c:out value="${tag}"></c:out>
-                        </option>
-                    </c:forEach>
-                </select>
-
+            <div class="autocomplete">
+                <h2>Choose/Enter tag</h2>
+                <input id="filter" type="text" name="filter" placeholder="Search for a tag">
             </div>
 
-            <div>
+            <article>
                 <c:forEach var="star" items="${stars}">
                     <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
                     <ul class="tags">
@@ -107,8 +100,10 @@
                         </c:forEach>
                     </ul>
                 </c:forEach>
-            </div>
+            </article>
         </section>
+
+    </section>
 
     <script>
         window.addEventListener("load", initPage, false);
@@ -120,7 +115,9 @@
         }
 
         function addTag() {
+
             if (counterList > 3) {
+
             } else {
                 var currentSelection = document.getElementById("select").value
 
@@ -166,7 +163,7 @@
                     /*check if the item starts with the same letters as the text field value:*/
                     if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                         /*create a DIV element for each matching element:*/
-                        b = document.createElement("DIV");
+                        b = document.createElement("SPAN");
                         /*make the matching letters bold:*/
                         b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                         b.innerHTML += arr[i].substr(val.length);
@@ -185,9 +182,9 @@
                 }
             });
             /*execute a function presses a key on the keyboard:*/
-            inp.addEventListener("keydown", function(e) {
+            inp.addEventListener("keydown", function (e) {
                 var x = document.getElementById(this.id + "autocomplete-list");
-                if (x) x = x.getElementsByTagName("div");
+                if (x) x = x.getElementsByTagName("span");
                 if (e.keyCode == 40) {
                     /*If the arrow DOWN key is pressed,
                     increase the currentFocus variable:*/

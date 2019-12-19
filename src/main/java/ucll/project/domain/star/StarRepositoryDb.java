@@ -1,9 +1,13 @@
 package ucll.project.domain.star;
 
 import ucll.project.db.ConnectionPool;
+import ucll.project.domain.user.Role;
+import ucll.project.domain.user.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class StarRepositoryDb implements StarRepository {
@@ -98,6 +102,60 @@ public class StarRepositoryDb implements StarRepository {
                     exchanges.add(starFromResultSet(rs));
                 }
                 return exchanges;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean starWasGivenBy(int userId, int starId){
+        boolean result = false;
+        for(Star star: getStarsSent(userId)){
+            if(star.getStar_id()==starId){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public boolean starWasReceivedBy(int userId, int starId){
+        boolean result = false;
+        for(Star star: getStarsReceived(userId)){
+            if(star.getStar_id()==starId){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<Star> getStarsSent(int userId) {
+        List<Star> received = new ArrayList<>();
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".star WHERE sender_id = ?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    received.add(starFromResultSet(rs));
+                }
+                return received;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Star> getStarsReceived(int userId) {
+        List<Star> granted = new ArrayList<>();
+        try (Connection conn = ConnectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM \"award-team9\".star WHERE receiver_id = ?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    granted.add(starFromResultSet(rs));
+                }
+                return granted;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
