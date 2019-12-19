@@ -38,6 +38,7 @@ public class Index extends RequestHandler {
         setTagAttribute(request);
         getStars(request);
         request.setAttribute("listName", getUserService().getAllNames());
+        request.setAttribute("listTag", getAllTags());
         int userId = (int) request.getSession().getAttribute("user");
         request.setAttribute("availableStars", userDb.getAvailableStars(userId));
         checkStars();
@@ -54,6 +55,17 @@ public class Index extends RequestHandler {
         return "index.jsp";
     }
 
+    public List<String> getAllTags(){
+        ArrayList<String> listTags = new ArrayList<>();
+        String tags;
+
+        for (int i = 0; i < Tags.values().length; i++) {
+            tags = '"' + Tags.values()[i].getTag() + '"';
+            listTags.add(tags);
+        }
+        return listTags;
+    }
+
     public void setTagAttribute(HttpServletRequest request) {
         ArrayList<String> tempTags = new ArrayList<>();
 
@@ -61,7 +73,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", tempTags);
+        request.setAttribute("tags", getAllTags());
     }
 
 
