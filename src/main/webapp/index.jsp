@@ -39,10 +39,12 @@
     <h1>Stargazing</h1>
     <section class="starOverview">
 
-        <form method="post" action="Controller?command=Index&iWantFilter=yes">
+        <form method="post" action="Controller?command=Index&iWantFilter=yes" autocomplete="off">
 
             <select id="selectFilter" name="tagss" id="tagss">
                 <option>--Select a tag--</option>
+                <option>All Tags</option>
+
                 <c:forEach var="tag" items="${tags}">
                     <option name="<c:out value="${tag}"></c:out>" class="tagOptions"
                             value="<c:out value="${tag}"></c:out>">
@@ -212,11 +214,9 @@
         /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
-        var tags = [];
-        tags = ${listTag};
+
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
-        autocomplete(document.getElementById("filter"), tags)
 
     </script>
 

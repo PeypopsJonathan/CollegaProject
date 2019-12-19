@@ -81,17 +81,19 @@ public class Index extends RequestHandler {
         sortStars(localStars);
 
         String filterOrNah = request.getParameter("iWantFilter");
-        System.out.println(filterOrNah + "-------------");
         if (filterOrNah != null) {
-            // filter button pressed
-            List<Star> filteredStars = new ArrayList<>();
-            for (Star s : localStars) {
-                if (s.getTags().contains(request.getParameter("tagss"))) {
-                    filteredStars.add(s);
+            if(request.getParameter("tagss").equals("All Tags")){
+                request.setAttribute("stars", localStars);
+            } else {
+                // filter button pressed
+                List<Star> filteredStars = new ArrayList<>();
+                for (Star s : localStars) {
+                    if (s.getTags().contains(request.getParameter("tagss"))) {
+                        filteredStars.add(s);
+                    }
                 }
+                request.setAttribute("stars", filteredStars);
             }
-            System.out.println(filteredStars.toString());
-            request.setAttribute("stars", filteredStars);
         } else {
             request.setAttribute("stars", localStars);
         }
