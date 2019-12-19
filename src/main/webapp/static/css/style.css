@@ -621,3 +621,8 @@ li.giveStarButton{
     grid-row-start: 2;
 }
 
+#receiverNameFilter{
+    width: fit-content;
+    padding-left: 2rem;
+}
+
