@@ -88,15 +88,7 @@ public class Index extends RequestHandler {
             if((filterTag.equals("--Select a tag--") || filterTag.equals("All Tags")) && (filterName == null || filterName.equals(""))){
                 request.setAttribute("stars", localStars);
             }
-            else if(filterTag.equals("--Select a tag--") && filterName != null){
-                for (Star s : localStars) {
-                    if (s.getReceiver_name().equals(filterName) || s.getSender_name().equals(filterName)) {
-                        filteredStars.add(s);
-                    }
-                }
-                request.setAttribute("stars", filteredStars);
-            }
-            else if(!(filterTag.equals("--Select a tag--") || filterTag.equals("All Tags")) && filterName != null){
+            else if((filterTag.equals("--Select a tag--") || filterTag.equals("All Tags")) && filterName != null){
                 for (Star s : localStars) {
                     if ((s.getReceiver_name().equals(filterName) || s.getSender_name().equals(filterName)) && s.getTags().contains(filterTag)) {
                         filteredStars.add(s);
