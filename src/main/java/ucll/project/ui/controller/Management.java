@@ -17,6 +17,7 @@ public class Management extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         int id = (Integer) session.getAttribute("user");
+        request.setAttribute("listName", getUserService().getAllNames());
         if (request.getParameter("IsForm") == null) {
             boolean isManager = this.getUserService().getManagerStatusUser(id);
             if (isManager) return "management.jsp";

@@ -42,6 +42,7 @@ public class Profile extends RequestHandler {
         int total = countGivenStars(request, response, currentUser.getUserId());
         total += countReceivedStars(request, response, currentUser.getUserId());
         request.setAttribute("totalStars", total);
+        request.setAttribute("listName", getUserService().getAllNames());
 
         return "profile.jsp";
     }
