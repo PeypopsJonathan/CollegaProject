@@ -39,6 +39,7 @@ public class AddUserVerification extends RequestHandler {
         }
         UserRepositoryDb userDB = new UserRepositoryDb();
         userDB.addUserWithoutPassword(user);
+        request.setAttribute("listName", getUserService().getAllNames());
         return "Controller?command=Index";
     }
 

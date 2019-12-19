@@ -12,6 +12,7 @@ public class AddUser extends RequestHandler {
     }
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("listName", getUserService().getAllNames());
         return "addUser.jsp";
     }
 }
