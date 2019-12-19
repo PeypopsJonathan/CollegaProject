@@ -38,7 +38,8 @@ public class Index extends RequestHandler {
         setTagAttribute(request);
         getStars(request);
         request.setAttribute("listName", getUserService().getAllNames());
-        request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
+        int userId = (int) request.getSession().getAttribute("user");
+        request.setAttribute("availableStars", userDb.getAvailableStars(userId));
         checkStars();
 
         if (isFormSubmition(request)) {
@@ -218,9 +219,9 @@ public class Index extends RequestHandler {
     private String submitForm(HttpServletRequest request) throws Exception {
         Star star = new Star();
 
-        int id = (Integer) request.getSession().getAttribute("user");
+        int userId = (Integer) request.getSession().getAttribute("user");
 
-        star.setSender_id(id);
+        star.setSender_id(userId);
 
         ArrayList<String> errorList = new ArrayList<>();
 
@@ -241,20 +242,18 @@ public class Index extends RequestHandler {
             maxIdStar++;
             star.setStar_id(maxIdStar);
 
-            int availableStars = userDb.getAvailableStars(id);
+            int availableStars = userDb.getAvailableStars(userId);
 
             if (availableStars > 0) {
                 starDb.createStar(star);
 
-                userDb.setAvailableStar(id, availableStars - 1);
+                userDb.setAvailableStar(userId, availableStars - 1);
 
-            request.setAttribute("success", "Successfully Added Star!");
 
-            String comment = request.getParameter("");
-            SimpleMail.send("dennisw@live.be","Control alt de yeet");
-            System.out.println("MAIL");
+                //HARD CODED DAAN ZEN EMAIL
 
-            // TODO Show success page
+                SimpleMail.send("dennisw@live.be", "Control alt de yeet");
+
                 request.setAttribute("availableStars", availableStars - 1);
                 request.setAttribute("success", "Successfully Added Star!");
                 return "index.jsp";

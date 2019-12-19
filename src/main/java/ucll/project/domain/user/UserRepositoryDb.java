@@ -216,7 +216,7 @@ public class UserRepositoryDb implements UserRepository {
                     "set available_stars = ?" + "where id = ? ");
             stmt.setInt(1, aantal);
             stmt.setInt(2, id);
-            stmt.executeUpdate();
+            stmt.executeQuery();
 
         } catch (SQLException ex){
             throw new RuntimeException(ex);
