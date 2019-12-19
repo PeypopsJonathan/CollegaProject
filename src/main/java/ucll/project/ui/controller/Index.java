@@ -68,7 +68,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", getAllTags());
+        request.setAttribute("tags", tempTags);
     }
 
 
