@@ -604,3 +604,20 @@ li.giveStarButton{
 .addUserForm{
     width: 100%;
 }
+
+.setPassword{
+    align-content: center;
+    width: fit-content;
+    display: grid;
+    grid-template-rows: 2fr;
+
+}
+
+#password{
+    grid-row-start: 1;
+}
+
+#confirmPassword {
+    grid-row-start: 2;
+}
+

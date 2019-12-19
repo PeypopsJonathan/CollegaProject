@@ -21,21 +21,30 @@
 
 <!-- Page Content -->
 <body>
-<h1>voeg persoon toe</h1>
+<main class="container">
+<h1>Set your password</h1>
 <div id="errors">
     <c:if test="${errorClass}">
         <p>${error}</p>
     </c:if>
 </div>
 
-<form action="Controller?command=SetPassword" method="post">
+    <div class="setPassword">
+<form action="Controller?command=SetPassword" class="setPassword" method="post">
+    <span id="password">
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password"><br>
+    </span>
 
-    <label for="password">password</label>
-    <input type="password" name="password" id="password">
-    <label for="confirmPassword">confirm password</label>
-    <input type="password" name="confirmPassword" id="confirmPassword">
-
+    <span id="confirmPassword">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" name="confirmPassword" placeholder="Confirm Password">
+    </span>
     <input type="submit" value="set password">
 </form>
+
+    </div>
+
+</main>
 </body>
 </html>
