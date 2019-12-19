@@ -246,10 +246,10 @@ public class Index extends RequestHandler {
 
             request.setAttribute("success", "Successfully Added Star!");
 
-            String mail = getMailReceiver(star.getReceiver_id());
+            String mailReceiver = getMailReceiver(star.getReceiver_id());
             String senderName = getUserService().getUserNameById(id);
             List<User> managers = getUserService().getAllManagers();
-            SimpleMail.send(mail,request.getParameter("receiverName"));
+            SimpleMail.send(mailReceiver,request.getParameter("receiverName"));
             for (User manager : managers) {
                 SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
             }
