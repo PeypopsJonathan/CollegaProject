@@ -28,4 +28,7 @@ public interface StarRepository {
 
     List<Star> getStarsReceived(int userId);
 
+    int countGivenStars(int userId);
+    int countReceivedStars(int userId);
+
 }
