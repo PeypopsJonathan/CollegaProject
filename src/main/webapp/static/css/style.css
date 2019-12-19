@@ -264,7 +264,6 @@ input[type=text]::placeholder {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
-
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
@@ -474,4 +473,9 @@ div.profileStarOverview{
     margin-right: 5px;
     font-size: 12px;
 
+}
+
+li.giveStarButton{
+    margin-top: 0.5vh;
+    float: right;
 }
