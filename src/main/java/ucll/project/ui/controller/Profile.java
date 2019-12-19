@@ -39,6 +39,9 @@ public class Profile extends RequestHandler {
         request.setAttribute("email", currentUser.getEmail().trim());
         request.setAttribute("availableStars",userRep.getAvailableStars((int)request.getSession().getAttribute("user")));
         getUserStars(request, response, currentUser.getUserId());
+        int total = countGivenStars(request, response, currentUser.getUserId());
+        total += countReceivedStars(request, response, currentUser.getUserId());
+        request.setAttribute("totalStars", total);
 
         return "profile.jsp";
     }
@@ -56,5 +59,17 @@ public class Profile extends RequestHandler {
     private void sortStars(List<Star> unsortedStars) {
         Collections.sort(unsortedStars);
 
+    }
+
+    private int countGivenStars(HttpServletRequest request, HttpServletResponse response, int userId){
+        int givenStars = starRep.countGivenStars(userId);
+        request.setAttribute("givenStars", givenStars);
+        return givenStars;
+    }
+
+    private int countReceivedStars(HttpServletRequest request, HttpServletResponse response, int userId){
+        int receivedStars = starRep.countReceivedStars(userId);
+        request.setAttribute("receivedStars", receivedStars);
+        return receivedStars;
     }
 }
