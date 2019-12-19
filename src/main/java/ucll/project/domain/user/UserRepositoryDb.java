@@ -118,6 +118,7 @@ public class UserRepositoryDb implements UserRepository {
         user.setEmail(rs.getString("email"));
         user.setRole(Role.valueOf(rs.getString("role")));
         user.setHashedPassword(rs.getString("password"));
+        user.setManager(rs.getBoolean("manager"));
         return user;
     }
 

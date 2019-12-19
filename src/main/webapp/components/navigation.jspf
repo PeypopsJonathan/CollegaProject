@@ -13,6 +13,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="/Controller?command=Profile">Profile</a>
             </li>
+            <c:choose>
+                <c:when test="${isManager == true}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Controller?command=Management">Management</a>
+                    </li>
+                </c:when>
+            </c:choose>
             <li class="nav-item">
                 <a class="nav-link" href="Controller?command=Signout">Log out</a>
             </li>

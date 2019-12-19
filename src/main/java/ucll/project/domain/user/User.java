@@ -13,6 +13,7 @@ public class User {
     private String lastName;
     private String email;
     private Role role;
+    private boolean isManager;
 
     // hashed password
     private transient String hashedPassword;
@@ -20,11 +21,12 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, Role role) {
+    public User(String firstName, String lastName, String email, Role role, boolean isManager) {
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setRole(role);
+        this.isManager = isManager;
     }
 
     public void hashAndSetPassword(String password) {
@@ -105,6 +107,14 @@ public class User {
 
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
+    }
+
+    public void setManager(boolean isManager){
+        this.isManager = isManager;
+    }
+
+    public boolean isManager(){
+        return this.isManager;
     }
 
     public String toString() {

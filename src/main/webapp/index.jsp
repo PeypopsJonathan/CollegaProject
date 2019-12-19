@@ -36,7 +36,7 @@
             </c:forEach>
         </div>
     </c:if>
-    <h1>Star feed</h1>
+    <h1>Stargazing</h1>
     <div class="containerGiveStar">
         <h3>Give Star</h3>
 
@@ -50,7 +50,7 @@
             <h2 for="tags">tags</h2>
 
             <select id="select" name="tags" id="tags" onchange="addTag()">
-                <option></option>
+                <option>--Select a tag--</option>
                 <c:forEach var="tag" items="${tags}">
                     <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
                         <c:out value="${tag}"></c:out>

@@ -12,7 +12,7 @@ public class UserRepositoryMemoryTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");
@@ -24,13 +24,13 @@ public class UserRepositoryMemoryTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         User invalidUser = new User(
                 "firstName2",
                 "lastName2",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");
@@ -43,7 +43,7 @@ public class UserRepositoryMemoryTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");
@@ -60,7 +60,7 @@ public class UserRepositoryMemoryTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");
@@ -73,7 +73,7 @@ public class UserRepositoryMemoryTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");
@@ -87,7 +87,7 @@ public class UserRepositoryMemoryTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         UserRepositoryMemory u = new UserRepositoryMemory();
         u.createUser(user, "Password1");

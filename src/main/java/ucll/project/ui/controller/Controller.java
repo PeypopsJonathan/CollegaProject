@@ -42,8 +42,12 @@ public class Controller extends HttpServlet {
                 id = (int)request.getSession().getAttribute("user");
             } catch (Exception e){ }
             if (command == null || command.trim().isEmpty() || id == 0) {
-                if (!(command != null && command.equals("Verification")))
-                    command = "Login";
+                if (!(command != null && command.equals("Verification"))) {
+                    if (id == 0) command = "Login";
+                    else {
+                        command = "Index";
+                    }
+                }
             }
             RequestHandler handler = handlerFactory.getHandler(command, service);
             String destination = handler.handleRequest(request, response);

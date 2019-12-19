@@ -13,7 +13,7 @@ public class UserTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
 
         assertEquals(user.getFirstName(), "firstName");
@@ -29,7 +29,7 @@ public class UserTest {
                 "firstName",
                 "lastName",
                 "emailexample.com",
-                Role.ADMIN
+                Role.ADMIN, false
         );
     }
 
@@ -39,7 +39,7 @@ public class UserTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         user.hashAndSetPassword("validPassword1");
         assertEquals(user.getHashedPassword(), user.getPasswordToHashedPassword("validPassword1"));
@@ -51,7 +51,7 @@ public class UserTest {
                 "firstName",
                 "lastName",
                 "email@example.com",
-                Role.ADMIN
+                Role.ADMIN, true
         );
         user.hashAndSetPassword("a");
     }
