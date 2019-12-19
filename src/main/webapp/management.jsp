@@ -1,11 +1,8 @@
-<%@ page import="ucll.project.domain.user.User" %>
-<%@ page import="ucll.project.db.ConnectionPool" %>
-<%@ page import="java.sql.*" %>
-<%@ page import="ucll.project.ui.controller.Profile" %>
-<%@ page import="org.openqa.selenium.remote.SessionId" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!-- Header -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
-    <title>Hello world!</title>
+    <title>Management</title>
 </head>
 <body>
 
@@ -25,27 +22,25 @@
 <%@ include file="components/navigation.jspf" %>
 
 <!-- Page Content -->
-<main>
 
-    <section class="profileOverview">
-        <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
-        <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
-        <p class="profileOverviewItem">${email}</p>
-        <p class="profileOverviewItem2">you have ${availableStars} stars left to give this month</p>
-        <div class="profileStarOverview">
-            <c:forEach var="star" items="${stars}">
-                <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
-                <ul class="tags">
-                    <c:forEach var="tag" items="${star.tags}">
-                        <li class="starTag">${tag}</li>
-                    </c:forEach>
-                </ul>
-            </c:forEach>
-        </div>
-    </section>
+
+<main role="main" class="container">
+
+    <h3>Management Actions</h3>
+    <div>
+        <form action="Controller?command=Management&IsForm=true">
+            <select name="action">
+                <option>--Select an action--</option>
+                <option value="AddUser">Add User</option>
+            </select>
+            <input type="submit" value="submit">
+        </form>
+    </div>
 </main>
-
-
+</body>
+<!-- Footer -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

@@ -42,10 +42,15 @@ public class Index extends RequestHandler {
         checkStars();
 
         if (isFormSubmition(request)) {
-            return submitForm(request);
+            try {
+                return submitForm(request);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             return "index.jsp";
         }
+        return "index.jsp";
     }
 
     public void setTagAttribute(HttpServletRequest request) {
@@ -153,6 +158,14 @@ public class Index extends RequestHandler {
             String tag2 = request.getParameter("1");
             String tag3 = request.getParameter("2");
             String tag4 = request.getParameter("3");
+            String tag5 = request.getParameter("4");
+            String tag6 = request.getParameter("5");
+            String tag7 = request.getParameter("6");
+            String tag8 = request.getParameter("7");
+            String tag9 = request.getParameter("8");
+            String tag10 = request.getParameter("9");
+            String tag11 = request.getParameter("10");
+
             if (tag1 != null && !tag1.trim().isEmpty()) {
                 tagList.add(tag1);
             }
@@ -164,6 +177,27 @@ public class Index extends RequestHandler {
             }
             if (tag4 != null && !tag4.trim().isEmpty()) {
                 tagList.add(tag4);
+            }
+            if (tag5 != null && !tag5.trim().isEmpty()) {
+                tagList.add(tag5);
+            }
+            if (tag6 != null && !tag6.trim().isEmpty()) {
+                tagList.add(tag6);
+            }
+            if (tag7 != null && !tag7.trim().isEmpty()) {
+                tagList.add(tag7);
+            }
+            if (tag8 != null && !tag8.trim().isEmpty()) {
+                tagList.add(tag8);
+            }
+            if (tag9 != null && !tag9.trim().isEmpty()) {
+                tagList.add(tag9);
+            }
+            if (tag10 != null && !tag10.trim().isEmpty()) {
+                tagList.add(tag10);
+            }
+            if (tag11 != null && !tag11.trim().isEmpty()) {
+                tagList.add(tag11);
             }
 
             if (tagList.isEmpty()) {
@@ -181,7 +215,7 @@ public class Index extends RequestHandler {
         return request.getParameter("isForm") != null;
     }
 
-    private String submitForm(HttpServletRequest request) {
+    private String submitForm(HttpServletRequest request) throws Exception {
         Star star = new Star();
 
         int id = (Integer) request.getSession().getAttribute("user");
@@ -207,11 +241,29 @@ public class Index extends RequestHandler {
             maxIdStar++;
             star.setStar_id(maxIdStar);
 
-            starDb.createStar(star);
+            int availableStars = userDb.getAvailableStars(id);
 
+            if (availableStars > 0) {
+                starDb.createStar(star);
+
+                userDb.setAvailableStar(id, availableStars - 1);
 
             request.setAttribute("success", "Successfully Added Star!");
-            return "index.jsp"; // TODO Show success page
+
+            String comment = request.getParameter("");
+            SimpleMail.send("dennisw@live.be","Control alt de yeet");
+            System.out.println("MAIL");
+
+            // TODO Show success page
+                request.setAttribute("availableStars", availableStars - 1);
+                request.setAttribute("success", "Successfully Added Star!");
+                return "index.jsp";
+            } else {
+                errorList.add("No more stars left to give :(");
+                request.setAttribute("errors", errorList);
+                return "index.jsp";
+            }
+
         } else {
             request.setAttribute("errors", errorList);
             return "index.jsp";

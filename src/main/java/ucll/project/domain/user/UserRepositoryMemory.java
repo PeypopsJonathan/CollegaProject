@@ -76,6 +76,12 @@ public class UserRepositoryMemory implements UserRepository {
     }
 
     @Override
+    public void setAvailableStar(int id, int aantal) {
+
+    }
+
+
+    @Override
     public List<Star> getStar(int id) {
         return new ArrayList<Star>();
     }
