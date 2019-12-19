@@ -234,6 +234,10 @@ input[type=text]::placeholder {
     color: #cccccc;
 }
 
+input[type=password]::placeholder {
+    color: #cccccc;
+}
+
 .autocomplete {
     position: relative;
 }
