@@ -271,11 +271,10 @@ public class UserRepositoryDb implements UserRepository {
 
     public void setAvailableStar(int id, int aantal){
         try (Connection conn = ConnectionPool.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user\n" +
-                    "set available_stars = ?" + "where id = ? ");
+            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user set available_stars = ? where id = ? ");
             stmt.setInt(1, aantal);
             stmt.setInt(2, id);
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
         } catch (SQLException ex){
             throw new RuntimeException(ex);
