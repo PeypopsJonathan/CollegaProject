@@ -39,10 +39,10 @@
     <h1>Stargazing</h1>
         <section class="starOverview">
 
-            <div class="autocomplete">
-                <h2>Choose/Enter tag</h2>
-                <input id="filter" type="text" name="filter" placeholder="Search for a tag">
-            </div>
+        <div class="autocomplete">
+            <h2>Choose/Enter tag</h2>
+            <input id="filter" type="text" name="filter" placeholder="Search for a tag">
+        </div>
 
             <article>
                 <c:forEach var="star" items="${stars}">
@@ -55,6 +55,18 @@
                 </c:forEach>
             </article>
         </section>
+        <div>
+            <c:forEach var="star" items="${stars}">
+                <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying
+                    "${star.comment}"</p>
+                <ul class="tags">
+                    <c:forEach var="tag" items="${star.tags}">
+                        <li class="starTag">${tag}</li>
+                    </c:forEach>
+                </ul>
+            </c:forEach>
+        </div>
+    </section>
 
     <script>
         window.addEventListener("load", initPage, false);
@@ -134,7 +146,7 @@
                 }
             });
             /*execute a function presses a key on the keyboard:*/
-            inp.addEventListener("keydown", function(e) {
+            inp.addEventListener("keydown", function (e) {
                 var x = document.getElementById(this.id + "autocomplete-list");
                 if (x) x = x.getElementsByTagName("span");
                 if (e.keyCode == 40) {

@@ -35,7 +35,7 @@ public class UserService {
     public boolean getManagerStatusUser(int userId){
         for (User user: getUsers()) {
             if (user.getUserId() == userId){
-                return user.isManager();
+                return user.getRole().equals(Role.ADMIN);
             }
         }
         return false;

@@ -24,6 +24,9 @@ public class Verification extends RequestHandler {
             session.setAttribute("user",id);
             boolean isManager = this.getUserService().getManagerStatusUser(id);
             request.setAttribute("isManager", isManager);
+            if (password.isEmpty()){
+                return "setPassword.jsp";
+            }
             return "Controller?command=Index";
         }
         else

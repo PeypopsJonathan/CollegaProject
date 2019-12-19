@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 
 public class Index extends RequestHandler {
@@ -69,7 +68,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", getAllTags());
+        request.setAttribute("tags", tempTags);
     }
 
 
@@ -257,18 +256,18 @@ public class Index extends RequestHandler {
 
                 userDb.setAvailableStar(userId, availableStars - 1);
 
-            request.setAttribute("success", "Successfully Added Star!");
+                request.setAttribute("success", "Successfully Added Star!");
 
-            String mail = getMailReceiver(star.getReceiver_id());
-            String senderName = getUserService().getUserNameById(id);
+            String mailReceiver = getMailReceiver(star.getReceiver_id());
+            String senderName = getUserService().getUserNameById(star.getSender_id());
             List<User> managers = getUserService().getAllManagers();
-            SimpleMail.send(mail,request.getParameter("receiverName"));
+            SimpleMail.send(mailReceiver,request.getParameter("receiverName"));
             for (User manager : managers) {
                 SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
             }
             System.out.println("MAIL");
 
-            // TODO Show success page
+
                 request.setAttribute("availableStars", availableStars - 1);
                 request.setAttribute("success", "Successfully Added Star!");
                 return "index.jsp";
@@ -284,4 +283,7 @@ public class Index extends RequestHandler {
         }
     }
 
+    private String getMailReceiver(int id){
+        return getUserService().getUserMailById(id);
+    }
 }
