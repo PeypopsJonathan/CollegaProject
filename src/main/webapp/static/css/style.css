@@ -254,6 +254,7 @@ input[type=password]::placeholder {
 
 .autocomplete-items span {
     display: inline-block;
+    width: -webkit-fill-available;
     text-align: center;
     padding: 10px;
     cursor: pointer;
@@ -463,51 +464,46 @@ p.profileOverviewItem2{
 }
 
 div.profileStarOverview {
-    grid-row-start: 5;
+    grid-row-start: 6;
     grid-column-start: 2;
     grid-column-end: 7;
 }
 
-
-#filterContainer{
-    grid-row: 5;
-    grid-column: 3/6;
-    display: grid;
-    grid-template-colums: repeat(3, 1fr);
-    grid-auto-rows: auto;
-    padding-bottom: 20px;
+.btn {
+    box-shadow: 0px 0px 0px 2px #9fb4f2;
+    background: cornflowerblue;
+    border-radius:10px;
+    border:1px solid #4e6096;
+    cursor:pointer;
+    color:#ffffff;
+    text-shadow:0px 1px 0px #283966;
+    margin: 1rem;
+}
+.btn:hover {
+    background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+    background-color:#476e9e;
+}
+.btn:active {
+    top:1px;
 }
 
+
 .filterLeft{
-    grid-row: 1;
-    grid-column: 1;
+    grid-area: span 1;
+    grid-row-start: 5;
+    grid-column-start: 3;
 }
 
 .filterMiddle{
-    grid-row: 1;
-    grid-column: 2;
+    grid-area: span 1;
+    grid-row-start: 5;
+    grid-column-start: 4;
 }
 
 .filterRight{
-    grid-row: 1;
-    grid-column: 3;
-}
-
-.btn{
-    border: none;
-    outline: none;
-    padding: 10px 10px;
-    background-color: #ace;
-}
-
-.btn:hover{
-    background-color: #8888ff;
-}
-
-.btn.active {
-    background-color: #2222ff;
-    border: 5px solid #000;
-    color: white;
+    grid-area: span 1;
+    grid-row-start: 5;
+    grid-column-start: 5;
 }
 
 .noshow {
@@ -544,6 +540,10 @@ div.profileStarOverview {
 li.giveStarButton{
     margin-top: 0.5vh;
     float: right;
+}
+
+#filterContainer button{
+    align-content: space-evenly;
 }
 
 #close-overlay {
