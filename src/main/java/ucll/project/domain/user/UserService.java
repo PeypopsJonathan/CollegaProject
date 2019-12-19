@@ -31,4 +31,13 @@ public class UserService {
     public int getUserByName(String firstName, String lastName) {
         return ((UserRepositoryDb)userRepo).UserIdByName(firstName, lastName);
     }
+
+    public boolean getManagerStatusUser(int userId){
+        for (User user: getUsers()) {
+            if (user.getUserId() == userId){
+                return user.isManager();
+            }
+        }
+        return false;
+    }
 }

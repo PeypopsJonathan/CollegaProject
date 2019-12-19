@@ -118,6 +118,7 @@ public class UserRepositoryDb implements UserRepository {
         user.setEmail(rs.getString("email"));
         user.setRole(Role.valueOf(rs.getString("role")));
         user.setHashedPassword(rs.getString("password"));
+        user.setManager(rs.getBoolean("manager"));
         return user;
     }
 
@@ -215,7 +216,7 @@ public class UserRepositoryDb implements UserRepository {
                     "set available_stars = ?" + "where id = ? ");
             stmt.setInt(1, aantal);
             stmt.setInt(2, id);
-            stmt.executeUpdate();
+            stmt.executeQuery();
 
         } catch (SQLException ex){
             throw new RuntimeException(ex);
