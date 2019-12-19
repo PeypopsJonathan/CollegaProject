@@ -44,9 +44,9 @@
                     </option>
                 </c:forEach>
 
-                <article class="autocomplete">
+                <!--<article class="autocomplete">
                     <input id="receiverNameFilter" type="text" name="receiverNameFilter" placeholder="Names">
-                </article>
+                </article>-->
                 <input type="submit" value="filter" id="btn2">
             </select>
         </form>

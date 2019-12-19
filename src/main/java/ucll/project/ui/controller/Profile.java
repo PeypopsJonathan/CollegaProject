@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class Profile extends RequestHandler {
         total += countReceivedStars(request, response, currentUser.getUserId());
         request.setAttribute("totalStars", total);
         request.setAttribute("listName", getUserService().getAllNames());
+        setTagAttribute(request);
 
         return "profile.jsp";
     }
@@ -72,5 +74,15 @@ public class Profile extends RequestHandler {
         int receivedStars = starRep.countReceivedStars(userId);
         request.setAttribute("receivedStars", receivedStars);
         return receivedStars;
+    }
+
+    public void setTagAttribute(HttpServletRequest request) {
+        ArrayList<String> tempTags = new ArrayList<>();
+
+        for (int i = 0; i < Tags.values().length; i++) {
+            tempTags.add(Tags.values()[i].getTag());
+        }
+
+        request.setAttribute("tags", tempTags);
     }
 }

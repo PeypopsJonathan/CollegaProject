@@ -81,8 +81,9 @@ public class Index extends RequestHandler {
         sortStars(localStars);
 
         String filterOrNah = request.getParameter("iWantFilter");
+        String filterTag = request.getParameter("tagss");
         if (filterOrNah != null) {
-            if(request.getParameter("tagss").equals("All Tags")){
+            if(filterTag.equals("All Tags") || filterTag.equals("--Select a tag--")){
                 request.setAttribute("stars", localStars);
             } else {
                 // filter button pressed
@@ -254,7 +255,7 @@ public class Index extends RequestHandler {
         tagsValidator(star, request, errorList);
         descriptionValidator(star, request, errorList);
 
-        if (errorList.isEmpty()) {
+        if (errorList.isEmpty() && star.getSender_id() != star.getReceiver_id()) {
 
             int maxIdStar = starDb.getAll().get(0).getStar_id();
             for (Star s : starDb.getAll()) {
