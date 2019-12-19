@@ -51,11 +51,11 @@
                         <c:out value="${tag}"></c:out>
                     </option>
                 </c:forEach>
-                <input type="submit" class="" value="filter">
             </select>
             <article class="autocomplete">
                 <input id="receiverNameFilter" type="text" name="receiverName" placeholder="Names">
             </article>
+            <input type="submit" class="" value="filter">
         </form>
 
             <article>
