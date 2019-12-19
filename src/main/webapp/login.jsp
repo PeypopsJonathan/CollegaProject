@@ -24,20 +24,15 @@
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="/static/images/user-login.png" style="max-width: 50px" id="icon" alt="User Icon"/>
+                <img src="/static/images/user-login.png" style="max-width: 50px; margin: 1rem;" id="icon" alt="User Icon"/>
             </div>
 
             <!-- Login Form -->
             <form method="post" action="Controller?command=Verification">
                 <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
                 <input type="password" id="password" class="fadeIn second" name="password" placeholder="Password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="submit" class="fadeIn fourth" value="Log In" id="btn3">
             </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>
 
         </div>
     </div>

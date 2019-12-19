@@ -28,7 +28,7 @@
 <main class="container">
 
     <section class="profileOverview">
-        <p class="profileOverviewImage"><img src="static/images/ProfileAvatar.png"></p>
+        <p class="profileOverviewImage"><img id="profilePicture" src="static/images/salesman.png"></p>
         <h1 class="profileOverviewItem">${firstname} ${lastname}<br></h1>
         <p class="profileOverviewItem">${email}</p>
         <p class="profileOverviewItem2" style="text-align: center">Stars available: ${availableStars}</p>
@@ -55,8 +55,8 @@
                     </c:when>
                     <c:otherwise>
                         <div class="starDiv givenStar">
-                            <p class="starText givenStar">${star.sender_name} has sent ${star.receiver_name} a
-                                star, saying "${star.comment}"</p>
+                            <p class="starText givenStar"><b>${star.sender_name}</b> has sent <b>${star.receiver_name} </b>a
+                                star, saying: </br> <i>"${star.comment}"</i></p>
                             <ul class="tags givenStar">
                                 <c:forEach var="tag" items="${star.tags}">
                                     <li class="starTag">${tag}</li>
