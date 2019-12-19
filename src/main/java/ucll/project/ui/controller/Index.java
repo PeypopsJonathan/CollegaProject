@@ -34,7 +34,9 @@ public class Index extends RequestHandler {
         setTagAttribute(request);
         getStars(request);
         request.setAttribute("listName", getUserService().getAllNames());
-        request.setAttribute("availableStars", userDb.getAvailableStars((int) request.getSession().getAttribute("user")));
+        request.setAttribute("listTag", getAllTags());
+        int userId = (int) request.getSession().getAttribute("user");
+        request.setAttribute("availableStars", userDb.getAvailableStars(userId));
         checkStars();
 
         if (isFormSubmition(request)) {
@@ -49,6 +51,17 @@ public class Index extends RequestHandler {
         return "index.jsp";
     }
 
+    public List<String> getAllTags(){
+        ArrayList<String> listTags = new ArrayList<>();
+        String tags;
+
+        for (int i = 0; i < Tags.values().length; i++) {
+            tags = '"' + Tags.values()[i].getTag() + '"';
+            listTags.add(tags);
+        }
+        return listTags;
+    }
+
     public void setTagAttribute(HttpServletRequest request) {
         ArrayList<String> tempTags = new ArrayList<>();
 
@@ -56,7 +69,7 @@ public class Index extends RequestHandler {
             tempTags.add(Tags.values()[i].getTag());
         }
 
-        request.setAttribute("tags", tempTags);
+        request.setAttribute("tags", getAllTags());
     }
 
 
@@ -214,9 +227,9 @@ public class Index extends RequestHandler {
     private String submitForm(HttpServletRequest request) throws Exception {
         Star star = new Star();
 
-        int id = (Integer) request.getSession().getAttribute("user");
+        int userId = (Integer) request.getSession().getAttribute("user");
 
-        star.setSender_id(id);
+        star.setSender_id(userId);
 
         ArrayList<String> errorList = new ArrayList<>();
 
@@ -237,12 +250,12 @@ public class Index extends RequestHandler {
             maxIdStar++;
             star.setStar_id(maxIdStar);
 
-            int availableStars = userDb.getAvailableStars(id);
+            int availableStars = userDb.getAvailableStars(userId);
 
             if (availableStars > 0) {
                 starDb.createStar(star);
 
-                userDb.setAvailableStar(id, availableStars - 1);
+                userDb.setAvailableStar(userId, availableStars - 1);
 
             request.setAttribute("success", "Successfully Added Star!");
 
@@ -271,7 +284,4 @@ public class Index extends RequestHandler {
         }
     }
 
-    private String getMailReceiver(int id){
-        return this.getUserService().getUserMailById(id);
-    }
 }
