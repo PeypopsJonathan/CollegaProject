@@ -20,4 +20,9 @@ public interface StarRepository {
     void delete(Star star);
 
     List<Star> getUserInvolvedInStarExchanges(int userId);
+
+    List<Star> getStarsSent(int userId);
+
+    List<Star> getStarsReceived(int userId);
+
 }

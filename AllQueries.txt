@@ -6,7 +6,7 @@ drop table "award-team9".user cascade;
 
 --bouw schemas op van nul af aan
 create table "award-team9".star (receiver_id smallint NOT NULL, sender_id smallint NOT NULL, comment varchar(255) NOT NULL, tags varchar(255)[] NOT NULL, timestamp timestamp  NOT NULL, star_id SERIAL, primary key (star_id));
-create table "award-team9".user (id integer NOT NULL, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, role varchar(255) NOT NULL, password varchar(255) NOT NULL, available_stars smallint NOT NULL DEFAULT 3, primary key (id));
+create table "award-team9".user (id integer NOT NULL, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, role varchar(255) NOT NULL, password varchar(255) NOT NULL, available_stars smallint NOT NULL DEFAULT 3, superuser boolean NOT NULL, manager boolean NOT NULL, primary key (id));
 
 --geef toestemming op tabellen
 grant all privileges on schema "award-team9".user, "award-team9".star to r0578690, r0711106, r0654233, r0729781, r0765653, r0664478, r0679673, r0759603, hakkaton_09;
@@ -20,45 +20,44 @@ grant all privileges on "award-team9".user, "award-team9".star to r0578690, r071
 --verwijder alle gebruikers van de database
 delete
 from "award-team9".user
-where user_id > 0;
+where id > 0;
 
 --laat alle gebruikers in de database zien
 select * from "award-team9".user;
 
 --voeg tijdelijke testgebruikers too aan database
 insert into "award-team9".user values
-(1, 'Daan', 'Heivers', 'daan.heivers@student.ucll.be', 'ADMIN', 'test', 3),
-(2, 'Laurent', 'Bubba', 'laurent.bubba@student.ucll.be', 'ADMIN', 'test', 2),
-(3, 'Arno', 'Bunckens', 'arno.bunckens@student.ucll.be', 'SUPPORT', 'test', 2),
-(4, 'Jonathan', 'Peypops', 'jonathan.peypos@student.ucll.be', 'USER', 'test', 1),
-(5, 'Dennis', 'Winnepenninckx', 'dennis.winnepennincks@student.ucll.be', 'USER', 'test', 2),
-(6, 'Wouter', 'Van Elst', 'wouter.vanelst@student.ucll.be', 'ADMIN', 'ABCxyz123', 3),
-(7, 'Herman', 'Hermans', 'herman.hermans@gmail.com', 'USER', 'abcXYZ789', 2),
-(8, 'Jan', 'Janssen', 'jan.janssen@hotmail.com', 'USER', 'Wachtwoord123', 2),
-(9, 'Daan', 'Daans', 'daand@amail1.com', 'SUPPORT', 'Password5', 1),
-(10, 'Nick', 'Gevers', 'gnick@amail1.com', 'USER', 'HelloWorld', 2);
+(1, 'Daan', 'Heivers', 'daan.heivers@student.ucll.be', 'ADMIN', 'test', 3, 'true', 'true'),
+(2, 'Laurent', 'Bubba', 'laurent.bubba@student.ucll.be', 'ADMIN', 'test', 2, 'false', 'false'),
+(3, 'Arno', 'Bunckens', 'arno.bunckens@student.ucll.be', 'USER', 'test', 2, 'false', 'false'),
+(4, 'Jonathan', 'Peypops', 'jonathan.peypops@student.ucll.be', 'USER', 'test', 1, 'false', 'true'),
+(5, 'Dennis', 'Winnepenninckx', 'dennis.winnepenninckx@student.ucll.be', 'USER','test', 2, 'false', 'false'),
+(6, 'Wouter', 'Van Elst', 'wouter.vanelst@student.ucll.be', 'ADMIN', 'ABCxyz123', 3, 'true', 'true'),
+(7, 'Herman', 'Hermans', 'herman.hermans@gmail.com', 'USER', 'abcXYZ789', 2, 'false', 'false'),
+(8, 'Jan', 'Janssen', 'jan.janssen@hotmail.com', 'USER', 'Wachtwoord123', 2, 'false', 'true'),
+(9, 'Daan', 'Daans', 'daand@amail1.com', 'USER', 'Password5', 1, 'false', 'false'),
+(10, 'Nick', 'Gevers', 'gnick@amail1.com', 'USER', 'HelloWorld', 2, 'false', 'false');
 
 --voeg gebruikers Ipsos toe aan database
 insert into "award-team9".user values
-(1, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'ADMIN', 'tmpPWD', 3),
-(2, 'Ahu', 'Alanya', 'Ahu.Alanya@ipsos.com', 'USER', 'tmpPWD', 3),
-(3, 'Anne', 'Esser', 'Anne.Esser@ipsos.com', 'USER', 'tmpPWD', 3),
-(4, 'Daan', 'Bijwaard', 'Daan.Bijwaard@ipsos.com', 'USER', 'tmpPWD', 3),
-(5, 'Femke', 'Dekeulenaer', 'Femke.Dekeulenaer@ipsos.com', 'USER', 'tmpPWD', 3),
-(6, 'Françoise', 'Schuster', 'Francoise.Schuster@ipsos.com', 'USER', 'tmpPWD', 3),
-(7, 'Aline', 'Moris', 'Aline.Moris@ipsos.com', 'USER', 'tmpPWD', 3),
-(8, 'Allison', 'Dunne', 'Allison.Dunne@ipsos.com', 'USER', 'tmpPWD', 3),
-(9, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'USER', 'tmpPWD', 3),
-(10, 'Femke', 'Maes', 'Femke.Maes@ipsos.com', 'USER', 'tmpPWD', 3),
-(11, 'Jonah', 'Rys', 'Jonah.Rys@ipsos.com', 'USER', 'tmpPWD', 3),
-(12, 'Kim', 'DeCuyper', 'Kim.DeCuyper@ipsos.com', 'USER', 'tmpPWD', 3),
-(13, 'Nancy', 'Heremans', 'Nancy.Heremans@ipsos.com', 'USER', 'tmpPWD', 3),
-(14, 'Pauline', 'Hardy', 'Pauline.Hardy@ipsos.com', 'USER', 'tmpPWD', 3),
-(15, 'Sara', 'Davidson', 'Sara.Davidson@ipsos.com', 'USER', 'tmpPWD', 3),
-(16, 'Sara', 'Gysen', 'Sara.Gysen@ipsos.com', 'USER', 'tmpPWD', 3),
-(17, 'Snezha', 'kazakova', 'Snezha.kazakova@ipsos.com', 'USER', 'tmpPWD', 3),
-(18, 'Suzanne', 'Dautzenberg', 'Suzanne.Dautzenberg@ipsos.com', 'USER', 'tmpPWD', 3),
-(19, 'Tim', 'Meeusen', 'Tim.Meeusen@ipsos.com', 'USER', 'tmpPWD', 3);
+(1, 'Christine', 'Tresignie', 'Christine.Tresignie@ipsos.com', 'ADMIN', 'tmpPWD', 3, 'true', 'true'),
+(2, 'Ahu', 'Alanya', 'Ahu.Alanya@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(3, 'Anne', 'Esser', 'Anne.Esser@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(4, 'Daan', 'Bijwaard', 'Daan.Bijwaard@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(5, 'Femke', 'Dekeulenaer', 'Femke.Dekeulenaer@ipsos.com', 'USER', 'tmpPWD', 3, 'true', 'true'),
+(6, 'Françoise', 'Schuster', 'Francoise.Schuster@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(7, 'Aline', 'Moris', 'Aline.Moris@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(8, 'Allison', 'Dunne', 'Allison.Dunne@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'true'),
+(9, 'Femke', 'Maes', 'Femke.Maes@ipsos.com', 'USER', 'tmpPWD', 3, 'true', 'true'),
+(10, 'Jonah', 'Rys', 'Jonah.Rys@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(11, 'Kim', 'DeCuyper', 'Kim.DeCuyper@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'true'),
+(12, 'Nancy', 'Heremans', 'Nancy.Heremans@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(13, 'Pauline', 'Hardy', 'Pauline.Hardy@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(14, 'Sara', 'Davidson', 'Sara.Davidson@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(15, 'Sara', 'Gysen', 'Sara.Gysen@ipsos.com', 'USER', 'tmpPWD', 3, 'true', 'true'),
+(16, 'Snezha', 'kazakova', 'Snezha.kazakova@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false'),
+(17, 'Suzanne', 'Dautzenberg', 'Suzanne.Dautzenberg@ipsos.com', 'ADMIN', 'tmpPWD', 3, 'false', 'false'),
+(18, 'Tim', 'Meeusen', 'Tim.Meeusen@ipsos.com', 'USER', 'tmpPWD', 3, 'false', 'false');
 
 --EIND QUERIES OP USER DATABASE--
 

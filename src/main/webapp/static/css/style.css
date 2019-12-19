@@ -409,8 +409,50 @@ p.profileOverviewItem2{
     grid-column-start: 4;
 }
 
+
+
+#filterContainer{
+    grid-row: 5;
+    grid-column: 3/6;
+    display: grid;
+    grid-template-colums: repeat(3, 1fr);
+    grid-auto-rows: auto;
+}
+
+.filterLeft{
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#filterContainer button{
+    border: none;
+    outline: none;
+    padding: 10px 10px;
+    background-color: #ace;
+}
+
+.filterMiddle{
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.filterRight{
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.filter:hover{
+    background-color: #39ace7;
+}
+
+.filter.active {
+    background-color: #8f8fff;
+    border: 5px solid #000;
+    color: white;
+}
+
 div.profileStarOverview{
-    grid-row-start: 5;
+    grid-row-start: 6;
     grid-column-start: 2;
     grid-column-end: 7;
 }
