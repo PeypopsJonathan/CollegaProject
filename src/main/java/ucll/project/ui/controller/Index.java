@@ -158,7 +158,7 @@ public class Index extends RequestHandler {
                 request.setAttribute("previous_input_description", description);
                 star.setComment(description);
             } else {
-                errorList.add("Empty description big no no");
+                errorList.add("Empty description not allowed");
             }
         } catch (DomainException e) {
             errorList.add("Empty description not allowed");
