@@ -40,7 +40,6 @@ main{
 }
 
 main.container {
-    display: grid;
     grid-template-columns: 4fr 3fr;
     grid-template-rows: 1fr;
     grid-gap: 2rem;
@@ -251,7 +250,6 @@ input[type=text]::placeholder {
 
 .autocomplete-items span {
     display: inline-block;
-    width: -webkit-fill-available;
     text-align: center;
     padding: 10px;
     cursor: pointer;
@@ -542,4 +540,63 @@ div.profileStarOverview {
 li.giveStarButton{
     margin-top: 0.5vh;
     float: right;
+}
+
+#close-overlay {
+    width: 8rem;
+    text-align: center;
+}
+
+#email {
+    width: fit-content;
+    padding-left: 5px;
+    grid-row-start: 2;
+    grid-column-start: 1;
+}
+
+#firstname{
+    grid-row-start: 1;
+    grid-column-start: 1;
+    width: fit-content;
+}
+
+#lastname {
+    grid-row-start: 1;
+    grid-column-start: 2;
+    width: fit-content;
+}
+
+#filter {
+    width: fit-content;
+    align-items: center;
+}
+
+#role {
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+
+#manager {
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+#superuser {
+    grid-column-start: 2;
+    grid-row-start: 3;
+}
+
+#add{
+    width: fit-content;
+}
+
+.addUserDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr;
+    align-content: center;
+}
+
+.addUserForm{
+    width: 100%;
 }
