@@ -86,10 +86,10 @@
     </div>
         <section class="starOverview">
 
-            <div class="autocomplete">
-                <h2>Choose/Enter tag</h2>
-                <input id="filter" type="text" name="filter" placeholder="Search for a tag">
-            </div>
+        <div class="autocomplete">
+            <h2>Choose/Enter tag</h2>
+            <input id="filter" type="text" name="filter" placeholder="Search for a tag">
+        </div>
 
             <article>
                 <c:forEach var="star" items="${stars}">
@@ -101,10 +101,6 @@
                     </ul>
                 </c:forEach>
             </article>
-        </section>
-
-    </section>
-
     <script>
         window.addEventListener("load", initPage, false);
 
@@ -133,6 +129,7 @@
                     var buttonIdToRemove = button.id;
                     var hiddenTagToRemove = document.getElementsByClassName(buttonIdToRemove);
                     hiddenTagToRemove[0].value = "";
+
                     counterList--;
                 }, false);
 
@@ -153,7 +150,7 @@
                 if (!val) { return false;}
                 currentFocus = -1;
                 /*create a DIV element that will contain the items (values):*/
-                a = document.createElement("DIV");
+                a = document.createElement("SPAN");
                 a.setAttribute("id", this.id + "autocomplete-list");
                 a.setAttribute("class", "autocomplete-items");
                 /*append the DIV element as a child of the autocomplete container:*/

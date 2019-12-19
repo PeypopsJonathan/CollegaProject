@@ -72,11 +72,15 @@ main.container.h1{
 .overlay {
     position: fixed;
     overflow-y: scroll;
-    top: 0; right: 0; bottom: 0; left: 0; }
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
 
-[aria-hidden="true"] { display: none; }
-[aria-hidden="false"] { display: block; }
-
+[aria-hidden="true"] {
+    display: none;
+}
 
 
 
@@ -88,6 +92,7 @@ main.container.h1{
     padding: 30px;
     background: rgba(255,255,255, 1);
 }
+
 .overlay {
     background:  rgba(40,40,40, .75);
 }
@@ -134,8 +139,8 @@ h2 {
     max-width: 450px;
     position: relative;
     padding: 0px;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
@@ -382,7 +387,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
 input[type=text], select, textarea {
-    width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -390,6 +394,19 @@ input[type=text], select, textarea {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+}
+
+input[type=password] {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
 }
 
 input[type=submit] {
@@ -443,6 +460,11 @@ p.profileOverviewItem2{
     grid-column-start: 4;
 }
 
+div.profileStarOverview {
+    grid-row-start: 5;
+    grid-column-start: 2;
+    grid-column-end: 7;
+}
 
 
 #filterContainer{
@@ -490,12 +512,6 @@ p.profileOverviewItem2{
     display: none;
 }
 
-div.profileStarOverview{
-    grid-row-start: 6;
-    grid-column-start: 2;
-    grid-column-end: 7;
-    overflow: hidden;
-}
 
 .starText {
     width: available;

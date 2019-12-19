@@ -24,13 +24,13 @@
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon"/>
+                <img src="/static/images/user-login.png" style="max-width: 50px" id="icon" alt="User Icon"/>
             </div>
 
             <!-- Login Form -->
             <form method="post" action="Controller?command=Verification">
                 <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-                <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+                <input type="password" id="password" class="fadeIn second" name="password" placeholder="password">
                 <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
 
