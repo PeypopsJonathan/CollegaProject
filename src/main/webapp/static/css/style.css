@@ -10,13 +10,17 @@ body {
 /* BASIC */
 
 html {
-    background-color: #2f469c;
+
 }
 
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
-    background-color: #2f469c;
+    background-image: url("1200px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg");
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     padding-top: 3.65rem;
 }
 
@@ -62,7 +66,9 @@ main.container.h1{
 
 
 .containerGiveStar{
-    align-content: start;
+    display:flex;
+    flex-flow: column;
+    align-content:flex-start;
     grid-column-start: 2 ;
     grid-column-end: 3;
     grid-row-start: 2;

@@ -18,6 +18,7 @@ public class UserRepositoryDb implements UserRepository {
                      Statement.RETURN_GENERATED_KEYS)) {
             user.hashAndSetPassword(password);
             stmtSetUser(stmt, 1, user);
+
             if (stmt.executeUpdate() == 0) {
                 throw new RuntimeException("Failed to create user");
             }
@@ -117,6 +118,7 @@ public class UserRepositoryDb implements UserRepository {
         user.setEmail(rs.getString("email"));
         user.setRole(Role.valueOf(rs.getString("role")));
         user.setHashedPassword(rs.getString("password"));
+        user.setManager(rs.getBoolean("manager"));
         return user;
     }
 
@@ -206,6 +208,19 @@ public class UserRepositoryDb implements UserRepository {
             throw new RuntimeException(e);
         }
         return -1;
+    }
+
+    public void setAvailableStar(int id, int aantal){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user\n" +
+                    "set available_stars = ?" + "where id = ? ");
+            stmt.setInt(1, aantal);
+            stmt.setInt(2, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
     }
 
     public void reassignStars(){

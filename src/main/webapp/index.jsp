@@ -36,20 +36,21 @@
             </c:forEach>
         </div>
     </c:if>
-    <h1>Star feed</h1>
+    <h1>Stargazing</h1>
     <div class="containerGiveStar">
         <h3>Give Star</h3>
+
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
         <p>you have ${availableStars} left to give this month</p>
         <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
             <div class="autocomplete">
+                <h2>Choose/Enter Correct Name</h2>
                 <input id="receiverName" type="text" name="receiverName" placeholder="Names">
             </div>
-            <h2>Choose/Enter Correct Name</h2>
             <h2 for="tags">tags</h2>
 
             <select id="select" name="tags" id="tags" onchange="addTag()">
-                <option></option>
+                <option>--Select a tag--</option>
                 <c:forEach var="tag" items="${tags}">
                     <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
                         <c:out value="${tag}"></c:out>
@@ -236,7 +237,6 @@
         var names = [];
         names = ${listName};
         console.log(names);
-        //var names = [Roshan, "Pim", "Niels", "Daan", "Bubba"];
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
     </script>
