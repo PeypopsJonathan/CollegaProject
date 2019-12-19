@@ -35,9 +35,22 @@ public class UserService {
     public boolean getManagerStatusUser(int userId){
         for (User user: getUsers()) {
             if (user.getUserId() == userId){
-                return user.isManager();
+                return user.getRole().equals(Role.ADMIN);
             }
         }
         return false;
+    }
+
+    public String getUserMailById(int id) {
+        return ((UserRepositoryDb)userRepo).userMailById(id);
+    }
+
+    public String getUserNameById(int id) {
+        return ((UserRepositoryDb)userRepo).userNameById(id);
+    }
+
+
+    public List<User> getAllManagers() {
+        return ((UserRepositoryDb)userRepo).getAllMAnagers();
     }
 }

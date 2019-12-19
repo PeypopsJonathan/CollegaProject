@@ -57,6 +57,9 @@ main.container.h1{
 }
 
 .starOverview{
+    overflow: auto;
+    align-self: start;
+    height: 50em;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
@@ -64,8 +67,33 @@ main.container.h1{
 
 }
 
+.noscroll { overflow: hidden; }
 
-.containerGiveStar{
+.overlay {
+    position: fixed;
+    overflow-y: scroll;
+    top: 0; right: 0; bottom: 0; left: 0; }
+
+[aria-hidden="true"] { display: none; }
+[aria-hidden="false"] { display: block; }
+
+
+
+
+/* this code is not strictly necessary: just to make this demo a bit pleasant */
+
+.overlay div {
+    margin: 8vh auto;
+    max-width: 650px;
+    padding: 30px;
+    background: rgba(255,255,255, 1);
+}
+.overlay {
+    background:  rgba(40,40,40, .75);
+}
+
+
+article.containerGiveStar{
     display:flex;
     flex-flow: column;
     align-content:flex-start;
@@ -82,7 +110,6 @@ h2 {
     font-weight: 600;
     text-transform: uppercase;
     display:inline-block;
-    margin: 40px 8px 10px 8px;
     color: #cccccc;
 }
 
@@ -204,7 +231,6 @@ input[type=text]::placeholder {
 
 .autocomplete {
     position: relative;
-    display: inline-block;
 }
 .autocomplete-items {
     position: absolute;
@@ -218,7 +244,10 @@ input[type=text]::placeholder {
     right: 0;
 }
 
-.autocomplete-items div {
+.autocomplete-items span {
+    display: inline-block;
+    width: -webkit-fill-available;
+    text-align: center;
     padding: 10px;
     cursor: pointer;
     background-color: #fff;
@@ -226,7 +255,7 @@ input[type=text]::placeholder {
 }
 
 /*when hovering an item:*/
-.autocomplete-items div:hover {
+.autocomplete-items span:hover {
     background-color: #e9e9e9;
 }
 
@@ -235,7 +264,6 @@ input[type=text]::placeholder {
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
-
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
@@ -493,4 +521,9 @@ div.profileStarOverview{
     margin-right: 5px;
     font-size: 12px;
 
+}
+
+li.giveStarButton{
+    margin-top: 0.5vh;
+    float: right;
 }

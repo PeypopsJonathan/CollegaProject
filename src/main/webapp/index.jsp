@@ -37,57 +37,14 @@
         </div>
     </c:if>
     <h1>Stargazing</h1>
-    <div class="containerGiveStar">
-        <h3>Give Star</h3>
-
-        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" autocomplete="off" method="post">
-        <p>you have ${availableStars} left to give this month</p>
-        <form novalidate="novalidate" action="/Controller?command=Index&isForm=yes" method="post">
-            <div class="autocomplete">
-                <h2>Choose/Enter Correct Name</h2>
-                <input id="receiverName" type="text" name="receiverName" placeholder="Names">
-            </div>
-            <h2 for="tags">tags</h2>
-
-            <select id="select" name="tags" id="tags" onchange="addTag()">
-                <option>--Select a tag--</option>
-                <c:forEach var="tag" items="${tags}">
-                    <option class="tagOptions" value="<c:out value="${tag}"></c:out>">
-                        <c:out value="${tag}"></c:out>
-                    </option>
-                </c:forEach>
-            </select>
-
-            <p id="tagsAdded">
-            <h2>Tags Added: </h2>
-            </p>
-
-            <input type="hidden" class="Integrity" name="0" id="0">
-            <input type="hidden" class="Curiosity" name="1" id="1">
-            <input type="hidden" class="Collaboration" name="2" id="2">
-            <input type="hidden" class="Client first" name="3" id="3">
-            <input type="hidden" class="Entrepreneurship" name="4" id="4">
-            <input type="hidden" class="Move Faster" name="5" id="5">
-            <input type="hidden" class="Act smarter" name="6" id="6">
-            <input type="hidden" class="Go further" name="7" id="7">
-            <input type="hidden" class="Be sure" name="8" id="8">
-            <input type="hidden" class="Team spirit" name="9" id="9">
-            <input type="hidden" class="Office spirit" name="10" id="10">
-
-            <label for="description" value="${previous_input_description}">description</label>
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="enter decription"></textarea>
-
-            <input type="submit" value="submit">
-
-
-        </form>
-        </form>
-        <h3>${success}</h3>
-    </div>
         <section class="starOverview">
 
+        <div class="autocomplete">
+            <h2>Choose/Enter tag</h2>
+            <input id="filter" type="text" name="filter" placeholder="Search for a tag">
+        </div>
 
-            <div>
+            <article>
                 <c:forEach var="star" items="${stars}">
                     <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying "${star.comment}"</p>
                     <ul class="tags">
@@ -96,8 +53,20 @@
                         </c:forEach>
                     </ul>
                 </c:forEach>
-            </div>
+            </article>
         </section>
+        <div>
+            <c:forEach var="star" items="${stars}">
+                <p class="starText">${star.sender_name} has sent ${star.receiver_name} a star, saying
+                    "${star.comment}"</p>
+                <ul class="tags">
+                    <c:forEach var="tag" items="${star.tags}">
+                        <li class="starTag">${tag}</li>
+                    </c:forEach>
+                </ul>
+            </c:forEach>
+        </div>
+    </section>
 
     <script>
         window.addEventListener("load", initPage, false);
@@ -148,7 +117,7 @@
                 if (!val) { return false;}
                 currentFocus = -1;
                 /*create a DIV element that will contain the items (values):*/
-                a = document.createElement("DIV");
+                a = document.createElement("SPAN");
                 a.setAttribute("id", this.id + "autocomplete-list");
                 a.setAttribute("class", "autocomplete-items");
                 /*append the DIV element as a child of the autocomplete container:*/
@@ -158,7 +127,7 @@
                     /*check if the item starts with the same letters as the text field value:*/
                     if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                         /*create a DIV element for each matching element:*/
-                        b = document.createElement("DIV");
+                        b = document.createElement("SPAN");
                         /*make the matching letters bold:*/
                         b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                         b.innerHTML += arr[i].substr(val.length);
@@ -177,9 +146,9 @@
                 }
             });
             /*execute a function presses a key on the keyboard:*/
-            inp.addEventListener("keydown", function(e) {
+            inp.addEventListener("keydown", function (e) {
                 var x = document.getElementById(this.id + "autocomplete-list");
-                if (x) x = x.getElementsByTagName("div");
+                if (x) x = x.getElementsByTagName("span");
                 if (e.keyCode == 40) {
                     /*If the arrow DOWN key is pressed,
                     increase the currentFocus variable:*/
@@ -236,9 +205,12 @@
         /*An array containing all the country names in the world:*/
         var names = [];
         names = ${listName};
-        console.log(names);
+        var tags = [];
+        tags = ${listTag};
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("receiverName"), names);
+        autocomplete(document.getElementById("filter"), tags)
+
     </script>
 
 

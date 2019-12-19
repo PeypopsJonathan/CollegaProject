@@ -122,6 +122,22 @@ public class UserRepositoryDb implements UserRepository {
         return user;
     }
 
+    private static List<User> usersFromResult(ResultSet rs) throws SQLException {
+        List<User> users = new ArrayList<>();
+        while (rs.next()) {
+            User user = new User();
+            user.setUserId(rs.getInt("id"));
+            user.setFirstName(rs.getString("firstname"));
+            user.setLastName(rs.getString("lastname"));
+            user.setEmail(rs.getString("email"));
+            user.setRole(Role.valueOf(rs.getString("role")));
+            user.setHashedPassword(rs.getString("password"));
+            user.setManager(rs.getBoolean("manager"));
+            users.add(user);
+        }
+        return users;
+    }
+
     private static Star starFromResult(ResultSet rs) throws SQLException {
         Star star = new Star();
         star.setStar_id(rs.getInt("star_id"));
@@ -196,6 +212,49 @@ public class UserRepositoryDb implements UserRepository {
         return -1;
     }
 
+    public String userMailById(int id){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT email from \"award-team9\".user where id = ?");
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("email");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
+    public String userNameById(int id){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT firstname, lastname from \"award-team9\".user where id = ?");
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            String name = "";
+            if (rs.next()) {
+                name  += rs.getString("firstname");
+                name += " " + rs.getString("lastname");
+                return name;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
+    public List<User> getAllMAnagers(){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * from \"award-team9\".user where manager = ?");
+            stmt.setBoolean(1, true);
+            ResultSet rs = stmt.executeQuery();
+            List<User> managers = usersFromResult(rs);
+            return managers;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public int getAvailableStars(int id) {
         try (Connection conn = ConnectionPool.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT available_stars from \"award-team9\".user where id = ?");
@@ -212,11 +271,10 @@ public class UserRepositoryDb implements UserRepository {
 
     public void setAvailableStar(int id, int aantal){
         try (Connection conn = ConnectionPool.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user\n" +
-                    "set available_stars = ?" + "where id = ? ");
+            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user set available_stars = ? where id = ? ");
             stmt.setInt(1, aantal);
             stmt.setInt(2, id);
-            stmt.executeQuery();
+            stmt.executeUpdate();
 
         } catch (SQLException ex){
             throw new RuntimeException(ex);
@@ -228,6 +286,51 @@ public class UserRepositoryDb implements UserRepository {
             PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user\n" +
                     "set available_stars = 3");
         } catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void addUserWithoutPassword(User user){
+        try (Connection conn = ConnectionPool.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("insert into \"award-team9\".user\n" +
+                    "(id,firstname,lastname,email,role,password,available_stars,superuser,manager)\n" +
+                    "values (\n" +
+                    "?, ?, ?,?, ?, '', 3, ?, ?\n" +
+                    ")");
+            stmt.setInt(1,getHighestID() + 1);
+            stmt.setString(2,user.getFirstName());
+            stmt.setString(3,user.getLastName());
+            stmt.setString(4,user.getEmail());
+            stmt.setString(5,user.getRole().toString());
+            stmt.setBoolean(6,user.isSuperuser());
+            stmt.setBoolean(7,user.isManager());
+            stmt.executeUpdate();
+
+        } catch ( SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public int getHighestID(){
+        try (Connection conn = ConnectionPool.getConnection()){
+            PreparedStatement stmt = conn.prepareStatement("select id from \"award-team9\".user order by id desc");
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                return rs.getInt("id");
+            }
+            throw new RuntimeException("could not find id in database");
+        } catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void setPassword(int id,String password){
+        try (Connection conn = ConnectionPool.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("update \"award-team9\".user set password = ? where id = ?");
+            stmt.setString(1,password);
+            stmt.setInt(2,id);
+            stmt.executeUpdate();
+        } catch ( SQLException ex){
             throw new RuntimeException(ex);
         }
     }

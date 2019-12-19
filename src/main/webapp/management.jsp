@@ -28,7 +28,7 @@
 
     <h3>Management Actions</h3>
     <div>
-        <form action="Controller?command=Management&IsForm=true">
+        <form action="Controller?command=Management&IsForm=true" method="post">
             <select name="action">
                 <option>--Select an action--</option>
                 <option value="AddUser">Add User</option>

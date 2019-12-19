@@ -2,15 +2,11 @@ package ucll.project.ui.controller;
 
 import ucll.project.db.ConnectionPool;
 import ucll.project.domain.DomainException;
-import ucll.project.domain.user.Tags;
+import ucll.project.domain.user.*;
 
 import ucll.project.domain.star.Star;
 import ucll.project.domain.star.StarRepository;
 import ucll.project.domain.star.StarRepositoryDb;
-import ucll.project.domain.user.UserRepository;
-import ucll.project.domain.user.UserRepositoryDb;
-
-import ucll.project.domain.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +17,6 @@ import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 
 public class Index extends RequestHandler {
@@ -38,6 +33,7 @@ public class Index extends RequestHandler {
         setTagAttribute(request);
         getStars(request);
         request.setAttribute("listName", getUserService().getAllNames());
+        request.setAttribute("listTag", getAllTags());
         int userId = (int) request.getSession().getAttribute("user");
         request.setAttribute("availableStars", userDb.getAvailableStars(userId));
         checkStars();
@@ -52,6 +48,17 @@ public class Index extends RequestHandler {
             return "index.jsp";
         }
         return "index.jsp";
+    }
+
+    public List<String> getAllTags(){
+        ArrayList<String> listTags = new ArrayList<>();
+        String tags;
+
+        for (int i = 0; i < Tags.values().length; i++) {
+            tags = '"' + Tags.values()[i].getTag() + '"';
+            listTags.add(tags);
+        }
+        return listTags;
     }
 
     public void setTagAttribute(HttpServletRequest request) {
@@ -249,10 +256,17 @@ public class Index extends RequestHandler {
 
                 userDb.setAvailableStar(userId, availableStars - 1);
 
+                request.setAttribute("success", "Successfully Added Star!");
 
-                //HARD CODED DAAN ZEN EMAIL
+            String mailReceiver = getMailReceiver(star.getReceiver_id());
+            String senderName = getUserService().getUserNameById(star.getSender_id());
+            List<User> managers = getUserService().getAllManagers();
+            SimpleMail.send(mailReceiver,request.getParameter("receiverName"));
+            for (User manager : managers) {
+                SimpleMail.sendManager(manager.getEmail(), request.getParameter("receiverName"), senderName, manager.getFirstName()+ " " +manager.getLastName());
+            }
+            System.out.println("MAIL");
 
-                SimpleMail.send("dennisw@live.be", "Control alt de yeet");
 
                 request.setAttribute("availableStars", availableStars - 1);
                 request.setAttribute("success", "Successfully Added Star!");
@@ -269,4 +283,7 @@ public class Index extends RequestHandler {
         }
     }
 
+    private String getMailReceiver(int id){
+        return getUserService().getUserMailById(id);
+    }
 }

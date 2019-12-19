@@ -41,6 +41,9 @@ public class Controller extends HttpServlet {
             try {
                 id = (int)request.getSession().getAttribute("user");
             } catch (Exception e){ }
+            UserService userService = new UserService();
+            boolean isManager = userService.getManagerStatusUser(id);
+            request.setAttribute("isManager", isManager);
             if (command == null || command.trim().isEmpty() || id == 0) {
                 if (!(command != null && command.equals("Verification"))) {
                     if (id == 0) command = "Login";
