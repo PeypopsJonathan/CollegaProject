@@ -85,7 +85,7 @@ public class Index extends RequestHandler {
         String filterName = request.getParameter("receiverNameFilter");
         if (filterOrNah != null) {
             List<Star> filteredStars = new ArrayList<>();
-            if(filterTag.equals("All Tags") && filterName == null){
+            if((filterTag.equals("--Select a tag--") || filterTag.equals("All Tags")) && (filterName == null || filterName.equals(""))){
                 request.setAttribute("stars", localStars);
             }
             else if(filterTag.equals("--Select a tag--") && filterName != null){

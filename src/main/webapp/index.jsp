@@ -53,11 +53,10 @@
                 </c:forEach>
 
                 <article class="autocomplete">
-                    <input id="receiverNameFilter" type="text" name="receiverName" placeholder="Names">
+                    <input id="receiverNameFilter" type="text" name="receiverNameFilter" placeholder="Names">
                 </article>
-                <input type="submit" class="" value="filter">
+                <input type="submit" value="filter">
             </select>
-
         </form>
 
             <article>
