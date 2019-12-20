@@ -15,7 +15,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Hello world!</title>
+    <title>Set Password</title>
 </head>
 <!-- Navigation -->
 <%@ include file="components/navigation.jspf" %>
@@ -23,7 +23,7 @@
 <!-- Page Content -->
 <body style="font-family: 'Montserrat', sans-serif">
 <main class="container">
-<h1>Set your password</h1>
+<h1 class="yeet">Set your password</h1>
 <div id="errors">
     <c:if test="${errorClass}">
         <p>${error}</p>
@@ -33,15 +33,15 @@
     <div class="setPassword">
 <form action="Controller?command=SetPassword" class="setPassword" method="post">
     <span id="password">
-    <label for="password">Password</label>
+    <label for="password">Password</label><br>
     <input type="password" name="password" placeholder="Password"><br>
     </span>
 
     <span id="confirmPassword">
-    <label for="confirmPassword">Confirm Password</label>
+    <label for="confirmPassword">Confirm Password</label><br>
     <input type="password" name="confirmPassword" placeholder="Confirm Password">
     </span>
-    <input type="submit" value="set password" id="btn">
+    <input type="submit" value="set password" id="btn5">
 </form>
 
     </div>
