@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>Login</title>
 </head>
-<body>
+<body style="font-family: 'Montserrat', sans-serif">
 
 <main>
     <div class="wrapper fadeInDown">
@@ -24,20 +24,15 @@
 
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="/static/images/user-login.png" style="max-width: 50px" id="icon" alt="User Icon"/>
+                <img src="/static/images/user-login.png" style="max-width: 50px; margin: 1rem;" id="icon" alt="User Icon"/>
             </div>
 
             <!-- Login Form -->
             <form method="post" action="Controller?command=Verification">
                 <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
                 <input type="password" id="password" class="fadeIn second" name="password" placeholder="Password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="submit" class="fadeIn fourth" value="Log In" id="btn3">
             </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>
 
         </div>
     </div>
