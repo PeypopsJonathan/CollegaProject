@@ -40,7 +40,7 @@
     <label for="confirmPassword">Confirm Password</label>
     <input type="password" name="confirmPassword" placeholder="Confirm Password">
     </span>
-    <input type="submit" value="set password">
+    <input type="submit" value="set password" id="btn">
 </form>
 
     </div>
