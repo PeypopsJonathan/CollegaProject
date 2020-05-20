@@ -13,7 +13,6 @@ public class Users extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        
 
         return "users.jsp";
     }
